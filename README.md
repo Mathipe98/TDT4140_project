@@ -1,14 +1,14 @@
 # 52
 
-Create new project  
-Django  
-New vertialenv  
-git clone https://gitlab.stud.idi.ntnu.no/tdt4140-2020/52.git pu  
-Install requirements
+I Pycharm: Create new project  
+Velg Django  
+Velg New environment using Vertialenv  
+I terminalen i pycharm skriv: git clone https://gitlab.stud.idi.ntnu.no/tdt4140-2020/52.git pu  
+Trykk på popup-beskjed: Install requirements  
 
-Or  
+Eller  
 
-Checkout from verison control -> git  
+I Pycharm: Checkout from version control -> git  
 https://gitlab.stud.idi.ntnu.no/tdt4140-2020/52.git  
-Create new directory
-Install requirements
+Skriv path/mappenavn, feks "pu" som over  
+Trykk på popup-beskjed: Install requirements  
