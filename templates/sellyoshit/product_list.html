@@ -2,9 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Products</title>
 </head>
 <body>
-
+    <ol>
+        {% for item in products %}
+            <li>{{ item.name }}</li>
+        {% endfor %}
+    </ol>
 </body>
 </html>
