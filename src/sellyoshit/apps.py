@@ -2,4 +2,4 @@ from django.apps import AppConfig
 
 
 class SellyoshitConfig(AppConfig):
-    name = 'sellyoshit'
+    name = 'src.sellyoshit'
