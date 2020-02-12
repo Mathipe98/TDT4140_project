@@ -13,6 +13,4 @@ def product(request, pk):
     return render(request, 'sellyoshit/product_details.html', context)
 
 def home(request):
-    home = "hei"
-    context = {'home': home}
-    return render(request, 'sellyoshit/home_page.html', context)
+    return render(request, 'sellyoshit/home_page.html')
