@@ -14,3 +14,6 @@ def product(request, pk):
 
 def home(request):
     return render(request, 'sellyoshit/home_page.html')
+
+def login(request):
+    return render(request, 'sellyoshit/log_in.html')
