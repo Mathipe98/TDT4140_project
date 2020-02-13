@@ -28,4 +28,4 @@ test:
   variables:
     DATABASE_URL: "postgresql://postgres:postgres@postgres:5432/$POSTGRES_DB"
   script:
-    - python /src/manage.py test --settings pu.settings.ci
+    - python ../src/manage.py test --settings ../src/pu.settings.ci
