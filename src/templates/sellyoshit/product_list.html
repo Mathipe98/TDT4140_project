@@ -8,6 +8,10 @@
     <ol>
         {% for item in products %}
             <li>{{ item.name }} - kr {{ item.price }}</li>
+            <a href="https://google.com">
+        <img src="{{STATIC_URL}} /static/Old-Spice-Beard-Oil-Store-Example.jpg"
+             alt="Product ad" style="width:600px;height:288px;border:0;"/>
+            </a>
 
         {% endfor %}
     </ol>
