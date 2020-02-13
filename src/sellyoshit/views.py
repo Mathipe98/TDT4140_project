@@ -14,3 +14,7 @@ def product(request, pk):
 
 def home(request):
     return render(request, 'sellyoshit/home_page.html')
+
+def image_test(request):
+    #index_file_path = PROJECT_PATH + '/templates/sellyoshit/Clickable_image_test.html'
+    return render(request, "sellyoshit/Clickable_image_test.html")
