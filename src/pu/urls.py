@@ -23,4 +23,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('shop/', include('sellyoshit.urls'), name='shop'),
     path('signup/', uv.signup, name='signup'),
+    path('login/', uv.logins, name='login'),
+    path('logout/', uv.logouts, name='logout'),
 ]
