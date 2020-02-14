@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'sellyoshit.apps.SellyoshitConfig',
+    'users.apps.UserConfig'
 ]
 
 MIDDLEWARE = [
@@ -66,6 +67,8 @@ TEMPLATES = [
         },
     },
 ]
+
+AUTH_USER_MODEL = "users.Users"
 
 WSGI_APPLICATION = 'pu.wsgi.application'
 

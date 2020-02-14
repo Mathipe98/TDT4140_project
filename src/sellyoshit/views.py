@@ -1,5 +1,8 @@
 from django.shortcuts import render
 from .models import Product
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import login
+from django.shortcuts import render, redirect
 
 
 def products(request):
@@ -15,5 +18,3 @@ def product(request, pk):
 def home(request):
     return render(request, 'sellyoshit/home_page.html')
 
-def login(request):
-    return render(request, 'sellyoshit/log_in.html')
