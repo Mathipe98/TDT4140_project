@@ -1,14 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Required meta tags -->
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS v4 -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <!-- Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
     <title>SellYo'Shit</title>
 </head>
-<body>
-    <div>
-        <p>SellYo'Shit Home Page
-            <br>
 
+<body>
+    <!-- Navigation bar -->
+    <nav class="navbar sticky-top navbar-dark bg-dark mb-3">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <img src="../static/navbarlogo.png" width="35" height="35" class="d-inline-block align-top" alt="">
+                SellYo'Shit
+            </a>
+
+            <form class="form-inline">
+                <button class="btn btn-outline-warning my-12 my-sm-0" type="submit">
+                    Logg inn
+                </button>
+            </form>
+        </div>
+     </nav>
+
+    <!-- Content div -->
+    <div class="container">
+        <!-- Left pane: functionality according to page -->
+        <div class="row">
+            <div class="col-3 order-1" style="min-height: 800px">
+
+                <!-- Search bar -->
+                <div class="row">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" style="height: 40px" placeholder="Search">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-warning btn-sm" type="submit">
+                                <i class="material-icons ">search</i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Checkboxes for categories -->
+                <div class="row mt-2">
+                    <form>
+                        <b>Kategorier</b>
+
+                        <div class="checkbox mt-1">
+                            <label><input type="checkbox" value=""> Torget</label>
+                        </div>
+
+                        <div class="checkbox">
+                            <label><input type="checkbox" value=""> Båter</label>
+                        </div>
+
+                        <div class="checkbox">
+                            <label><input type="checkbox" value=""> Biler</label>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Right pane: ads -->
+            <div class="col-9 order-2">
+                <div class="alert alert-primary" role="alert" style="min-height: 800px;">
+                    <div>
+                        Midlertidig plassert her:
+                        <br>
+                        <a href="{% url 'shop:products' %}">Product List</a><br>
+
+                        | {% if request.user.is_authenticated %}
+                        <p>Velkommen, {{ request.user.firstname }} {{ request.user.lastname }}</p><a href="{% url 'logout' %}">Logg ut</a>
+                        {% else %}
+                        <a href="{% url 'login' %}">Logg in</a> | <a href="{% url 'signup' %}">Registrering</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
             <a href="{% url 'shop:products' %}">Product List</a>
             {% if request.user.is_authenticated %}
                 <p>Velkommen, {{ request.user.firstname }} {{ request.user.lastname }} {% if user.admin %}Du er admin.{% endif %}</p>{% if user.admin %}<a href="{% url 'ademin' %}">Slett annonser</a> | {% endif %}<a href="{% url 'logout' %}">Logg ut</a>
