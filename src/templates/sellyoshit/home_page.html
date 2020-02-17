@@ -77,22 +77,15 @@
                         <br>
                         <a href="{% url 'shop:products' %}">Product List</a><br>
 
-                        | {% if request.user.is_authenticated %}
-                        <p>Velkommen, {{ request.user.firstname }} {{ request.user.lastname }}</p><a href="{% url 'logout' %}">Logg ut</a>
-                        {% else %}
-                        <a href="{% url 'login' %}">Logg in</a> | <a href="{% url 'signup' %}">Registrering</a>
-                        {% endif %}
+                        {% if request.user.is_authenticated %}
+                           <p>Velkommen, {{ request.user.firstname }} {{ request.user.lastname }} {% if user.admin %}Du er admin.{% endif %}</p>{% if user.admin %}<a href="{% url 'ademin' %}">Slett annonser</a> | {% endif %}<a href="{% url 'logout' %}">Logg ut</a>
+                       {% else %}
+                           <a href="{% url 'login' %}">Logg in</a> | <a href="{% url 'signup' %}">Registrering</a>
+                      {% endif %}
                     </div>
                 </div>
             </div>
         </div>
-            <a href="{% url 'shop:products' %}">Product List</a>
-            {% if request.user.is_authenticated %}
-                <p>Velkommen, {{ request.user.firstname }} {{ request.user.lastname }} {% if user.admin %}Du er admin.{% endif %}</p>{% if user.admin %}<a href="{% url 'ademin' %}">Slett annonser</a> | {% endif %}<a href="{% url 'logout' %}">Logg ut</a>
-            {% else %}
-                | <a href="{% url 'login' %}">Logg in</a> | <a href="{% url 'signup' %}">Registrering</a>
-            {% endif %}
-        </p>
 
     </div>
 
