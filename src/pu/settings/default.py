@@ -36,6 +36,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'sellyoshit.apps.SellyoshitConfig',
+    'ads.apps.AdsConfig',
+
 ]
 
 MIDDLEWARE = [
@@ -78,6 +80,7 @@ WSGI_APPLICATION = 'pu.wsgi.application'
 #     'NAME': os.path.join(BASE_DIR, '../../db.sqlite3'),
 # }
 # }
+"""
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
@@ -86,6 +89,13 @@ DATABASES = {
         'PASSWORD': 'ShAhGfMpMsTe',
         'HOST': 'mysql.stud.ntnu.no',
         'PORT': '3306',
+    }
+}
+"""
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
 
@@ -124,3 +134,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, '../static')
+STATICFILES_DIRS = [
+    # os.path.join(os.path.dirname(BASE_DIR), 'ads', 'static')
+    os.path.join(BASE_DIR, '../ads', 'static', 'css')
+]

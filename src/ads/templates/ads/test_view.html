@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+{% load static %} <!-- Laster inn static directory -->
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>{{ad.product_name}} At SellYoShit</title>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="{% static 'ads.css' %}" type="text/css">
+  </head>
+  <body>
+    <h1>Testing</h1>
+    {% for ad in ads %}
+      {{ ad.publish }}
+      <div>
+        <p>Hallo og velkommen til en fantastisk ad!</p>
+        <div id = "produktnavn">
+          <span>
+            <strong>Produkt: </strong>
+          </span>
+          <span>
+            {{ad.product_name}}
+          </span>
+        </div>
+        <div id = "price">
+          <span>
+            <strong>Pris: </strong>
+          </span>
+          <span>
+            {{ad.price}}
+          </span>
+        </div>
+        <div id = "seller">
+          <span>
+            <strong>Selger: </strong>
+          </span>
+          <span>
+            {{ad.seller_name}}
+          </span>
+        </div>
+        <div id = "datoer">
+          <span>
+            <strong>Salgsdato: </strong>
+          </span>
+          <span>
+            {{ad.published_date}}
+          </span>
+        </div>
+      </div>
+    {% endfor %}
+  </body>
+</html>
