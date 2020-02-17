@@ -28,8 +28,4 @@ test:
   variables:
     DATABASE_URL: "postgresql://postgres:postgres@postgres:5432/$POSTGRES_DB"
   script:
-    - python 3.7 -m pip install -r requirements.txt
-    - python 3.7 src/manage.py test app
-    
-    
-    #- python ../src/manage.py test --settings ../src/pu.settings.ci
+    - python ../src/manage.py test --settings ../src/pu.settings.ci
