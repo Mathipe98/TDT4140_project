@@ -2,13 +2,13 @@ from django.conf.urls import url
 from django.urls import path
 from .views import signup
 from .views import home
-from .views import logins
-from .views import logouts
+from .views import log_in
+from .views import log_out
 
 app_name='shop'
 urlpatterns = [
     path('', home, name='home'),
-    path('login/', logins, name='login'),
+    path('login/', log_in, name='login'),
     path('signup/', signup, name='signup'),
-    path('logout/', logouts, name='logout'),
+    path('logout/', log_out, name='logout'),
 ]

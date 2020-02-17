@@ -36,7 +36,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'sellyoshit.apps.SellyoshitConfig',
-    'users.apps.UserConfig'
+    'users.apps.UserConfig',
+    'crispy_forms',
+
 ]
 
 MIDDLEWARE = [
@@ -127,3 +129,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+
+#Bootstrap for forms
+CRISPY_TEMPLATE_PACK = 'bootstrap4'

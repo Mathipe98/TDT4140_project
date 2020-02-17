@@ -1,29 +1,29 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate, logout
-from django.contrib.auth.forms import UserCreationForm
-from .forms import SignupForm,LoginForm
+from .forms import SignupForm, LoginForm
+
 
 # Create your views here.
 def signup(request):
-        context = {}
-        if request.POST:
-            form = SignupForm(request.POST)
-            if form.is_valid():
-                form.save()
-                username = form.cleaned_data.get("username")
-                raw_password = form.cleaned_data.get("password1")
-                user = authenticate(username=username,password = raw_password)
-                login(request,user)
-                return redirect('home')
-            else:
-                context['registration_form'] = form
+    context = {}
+    if request.POST:
+        form = SignupForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get("username")
+            raw_password = form.cleaned_data.get("password1")
+            user = authenticate(username=username, password=raw_password)
+            login(request, user)
+            return redirect('home')
         else:
-            form =SignupForm()
-            context['registration_form'] = form
-        return render(request,"sellyoshit/log_in.html",context)
+            context['signup_form'] = form
+    else:
+        form = SignupForm()
+        context['signup_form'] = form
+    return render(request, "sellyoshit/log_in.html", context)
 
-def logins(request):
 
+def log_in(request):
     context = {}
 
     user = request.user
@@ -34,16 +34,17 @@ def logins(request):
         if form.is_valid():
             username = request.POST['username']
             password = request.POST['password']
-            user = authenticate(username=username,password=password)
+            user = authenticate(username=username, password=password)
             if user:
-                login(request,user)
+                login(request, user)
                 return redirect('home')
     else:
         form = LoginForm()
 
     context['login_form'] = form
-    return render(request,'sellyoshit/log_in.html',context)
+    return render(request, 'sellyoshit/log_in.html', context)
 
-def logouts(request):
+
+def log_out(request):
     logout(request)
     return redirect('home')

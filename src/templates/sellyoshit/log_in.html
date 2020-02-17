@@ -1,17 +1,22 @@
 <!DOCTYPE html>
+{% load crispy_forms_tags %}
+
 <html lang="no">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 </head>
 <body>
+    <div class="container">
+    {% if request.path == '/login/' %}
+    <h2>Logg inn</h2>
     <form method="post">{% csrf_token %}
         {% for field in login_form %}
-            <p>{{ field.label_tag }}</p>
-            {{ field }}
-            {% if field.help_text %}
-                <small style="color:greenyellow;">{{ field.help_text }}</small>
-            {% endif %}
+          <div class="form-group">
+            {{ field|as_crispy_field }}
+
 
             {% for error in field.error %}
                 <small style="color:red;">{{ error }}</small>
@@ -22,23 +27,29 @@
                  {{ login_form.non_field_errors }}
                 </small>
             {% endif %}
+            </div>
         {% endfor %}
-        <button type="submit">Logg inn</button>
+        <button type="submit" class="btn btn-primary">Logg inn</button>
     </form>
-  <h2>Sign up</h2>
+    {% elif request.path == '/signup/'%}
+    <h2>Registrering</h2>
     <form method="POST">{% csrf_token %}
-        {% for field in registration_form %}
-            <p>{{ field.label_tag }}</p>
-            {{ field }}
-            {% if field.help_text %}
-                <small>{{ field.help_text }}</small>
-            {% endif %}
+        {% for field in signup_form %}
+            <div class="form-group">
+            {{ field|as_crispy_field }}
+
 
             {% for error in field.error %}
                 <p>{{ error }}</p>
                 {% endfor %}
+            </div>
         {% endfor %}
-        <button type="submit">Sign up</button>
+        <button type="submit" class="btn btn-primary">Sign up</button>
     </form>
+    {% endif %}
+    </div>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 </body>
 </html>

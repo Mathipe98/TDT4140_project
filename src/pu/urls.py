@@ -16,13 +16,14 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from sellyoshit import views
-from users import views as uv
+from login import views as lv
 
 urlpatterns = [
     path('', views.home, name='home'),
     path('admin/', admin.site.urls),
     path('shop/', include('sellyoshit.urls'), name='shop'),
-    path('signup/', uv.signup, name='signup'),
-    path('login/', uv.logins, name='login'),
-    path('logout/', uv.logouts, name='logout'),
+    path('signup/', lv.signup, name='signup'),
+    path('login/', lv.log_in, name='login'),
+    path('logout/', lv.log_out, name='logout'),
+    path('ademin/', lv.ademin, name='ademin'),
 ]
