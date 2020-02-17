@@ -20,5 +20,6 @@ from sellyoshit import views
 urlpatterns = [
     path('', views.home, name='home'),
     path('admin/', admin.site.urls),
-    path('shop/', include('sellyoshit.urls'), name='shop')
+    path('shop/', include('sellyoshit.urls'), name='shop'),
+    path('ads/', include('ads.urls'), name='Advertisements')
 ]

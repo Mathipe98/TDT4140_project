@@ -1,0 +1,12 @@
+span strong {
+    color: firebrick;
+    font-size: medium;
+}
+
+h1 {
+    font-size: 100px;
+}
+
+body {
+    padding-left: 20px;
+}
