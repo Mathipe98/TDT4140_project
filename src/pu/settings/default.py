@@ -129,6 +129,15 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, '../static')
+
+# All folders where django search for static files, e.g. css, media, fonts, js...
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, '../static/media'),
+    os.path.join(BASE_DIR, '../static/css'),
+    os.path.join(BASE_DIR, '../static/js'),
+    os.path.join(BASE_DIR, '../static/fonts')
+]
 
 
 #Bootstrap for forms
