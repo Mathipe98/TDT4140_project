@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static "../static/styles.css" %}">
 <head>
     <meta charset="UTF-8">
     <title>Products</title>
@@ -8,10 +10,13 @@
     <ol>
         {% for item in products %}
             <li>{{ item.name }} - kr {{ item.price }}</li>
-            <a href="https://oldspice.com/">
-        <img src="{{STATIC_URL}} /static/Old-Spice-Beard-Oil-Store-Example.jpg"
-             alt="Product ad" style="width:600px;height:288px;border:0;"/>
-            </a>
+                <a href="https://oldspice.com/">
+                    <div class="img">
+                        <img src="{{ item.image.url }}" type="ad"
+                        alt="Product ad" style="width:600px;height:288px;border:0;"/>
+                    </div>
+
+                </a>
 
         {% endfor %}
     </ol>

@@ -10,7 +10,7 @@ def products(request):
 def product(request, pk):
     product = Product.objects.get(pk=pk)
     context = {'product': product}
-    return render(request, 'sellyoshit/product_details.html', context)
+    return render(request, 'sellyoshit/product_list.html', context)
 
 def home(request):
     return render(request, 'sellyoshit/home_page.html')
