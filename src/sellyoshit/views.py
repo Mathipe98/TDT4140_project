@@ -13,7 +13,7 @@ def product(request, pk):
     return render(request, 'sellyoshit/product_list.html', context)
 
 def home(request):
-    return render(request, 'sellyoshit/home_page.html')
+    return render(request, 'sellyoshit/home_page2.html')
 
 def image_test(request):
     #index_file_path = PROJECT_PATH + '/templates/sellyoshit/Clickable_image_test.html'
