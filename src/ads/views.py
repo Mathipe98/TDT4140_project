@@ -12,6 +12,6 @@ def advertisements_view(request):
 
 def show_specific_ad(request, pk):
     # pk is passed from urls to this view. Must be identically named
-    ad = Advertisement.objects.get_object_or_404(Advertisement, pk=pk)
+    ad = get_object_or_404(Advertisement, pk=pk)
     # get_object_or_404 either gives object with pk or a 404 not found
     return render(request, 'ads/advertisement.html', {'ad': ad})
