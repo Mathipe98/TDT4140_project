@@ -6,8 +6,10 @@
 </head>
 <body>
     <div>
-
-        {{ ad.name }}, {{ad.price }}
+        <img src="{{ ad.image.url }}" type="ad"
+                         alt="Product ad" style="width:400px;height:100%;border:0;"/>
+       <p> <b>{{ ad.name }}</b>
+           <br> Price: kr {{ad.price }} <p/>
 
     </div>
 

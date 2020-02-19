@@ -17,7 +17,7 @@
     <div class ="grid">
        {% for item in products %}
             <div>
-                <a href="https://oldspice.com/">
+                <a href="{% url 'shop:details' item.pk %}">
 
                     <img src="{{ item.image.url }}" type="ad"
                          alt="Product ad" style="width:400px;height:300px;border:0;"/>
