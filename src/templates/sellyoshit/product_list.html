@@ -6,19 +6,26 @@
     <meta charset="UTF-8">
     <title>Products</title>
 </head>
+
+<header>
+    <h1>SellYo'Shit</h1>
+    <h2>Product list</h2>
+    <p>Some additional information here</p>
+  </header>
+
 <body>
-    <ol>
-        {% for item in products %}
-            <li>{{ item.name }} - kr {{ item.price }}</li>
+    <div class ="grid">
+       {% for item in products %}
+            <div>
                 <a href="https://oldspice.com/">
-                    <div class="img">
-                        <img src="{{ item.image.url }}" type="ad">
 
-                    </div>
-
+                    <img src="{{ item.image.url }}" type="ad"
+                         alt="Product ad" style="width:400px;height:300px;border:0;"/>
                 </a>
 
+                <p> {{ item.name }} - kr {{ item.price }} </p>
+            </div>
         {% endfor %}
-    </ol>
+    </div>
 </body>
 </html>

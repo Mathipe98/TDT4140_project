@@ -1,9 +1,14 @@
 img[type="ad"] {
-    width: 400px;
-    height: 100%;
+
     object-fit: cover;
     margin: 0 auto auto 0;
 }
+
+.grid {
+  display: grid;
+  grid-template-columns: auto auto auto;
+}
+
 /*
 h1 {
   text-align: center;
