@@ -17,9 +17,18 @@ from django.contrib import admin
 from django.urls import path, include
 from sellyoshit import views
 
+# Used to import pictures
+from . import settings
+from django.contrib.staticfiles.urls import static
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+
 urlpatterns = [
     path('', views.home, name='home'),
     path('admin/', admin.site.urls),
     path('shop/', include('sellyoshit.urls'), name='shop'),
     path('ads/', include('ads.urls'), name='Advertisements')
 ]
+
+# For displaying imagefields
+urlpatterns += staticfiles_urlpatterns()
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
