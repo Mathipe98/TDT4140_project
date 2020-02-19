@@ -1,10 +1,18 @@
 from django.shortcuts import render
 from .models import Product
+from django.core.paginator import Paginator
 
 
 def products(request):
     products = Product.objects.all()
-    context = {'products': products}
+    paginator = Paginator(products, 6)  # Show X products per page
+
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    context = {'products': page_obj.object_list,
+               'page_obj': page_obj}
+
     return render(request, 'sellyoshit/product_list.html', context)
 
 def ad(request, pk):

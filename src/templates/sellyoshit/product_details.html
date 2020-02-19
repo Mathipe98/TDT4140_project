@@ -1,17 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
+{% load static %}
+<link rel="stylesheet" type="text/css" href="../../static/styles.css">
 <head>
     <meta charset="UTF-8">
     <title>Product Details</title>
 </head>
+
+<header>
+    <a href="{% url "home" %}" style="text-decoration:none;">
+        <h1>SellYo'Shit</h1>
+    </a>
+    <h2><b> {{ ad.name }} </b></h2>
+
+  </header>
+
 <body>
-    <div>
+
         <img src="{{ ad.image.url }}" type="ad"
                          alt="Product ad" style="width:400px;height:100%;border:0;"/>
-       <p> <b>{{ ad.name }}</b>
-           <br> Price: kr {{ad.price }} <p/>
+        <p> Price: kr {{ad.price }}
+        <br> Description
+        <p/>
 
-    </div>
+
 
 
 </body>
