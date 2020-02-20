@@ -29,3 +29,4 @@ test:
     DATABASE_URL: "postgresql://postgres:postgres@postgres:5432/$POSTGRES_DB"
   script:
     - python3.7 src/manage.py test pu
+    - python3.7 src/manage.py test users --keepdb -v2  # must have --keepdb, otherwise error 1215

@@ -91,6 +91,10 @@ DATABASES = {
         'PASSWORD': 'ShAhGfMpMsTe',
         'HOST': 'mysql.stud.ntnu.no',
         'PORT': '3306',
+        'TEST': {
+            'CHARSET': 'utf8'       # ensures that test db is using utf8
+        }
+
     }
 }
 
