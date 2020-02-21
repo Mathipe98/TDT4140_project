@@ -1,0 +1,7 @@
+.ad_wrapper {
+    text-align: center;
+}
+
+.ad_wrapper div {
+    display: inline-block;
+}

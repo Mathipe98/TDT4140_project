@@ -15,3 +15,4 @@ def show_specific_ad(request, pk):
     ad = get_object_or_404(Advertisement, pk=pk)
     # get_object_or_404 either gives object with pk or a 404 not found
     return render(request, 'ads/advertisement.html', {'ad': ad})
+

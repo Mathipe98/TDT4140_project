@@ -12,11 +12,12 @@ def user_directory_path(instance, filename):
 class Advertisement(models.Model):
     product_name = models.TextField(default="Product")
     price = models.IntegerField(default=0)
-    seller_name = models.TextField()
+    seller_name = models.TextField()  # Should be replaced by a user
     created_date = models.DateTimeField(default=timezone.now)
     published_date = models.DateTimeField(blank=True, null=True)
     sold = models.BooleanField(default=False)
-    header_picture = models.ImageField(upload_to="ads/users/",
+    # Should add a description field to the advertisement
+    header_picture = models.ImageField(upload_to="ads/users/",  # Should create a folder for each user optimally
                                        default="ads/default.png")
 
     def __str__(self):
