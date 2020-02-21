@@ -16,5 +16,5 @@ def product(request, pk):
     return render(request, 'sellyoshit/product_details.html', context)
 
 def home(request):
-    return render(request, 'sellyoshit/home_page.html')
+    return render(request, 'sellyoshit/home_pageEXT.html')
 

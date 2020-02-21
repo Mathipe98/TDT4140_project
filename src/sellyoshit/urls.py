@@ -9,5 +9,4 @@ app_name='shop'
 urlpatterns = [
     path('products/', products, name='products'),
     path('details/', product, name='details'),
-    path('login/', login, name='login'),
 ]

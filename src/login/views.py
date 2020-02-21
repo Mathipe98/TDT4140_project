@@ -20,7 +20,7 @@ def signup(request):
     else:
         form = SignupForm()
         context['signup_form'] = form
-    return render(request, "sellyoshit/log_in.html", context)
+    return render(request, "sellyoshit/log_inEXT.html", context)
 
 
 def log_in(request):
@@ -42,7 +42,7 @@ def log_in(request):
         form = LoginForm()
 
     context['login_form'] = form
-    return render(request, 'sellyoshit/log_in.html', context)
+    return render(request, 'sellyoshit/log_inEXT.html', context)
 
 
 def log_out(request):
@@ -59,3 +59,8 @@ def ademin(request):
     else:
         return redirect('home')
 
+def my_page(request):
+    user = request.user
+    if not user.is_authenticated:
+        return redirect('home')
+    return render(request,'sellyoshit/mypage.html',{})

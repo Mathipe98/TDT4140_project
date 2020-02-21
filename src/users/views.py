@@ -20,7 +20,7 @@ def signup(request):
     else:
         form = SignupForm()
         context['signup_form'] = form
-    return render(request, "sellyoshit/log_in.html", context)
+    return render(request, "sellyoshit/log_inEXT.html", context)
 
 
 def log_in(request):
@@ -42,9 +42,12 @@ def log_in(request):
         form = LoginForm()
 
     context['login_form'] = form
-    return render(request, 'sellyoshit/log_in.html', context)
+    return render(request, 'sellyoshit/log_inEXT.html', context)
 
 
 def log_out(request):
     logout(request)
     return redirect('home')
+
+
+
