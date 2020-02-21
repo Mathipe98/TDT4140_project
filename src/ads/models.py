@@ -1,6 +1,7 @@
 # Create your models here.
 from django.db import models
 from django.utils import timezone
+from django.contrib.auth.models import User
 
 
 def user_directory_path(instance, filename):
@@ -11,6 +12,7 @@ def user_directory_path(instance, filename):
 
 class Advertisement(models.Model):
     product_name = models.TextField(default="Product")
+    product_description = models.TextField(default="There is no description available for this product.")
     price = models.IntegerField(default=0)
     seller_name = models.TextField()  # Should be replaced by a user
     created_date = models.DateTimeField(default=timezone.now)
@@ -30,6 +32,36 @@ class Advertisement(models.Model):
         self.save()
         return
 
-    def sell(self):
-        self.sold = True
+    def toggle_sold(self):
+        self.sold = not self.sold
+        return
+
+    def update_name(self, new_name):
+        assert isinstance(new_name, str)
+        if new_name == "":
+            return "You cannot set the name to empty"
+        elif len(new_name) > 60:
+            return "New name cannot be longer than 60 characters"
+        else:
+            self.product_name = new_name
+            return "Successfully updated"
+
+    def update_description(self, new_description):
+        assert isinstance(new_description, str)
+        if new_description == "":
+            self.product_description = "There is no description available for this product."
+            # Not sure if this works as intended
+            return
+        elif len(new_description) > 400:
+            return "Description can't be longer than 400 chars"
+        else:
+            self.product_description = new_description
+            return "Successfully updated"
+
+    def update_price(self, price):
+        try:
+            price = int(price)
+        except ValueError:
+            return "Price must be an integer"
+        self.price = price
         return
