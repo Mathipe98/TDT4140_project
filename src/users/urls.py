@@ -1,11 +1,11 @@
 from django.conf.urls import url
 from django.urls import path
 from .views import signup
-from .views import home
+from sellyoshit.views import home
 from .views import log_in
 from .views import log_out
 
-app_name='shop'
+app_name = 'shop'
 urlpatterns = [
     path('', home, name='home'),
     path('login/', log_in, name='login'),

@@ -47,7 +47,7 @@ class Users(AbstractBaseUser):
         app_label ="users"
 
     def __str__(self):
-        return self.usersname
+        return self.username
 
 
 class Ads(models.Model):
