@@ -17,6 +17,8 @@ from django.contrib import admin
 from django.urls import path, include
 from sellyoshit import views
 from login import views as lv
+from django.conf.urls.static import static
+from django.conf import settings
 
 urlpatterns = [
     path('', views.home, name='home'),
@@ -27,4 +29,5 @@ urlpatterns = [
     path('logout/', lv.log_out, name='logout'),
     path('ademin/', lv.ademin, name='ademin'),
     path('mypage/', lv.my_page, name='mypage'),
-]
+    path('shop/', include('sellyoshit.urls'), name='shop')
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

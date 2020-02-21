@@ -137,12 +137,16 @@ STATIC_ROOT = os.path.join(BASE_DIR, '../static')
 
 # All folders where django search for static files, e.g. css, media, fonts, js...
 STATICFILES_DIRS = [
+    os.path.join(BASE_DIR,'../static'),
     os.path.join(BASE_DIR, '../static/media'),
     os.path.join(BASE_DIR, '../static/css'),
     os.path.join(BASE_DIR, '../static/js'),
     os.path.join(BASE_DIR, '../static/fonts')
 ]
 
+# Media files, uploaded by user
+MEDIA_ROOT = os.path.join(BASE_DIR, '../media')
+MEDIA_URL = '/media/'
 
 #Bootstrap for forms
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
