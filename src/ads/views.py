@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.utils import timezone
 from .models import Advertisement
-from .forms import Advertisment_form
+from .forms import AdvertismentForm
 from django.shortcuts import render, get_object_or_404
 from django.utils import timezone
 from django.contrib.auth.models import User
@@ -20,12 +20,13 @@ def add_detail_view(request):
 
 def create_add(request):
     if request.method == "POST":
-        form = Advertisment_form(request.POST)
+        form = AdvertismentForm(request.POST)
         if form.is_valid():
             form.save()
             return HttpResponseRedirect('/ads/thanks/')
-    form = Advertisment_form
+    form = AdvertismentForm
     return render(request, "ads/create_add.html", {'form': form})
+
 
 def response(request):
     return render(request, "ads/thanks.html", {})
@@ -38,6 +39,7 @@ def advertisements_view(request):
 
 
 def show_specific_ad(request, pk):
+    user = request.user
     # pk is passed from urls to this view. Must be identically named
     ad = get_object_or_404(Advertisement, pk=pk)
     # get_object_or_404 either gives object with pk or a 404 not found

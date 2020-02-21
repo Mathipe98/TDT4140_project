@@ -1,11 +1,13 @@
 from django import forms
 from .models import Advertisement
 
-class Advertisment_form(forms.ModelForm):
+
+class AdvertismentForm(forms.ModelForm):
 
     class Meta:
         model = Advertisement
-        fields = ('item', 'text','pris', 'image', 'published_date')
+        fields = ('product_name', 'product_description', 'price', 'header_picture', 'published_date')
+
 
 class ImageUploadForm(forms.Form):
     image = forms.ImageField()
