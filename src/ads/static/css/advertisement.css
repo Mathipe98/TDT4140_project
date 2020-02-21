@@ -1,7 +1,14 @@
 .ad_wrapper {
     text-align: center;
+    padding-top: 80px;
 }
 
 .ad_wrapper div {
     display: inline-block;
+}
+
+.card p {
+    width: 25rem;
+    height: 15rem;
+    padding-top: 10px;
 }
