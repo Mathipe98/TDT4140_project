@@ -1,6 +1,9 @@
 from django.shortcuts import render
 from .models import Product
 from django.core.paginator import Paginator
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import login
+from django.shortcuts import render, redirect
 
 
 def products(request):
@@ -21,7 +24,7 @@ def ad(request, pk):
     return render(request, 'sellyoshit/product_details.html', context)
 
 def home(request):
-    return render(request, 'sellyoshit/home_page2.html')
+    return render(request, 'sellyoshit/home_pageEXT.html')
 
 def image_test(request):
     #index_file_path = PROJECT_PATH + '/templates/sellyoshit/Clickable_image_test.html'

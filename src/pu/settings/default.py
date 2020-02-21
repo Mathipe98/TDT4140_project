@@ -36,6 +36,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'sellyoshit.apps.SellyoshitConfig',
+    'users.apps.UserConfig',
+    'crispy_forms',
+
 ]
 
 MIDDLEWARE = [
@@ -67,6 +70,8 @@ TEMPLATES = [
     },
 ]
 
+AUTH_USER_MODEL = "users.Users"
+
 WSGI_APPLICATION = 'pu.wsgi.application'
 
 # Database
@@ -86,6 +91,10 @@ DATABASES = {
         'PASSWORD': 'ShAhGfMpMsTe',
         'HOST': 'mysql.stud.ntnu.no',
         'PORT': '3306',
+        'TEST': {
+            'CHARSET': 'utf8'       # ensures that test db is using utf8
+        }
+
     }
 }
 
@@ -124,12 +133,20 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, '../static')
 
-
+# All folders where django search for static files, e.g. css, media, fonts, js...
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR,'../static'),
+    os.path.join(BASE_DIR, '../static/media'),
+    os.path.join(BASE_DIR, '../static/css'),
+    os.path.join(BASE_DIR, '../static/js'),
+    os.path.join(BASE_DIR, '../static/fonts')
 ]
 
 # Media files, uploaded by user
 MEDIA_ROOT = os.path.join(BASE_DIR, '../media')
 MEDIA_URL = '/media/'
+
+#Bootstrap for forms
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
