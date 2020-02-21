@@ -4,6 +4,10 @@ from django.db import models
 from django.utils import timezone
 
 # Create your models here.
+def user_directory_path(instance, filename):
+    # file will be uploaded to MEDIA_ROOT / user_<id>/<filename>
+    # Should optimally be used, not sure why user does not work
+    return 'advertisements/user_{0}/{1}'.format(instance.user.id, filename)
 
 class Advertisement(models.Model):
     product_name = models.TextField(default="Product")
@@ -19,11 +23,6 @@ class Advertisement(models.Model):
     class Meta:
         managed = True
         app_label = 'ads'
-
-def user_directory_path(instance, filename):
-    # file will be uploaded to MEDIA_ROOT / user_<id>/<filename>
-    # Should optimally be used, not sure why user does not work
-    return 'advertisements/user_{0}/{1}'.format(instance.user.id, filename)                             default="ads/default.png")
 
     def __str__(self):
         return "Seller name: " + self.seller_name + " Price: " + str(self.price) \
