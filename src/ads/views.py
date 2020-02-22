@@ -1,3 +1,4 @@
+from django.contrib.auth import authenticate
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.utils import timezone
@@ -8,24 +9,21 @@ from django.utils import timezone
 from django.contrib.auth.models import User
 from .models import Advertisement
 
-"""def create_add(request):
-    adds = Advertisement.objects.all()
-    context = {'adds': adds}
-    return render(request, 'ads/fetch_add.html', context)"""
 
-def add_detail_view(request):
-    ad = Advertisement.objects.last() #Henter kun siste element som ble lagt til
+def ad_detail_view(request):
+    ad = Advertisement.objects.last() # Henter kun siste element som ble lagt til
     context = {'ad': ad}
-    return render(request, 'ads/fetch_add.html', context)
+    return render(request, 'ads/fetch_ad.html', context)
 
-def create_add(request):
+
+def create_ad(request):
     if request.method == "POST":
         form = AdvertismentForm(request.POST)
         if form.is_valid():
             form.save()
             return HttpResponseRedirect('/ads/thanks/')
     form = AdvertismentForm
-    return render(request, "ads/create_add.html", {'form': form})
+    return render(request, "ads/create_ad.html", {'form': form})
 
 
 def response(request):
@@ -43,6 +41,10 @@ def show_specific_ad(request, pk):
     # pk is passed from urls to this view. Must be identically named
     ad = get_object_or_404(Advertisement, pk=pk)
     # get_object_or_404 either gives object with pk or a 404 not found
-    return render(request, 'ads/advertisement.html', {'ad': ad})
+
+    if user.is_superuser or user.id == ad.seller.id:  # Should be replaced by better authentication
+        return render(request, 'ads/advertisement_owner.html')
+    else:
+        return render(request, 'ads/advertisement_standard.html', {'ad': ad})
 
 
