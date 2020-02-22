@@ -17,7 +17,8 @@ class Advertisement(models.Model):
     product_name = models.TextField(default="Product")
     product_description = models.TextField(default="There is no description available for this product.")
     price = models.IntegerField(default=0)
-    seller = User  # Should be replaced by user from login
+    seller = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    # Seller should be replaced by user from login
     created_date = models.DateTimeField(default=timezone.now)
     published_date = models.DateTimeField(blank=True, null=True)
     sold = models.BooleanField(default=False)
@@ -30,9 +31,12 @@ class Advertisement(models.Model):
         app_label = 'ads'
 
     def __str__(self):
-        return "Seller name: " + self.seller_name + " Price: " + str(self.price) \
+        return "Seller name: " + self.seller.first_name + " Price: " + str(self.price) \
             + "Dates: " + str(self.created_date) + " " + str(self.published_date) + \
                "Sold: " + str(self.sold)
+
+    def get_seller_name(self):
+        return self.seller.first_name + self.seller.last_name
 
     def publish(self):
         self.published_date = timezone.now()

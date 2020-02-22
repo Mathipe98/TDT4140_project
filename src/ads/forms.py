@@ -2,7 +2,7 @@ from django import forms
 from .models import Advertisement
 
 
-class AdvertismentForm(forms.ModelForm):
+class AdvertisementForm(forms.ModelForm):
 
     class Meta:
         model = Advertisement
@@ -10,5 +10,5 @@ class AdvertismentForm(forms.ModelForm):
 
 
 class ImageUploadForm(forms.Form):
-    image = forms.ImageField()
+    image = forms.ImageField(initial="default.png")
 

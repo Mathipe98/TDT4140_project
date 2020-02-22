@@ -30,7 +30,8 @@
         <p class="card-text">
           {{ ad.product_description }}
         </p>
-        <a class="btn btn-primary" href="#" role="button">Contact Seller {{ ad.get_seller_name }}</a>
+        <a class="btn btn-primary" href="{% url 'edit_ad' %}" role="button">Edit ad</a>
+        <a class="btn btn-primary" href="#" role="button">Delete ad</a>
       </div>
     </div>
   </div>
