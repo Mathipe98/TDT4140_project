@@ -20,6 +20,11 @@ from login import views as lv
 from django.conf.urls.static import static
 from django.conf import settings
 
+# Used to import pictures
+from . import settings
+from django.contrib.staticfiles.urls import static
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+
 urlpatterns = [
     path('', views.products, name='home'),
     path('admin/', admin.site.urls),
@@ -29,5 +34,9 @@ urlpatterns = [
     path('logout/', lv.log_out, name='logout'),
     path('ademin/', lv.ademin, name='ademin'),
     path('mypage/', lv.my_page, name='mypage'),
-    path('shop/', include('sellyoshit.urls'), name='shop')
+    path('ads/', include('ads.urls'), name='Advertisements')
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+# For displaying imagefields
+urlpatterns += staticfiles_urlpatterns()
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

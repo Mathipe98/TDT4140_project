@@ -1,0 +1,21 @@
+h1 {
+    font-size: 60px;
+}
+
+body {
+    padding-left: 20px;
+}
+
+.advertisement {
+    padding: 40px;
+    border-color: black;
+}
+
+.product_name {
+    font-size: 30px;
+    color: darkred;
+}
+
+.ad_background {
+    background: gainsboro;
+}

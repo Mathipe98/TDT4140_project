@@ -1,0 +1,40 @@
+{% extends 'ads/test_view.html' %} <!-- Where the reference is to, this is now the main view -->
+
+{% block one_ad %} <!-- Name of the current block -->
+  {% for ad in ads %}
+      <div class = "advertisement">
+        <div class = "ad_background">
+          <h2 id = "product_name">{{ad.product_name}}</h2>
+          <h2>
+            <a href="{% url 'specific_ad' pk=ad.pk %}"> <!-- pk = Primary key -->
+              <img src="{{ ad.header_picture.url }}" alt = "Advertisement header picture" height="140" width="200">
+            </a>
+          </h2>
+          <div id = "price">
+            <span>
+              <strong>Pris: </strong>
+            </span>
+            <span>
+              {{ad.price}}
+            </span>
+          </div>
+          <div id = "seller">
+            <span>
+              <strong>Selger: </strong>
+            </span>
+            <span>
+              {{ad.seller}}
+            </span>
+          </div>
+          <div id = "datoer">
+            <span>
+              <strong>Salgsdato: </strong>
+            </span>
+            <span>
+              {{ad.published_date}}
+            </span>
+          </div>
+        </div>
+      </div>
+  {% endfor %}
+{% endblock %}
