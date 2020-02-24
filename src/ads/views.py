@@ -10,12 +10,6 @@ from django.contrib.auth.models import User
 from .models import Advertisement
 
 
-def ad_detail_view(request):
-    ad = Advertisement.objects.last()  # Henter kun siste element som ble lagt til
-    context = {'ad': ad}
-    return render(request, 'ads/fetch_ad.html', context)
-
-
 def create_ad(request):
     user = request.user
     if not user.is_authenticated:
@@ -66,3 +60,9 @@ def edit_ad(request, pk):
     else:
         form = AdvertisementForm(instance=ad)
     return render(request, 'ads/edit_ad.html', {'form': form})
+
+
+def delete_ad(request, pk):
+    ad = get_object_or_404(Advertisement, pk=pk)
+    ad.delete()
+    return redirect('ads_view')
