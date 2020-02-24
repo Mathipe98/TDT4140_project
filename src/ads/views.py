@@ -24,7 +24,7 @@ def create_ad(request):
         form = AdvertisementForm(request.POST, initial={"header_picture": "default.png"})
         if form.is_valid():
             ad = form.save(commit=False)
-            ad.seller = user.userID
+            #ad.seller = user.userID
             ad.publish()
             ad.save()
             return redirect('thanks_response')
