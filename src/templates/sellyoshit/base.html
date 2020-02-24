@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
     <!-- Required meta tags -->
@@ -10,7 +11,8 @@
 
     <!-- Icons -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
+    <link rel="stylesheet" type="text/css" href="../../static/styles.css">
+    {% block extra_head %}{% endblock %}
     <title>SellYo'Shit</title>
     <style>
         html,body {
@@ -20,6 +22,10 @@
         .navborder{
             border-top: 1px solid black;
             border-bottom: 1px solid black;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: auto auto auto;
         }
     </style>
 </head>

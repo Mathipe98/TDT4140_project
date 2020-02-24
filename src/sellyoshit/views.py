@@ -16,7 +16,7 @@ def products(request):
     context = {'products': page_obj.object_list,
                'page_obj': page_obj}
 
-    return render(request, 'sellyoshit/product_list.html', context)
+    return render(request, 'sellyoshit/product_listEXT.html', context)
 
 def ad(request, pk):
     ad = Product.objects.get(pk=pk)

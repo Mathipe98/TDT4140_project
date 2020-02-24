@@ -1,30 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-{% load static %}
-<link rel="stylesheet" type="text/css" href="../../static/styles.css">
-<head>
-    <meta charset="UTF-8">
-    <title>Product Details</title>
-</head>
+{% extends 'sellyoshit/base.html' %}
+{% block title %}My Title{% endblock %}
+{% block extra_head %}
+    <link rel="stylesheet" href=".../.../static/style.css"/>
+{% endblock %}
 
-<header>
-    <a href="{% url "home" %}" style="text-decoration:none;">
-        <h1>SellYo'Shit</h1>
-    </a>
-    <h2><b> {{ ad.name }} </b></h2>
-
-  </header>
-
-<body>
-
+{% block content %}
+         <h2><b> {{ ad.name }} </b></h2>
         <img src="{{ ad.image.url }}" type="ad"
                          alt="Product ad" style="width:400px;height:100%;border:0;"/>
         <p> Price: kr {{ad.price }}
         <br> Description
         <p/>
-
-
-
-
-</body>
-</html>
+{% endblock %}
