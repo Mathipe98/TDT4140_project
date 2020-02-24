@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import path, include
 from sellyoshit import views
 from login import views as lv
+from ads import views as av
 from django.conf.urls.static import static
 from django.conf import settings
 
@@ -34,7 +35,12 @@ urlpatterns = [
     path('logout/', lv.log_out, name='logout'),
     path('ademin/', lv.ademin, name='ademin'),
     path('mypage/', lv.my_page, name='mypage'),
-    path('ads/', include('ads.urls'), name='Advertisements')
+    path('ads/', include('ads.urls'), name='Advertisements'),
+    path('', av.advertisements_view, name='ads_view'),
+    path('<int:pk>/', av.show_specific_ad, name='specific_ad'),
+    path('new/', av.create_ad, name='create_ad'),
+    path('<int:pk>/edit/', av.edit_ad, name='edit_ad'),
+    path('<int:pk>/delete/', av.delete_ad, name='delete_ad')
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 # For displaying imagefields

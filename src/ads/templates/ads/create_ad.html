@@ -1,17 +1,10 @@
-
-<!DOCTYPE html>
+{% extends 'sellyoshit/base.html' %}
 {% load crispy_forms_tags %}
-{% load static %}
-<html lang="en">
-<head>
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-    <link rel="stylesheet" href="{% static 'ads.css' %}" type="text/css">
-    <meta charset="UTF-8">
-     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Create Advertisement</title>
-</head>
-<body>
+{% block title %}My Title{% endblock %}
+{% block extra_head %}
+    <link rel="stylesheet" href=".../.../static/style.css"/>
+{% endblock %}
+{% block content %}
     <h2><strong>Create Advertisement</strong>
             <br>
     </h2>
@@ -19,6 +12,4 @@
         {{ form|crispy }}
     <button type="submit" class="btn btn-primary"> Save</button>
     </form>
-
-</body>
-</html>
+{% endblock %}

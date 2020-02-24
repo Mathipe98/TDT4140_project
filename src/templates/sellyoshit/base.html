@@ -43,9 +43,11 @@
                     <button class="btn btn-outline-warning my-12 my-sm-0">
                         Meldinger
                     </button>
-                    <button class="btn btn-outline-warning my-12 my-sm-0">
-                        Ny annonse
-                    </button>
+                    <a href="{% url 'create_ad' %}">
+                        <button class="btn btn-outline-warning my-12 my-sm-0">
+                            Ny annonse
+                        </button>
+                    </a>
                     <a href="{% url 'mypage' %}">
                         <button class="btn btn-outline-warning my-12 my-sm-0">
                             Min side
@@ -78,7 +80,7 @@
     <div class="container-fluid">
         <!-- Left pane: functionality according to page -->
         <div class="row">
-            <div class="col-2 order-1">
+            <div class="col-1 order-1" visibility="hidden">
                 <div style="min-height: 800px;">
                     {% block sidebar %}
                     {% endblock %}
@@ -86,7 +88,7 @@
             </div>
 
             <!-- Right pane: ads -->
-            <div class="col-9 order-2">
+            <div class="col-10 order-2">
                 <div class="alert alert-primary" style="min-height: 800px;">
                     {% block content %}
                     {% endblock %}

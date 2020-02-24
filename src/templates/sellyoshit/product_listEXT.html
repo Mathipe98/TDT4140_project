@@ -7,13 +7,13 @@
     <div class="grid">
        {% for item in products %}
             <div>
-                <a href="{% url 'shop:details' item.pk %}">
+                <a href="{% url 'specific_ad' pk=item.pk %}">
 
-                    <img src="{{ item.image.url }}" type="ad"
+                    <img src="{{ item.header_picture.url }}" type="ad"
                          alt="Product ad" style="width:400px;height:300px;border:0;"/>
                 </a>
 
-                <p> {{ item.name|upper }} - kr {{ item.price }} </p>
+                <p> {{ item.prodct_name|upper }} - kr {{ item.price }} </p>
             </div>
         {% endfor %}
     </div>

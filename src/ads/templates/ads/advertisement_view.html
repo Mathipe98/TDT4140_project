@@ -1,6 +1,9 @@
-{% extends 'ads/test_view.html' %} <!-- Where the reference is to, this is now the main view -->
-
-{% block one_ad %} <!-- Name of the current block -->
+{% extends 'sellyoshit/base.html' %}
+{% block title %}My Title{% endblock %}
+{% block extra_head %}
+    <link rel="stylesheet" href=".../.../static/style.css"/>
+{% endblock %}
+{% block content %} <!-- Name of the current block -->
   {% for ad in ads %}
       <div class = "advertisement">
         <div class = "ad_background">

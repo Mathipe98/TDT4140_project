@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from .models import Product
+from ads.models import Advertisement
 from django.core.paginator import Paginator
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
@@ -7,7 +8,7 @@ from django.shortcuts import render, redirect
 
 
 def products(request):
-    products = Product.objects.all()
+    products = Advertisement.objects.all()
     paginator = Paginator(products, 6)  # Show X products per page
 
     page_number = request.GET.get('page')
