@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS v4 -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <!-- Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <title>SellYo'Shit</title>
+    <style>
+        html,body {
+            height: 100%;
+            width: 100%;
+        }
+        .navborder{
+            border-top: 1px solid black;
+            border-bottom: 1px solid black;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation bar -->
+    <nav class="navbar sticky-top navbar-dark bg-dark mb-3">
+        <div class="container">
+            <a class="navbar-brand" href="{% url 'home' %}">
+                <img src="../static/navbarlogo.png" width="35" height="35" class="d-inline-block align-top" alt="">
+                SellYo'Shit
+            </a>
+            {% if request.user.is_authenticated %}
+                <div>
+                    <button class="btn btn-outline-warning my-12 my-sm-0">
+                        Meldinger
+                    </button>
+                    <button class="btn btn-outline-warning my-12 my-sm-0">
+                        Ny annonse
+                    </button>
+                    <a href="{% url 'mypage' %}">
+                        <button class="btn btn-outline-warning my-12 my-sm-0">
+                            Min side
+                        </button>
+                    </a>
+                    <a href="{% url 'logout' %}">
+                        <button class="btn btn-outline-warning my-12 my-sm-0">
+                            Logg ut
+                        </button>
+                    </a>
+                </div>
+            {% else %}
+                <div>
+                    <a href="{% url 'login' %}">
+                        <button class="btn btn-outline-warning my-12 my-sm-0">
+                            Logg inn
+                        </button>
+                    </a>
+                    <a href="{% url 'signup' %}">
+                        <button class="btn btn-outline-warning my-12 my-sm-0">
+                            Register
+                        </button>
+                    </a>
+                </div>
+            {% endif %}
+        </div>
+     </nav>
+
+    <!-- Content div -->
+    <div class="container-fluid">
+        <!-- Left pane: functionality according to page -->
+        <div class="row">
+            <div class="col-2 order-1">
+                <div style="min-height: 800px;">
+                    {% block sidebar %}
+                    {% endblock %}
+                </div>
+            </div>
+
+            <!-- Right pane: ads -->
+            <div class="col-9 order-2">
+                <div class="alert alert-primary" style="min-height: 800px;">
+                    {% block content %}
+                    {% endblock %}
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<link rel="stylesheet" type="text/css" href="../../static/styles.css">
+<head>
+    <meta charset="UTF-8">
+    <title> {% block title %} SellYo'Shit {% endblock %}</title>
+</head>
+<body>
+
+    <h1>SellYo'Shit</h1>
+
+    <div class="sidenav">
+            <a href="{% url 'shop:products' %}">Product List</a>
+            <a href="{% url 'shop:image_test' %}">Image_test</a>
+    </div>
+
+</body>
+</html>

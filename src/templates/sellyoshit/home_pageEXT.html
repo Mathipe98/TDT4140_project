@@ -1,44 +1,6 @@
-<!DOCTYPE html>
-{% load static %}   <!-- Loads path to static folder-->
-<html lang="en">
-<head>
-    <!-- Required meta tags -->
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <!-- Bootstrap CSS v4 -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-
-    <!-- Icons -->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
-    <title>SellYo'Shit</title>
-</head>
-
-<body>
-    <!-- Navigation bar -->
-    <nav class="navbar sticky-top navbar-dark bg-dark mb-3">
-        <div class="container">
-            <a class="navbar-brand" href="#">
-                <img src="{% static 'navbarlogo.png' %}" width="35" height="35" class="d-inline-block align-top" alt="">
-                SellYo'Shit
-            </a>
-
-            <form class="form-inline">
-                <button class="btn btn-outline-warning my-12 my-sm-0" type="submit">
-                    Logg inn
-                </button>
-            </form>
-        </div>
-     </nav>
-
-    <!-- Content div -->
-    <div class="container">
-        <!-- Left pane: functionality according to page -->
-        <div class="row">
-            <div class="col-3 order-1" style="min-height: 800px">
-
-                <!-- Search bar -->
+{% extends 'sellyoshit/base.html' %}
+{% block sidebar %}
+<!-- Search bar -->
                 <div class="row">
                     <div class="input-group mb-3">
                         <input type="text" class="form-control" style="height: 40px" placeholder="Search">
@@ -68,11 +30,8 @@
                         </div>
                     </form>
                 </div>
-            </div>
-
-            <!-- Right pane: ads -->
-            <div class="col-9 order-2">
-                <div class="alert alert-primary" role="alert" style="min-height: 800px;">
+{% endblock %}
+{% block content %}
                     <div>
                         Midlertidig plassert her:
                         <br>
@@ -84,11 +43,4 @@
                            <a href="{% url 'login' %}">Logg in</a> | <a href="{% url 'signup' %}">Registrering</a>
                       {% endif %}
                     </div>
-                </div>
-            </div>
-        </div>
-
-    </div>
-
-</body>
-</html>
+{% endblock %}
