@@ -6,7 +6,7 @@ class AdvertisementForm(forms.ModelForm):
 
     class Meta:
         model = Advertisement
-        fields = ('product_name', 'product_description', 'price', 'header_picture', 'published_date')
+        fields = ('product_name', 'product_description', 'price', 'header_picture')
 
 
 class ImageUploadForm(forms.Form):
