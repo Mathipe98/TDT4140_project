@@ -18,7 +18,6 @@ class Advertisement(models.Model):
     product_description = models.TextField(default="There is no description available for this product.")
     price = models.IntegerField(default=0)
     # seller = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    # Seller should be replaced by user from login
     seller = models.TextField()
     created_date = models.DateTimeField(default=timezone.now)
     published_date = models.DateTimeField(blank=True, null=True)

@@ -17,21 +17,24 @@ def ad_detail_view(request):
 
 
 def create_ad(request):
+    user = request.user
+    if not user.is_authenticated:
+        redirect('ads_view')
     if request.method == "POST":
         form = AdvertisementForm(request.POST, initial={"header_picture": "default.png"})
         if form.is_valid():
             ad = form.save(commit=False)
-            ad.seller = "Funker ikke akkurat nå"
+            ad.seller = user.userID
             ad.publish()
             ad.save()
-            return redirect('thanks_response', ad.pk)
+            return redirect('thanks_response')
     form = AdvertisementForm
     return render(request, "ads/create_ad.html", {'form': form})
 
 
-def thanks_response(request, pk):
+def thanks_response(request):
     # Should rather be dependent on user than primary key
-    return render(request, "ads/thanks.html", {'id': pk})
+    return render(request, "ads/thanks.html")
 
 
 def advertisements_view(request):
@@ -59,7 +62,7 @@ def edit_ad(request, pk):
         form = AdvertisementForm(request.POST, instance=ad)
         if form.is_valid():
             ad = form.save(commit=False)
-            ad.author = "Funker ikke akkurat nå"
+            ad.author = request.user
             ad.published_date = timezone.now()
             ad.save()
             return redirect('post_detail', pk=ad.pk)
