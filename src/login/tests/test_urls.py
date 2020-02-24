@@ -9,7 +9,7 @@ from sellyoshit.views import home
 
 class TestUrls(SimpleTestCase):
     """
-    Test for urls in users.urls.py
+    Test for urls in login.urls.py
     """
 
     def test_login_url_resolves(self):

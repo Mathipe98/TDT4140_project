@@ -6,7 +6,7 @@ import json
 
 class TestViews(TestCase):
     """
-    Test for views in users.views.py, tests the following:
+    Test for views in login.views.py, tests the following:
         - client receives the url for each view
         - response code for HTTP GET is 200 OK when doing HTTP-requests
         - response code is 302 when doing HTTP-redirect
