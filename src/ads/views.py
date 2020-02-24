@@ -19,7 +19,7 @@ def ad_detail_view(request):
 def create_ad(request):
     user = request.user
     if not user.is_authenticated:
-        redirect('ads_view')
+        return redirect('ads_view')
     if request.method == "POST":
         form = AdvertisementForm(request.POST, initial={"header_picture": "default.png"})
         if form.is_valid():
@@ -30,11 +30,6 @@ def create_ad(request):
             return redirect('specific_ad', ad.pk)
     form = AdvertisementForm
     return render(request, "ads/create_ad.html", {'form': form})
-
-
-def thanks_response(request):
-    # Should rather be dependent on user than primary key
-    return render(request, "ads/thanks.html")
 
 
 def advertisements_view(request):
@@ -48,18 +43,18 @@ def show_specific_ad(request, pk):
     # pk is passed from urls to this view. Must be identically named
     ad = get_object_or_404(Advertisement, pk=pk)
     # get_object_or_404 either gives object with pk or a 404 not found
-
-    # if user.is_superuser or user.id == ad.seller.id:  # Should be replaced by better authentication
-    #    return render(request, 'ads/advertisement_owner.html', {'ad': ad})
-    # else:
-    return render(request, 'ads/advertisement_owner.html', {'ad': ad})
+    if user.is_authenticated:
+        if user == ad.seller:
+            return render(request, 'ads/advertisement_owner.html', {'ad': ad})
+    return render(request, 'ads/advertisement.html', {'ad': ad})
 
 
 def edit_ad(request, pk):
     ad = get_object_or_404(Advertisement, pk=pk)
     user = request.user
     if not user.is_authenticated:
-        redirect('specific_ad', ad.pk)
+        if not user == ad.seller:
+            return redirect('specific_ad', ad.pk)
     if request.method == "POST":
         form = AdvertisementForm(request.POST, instance=ad)
         if form.is_valid():

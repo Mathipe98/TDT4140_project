@@ -8,7 +8,6 @@ urlpatterns = [
     # it to the view as such. Transfers pk = int to show_specific_ad
     path('ads/', views.ad_detail_view, name='fetch_ad'),
     path('new/', views.create_ad, name='create_ad'),
-    path('thanks/', views.thanks_response, name='thanks_response'),
-    path('edit/<int:pk>/', views.edit_ad, name='edit_ad')
+    path('<int:pk>/edit/', views.edit_ad, name='edit_ad')
 ]
 
