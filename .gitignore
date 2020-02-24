@@ -11,8 +11,16 @@ venv/
 __pycache__/
 local_settings.py
 db.sqlite3git
+db.sqlite3
 db.sqlite3-journal
 media
+*.pyc
+*~
+/.vscode
+__pycache__
+myvenv
+/static
+.DS_Store
 
 # If your build process includes running collectstatic, then you probably don't need or want to include staticfiles/
 # in your Git repository. Update and uncomment the following line accordingly.
@@ -212,3 +220,4 @@ fabric.properties
 # End of https://www.gitignore.io/api/django,python,pycharm
 *.iml
 *.xml
+Scrum og XP.pdf
