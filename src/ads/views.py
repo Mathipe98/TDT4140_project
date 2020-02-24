@@ -24,10 +24,10 @@ def create_ad(request):
         form = AdvertisementForm(request.POST, initial={"header_picture": "default.png"})
         if form.is_valid():
             ad = form.save(commit=False)
-            #ad.seller = user.userID
+            ad.seller = user
             ad.publish()
             ad.save()
-            return redirect('thanks_response')
+            return redirect('specific_ad', ad.pk)
     form = AdvertisementForm
     return render(request, "ads/create_ad.html", {'form': form})
 
@@ -57,7 +57,9 @@ def show_specific_ad(request, pk):
 
 def edit_ad(request, pk):
     ad = get_object_or_404(Advertisement, pk=pk)
-    # Authentication needed
+    user = request.user
+    if not user.is_authenticated:
+        redirect('specific_ad', ad.pk)
     if request.method == "POST":
         form = AdvertisementForm(request.POST, instance=ad)
         if form.is_valid():

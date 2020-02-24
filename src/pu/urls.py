@@ -34,7 +34,6 @@ urlpatterns = [
     path('logout/', lv.log_out, name='logout'),
     path('ademin/', lv.ademin, name='ademin'),
     path('mypage/', lv.my_page, name='mypage'),
-    path('shop/', include('sellyoshit.urls'), name='shop'),
     path('ads/', include('ads.urls'), name='Advertisements')
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

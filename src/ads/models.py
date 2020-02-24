@@ -17,12 +17,10 @@ class Advertisement(models.Model):
     product_name = models.TextField(default="Product")
     product_description = models.TextField(default="There is no description available for this product.")
     price = models.IntegerField(default=0)
-    # seller = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    seller = models.TextField()
+    seller = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     created_date = models.DateTimeField(default=timezone.now)
     published_date = models.DateTimeField(blank=True, null=True)
     sold = models.BooleanField(default=False)
-    # Should add a description field to the advertisement
     header_picture = models.ImageField(upload_to="ads/users/",  # Should create a folder for each user optimally
                                        default="ads/default.png")
 
@@ -31,7 +29,7 @@ class Advertisement(models.Model):
         app_label = 'ads'
 
     def __str__(self):
-        return "Seller name: " + self.seller + " Price: " + str(self.price) \
+        return "Seller name: " + " Price: " + str(self.price) \
             + "Dates: " + str(self.created_date) + " " + str(self.published_date) + \
                "Sold: " + str(self.sold)
 
