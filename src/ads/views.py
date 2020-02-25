@@ -15,7 +15,7 @@ def create_ad(request):
     if not user.is_authenticated:
         return redirect('ads_view')
     if request.method == "POST":
-        form = AdvertisementForm(request.POST, initial={"header_picture": "default.png"})
+        form = AdvertisementForm(request.POST, request.FILES)#initial={"header_picture": "default.png"})
         if form.is_valid():
             ad = form.save(commit=False)
             ad.seller = user
@@ -38,7 +38,7 @@ def show_specific_ad(request, pk):
     ad = get_object_or_404(Advertisement, pk=pk)
     # get_object_or_404 either gives object with pk or a 404 not found
     if user.is_authenticated:
-        if user == ad.seller:
+        if user == ad.seller or user.admin:
             return render(request, 'ads/advertisement_owner.html', {'ad': ad})
     return render(request, 'ads/advertisement.html', {'ad': ad})
 
