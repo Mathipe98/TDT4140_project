@@ -2,7 +2,7 @@
 {% load crispy_forms_tags %}
 {% block title %}My Title{% endblock %}
 {% block extra_head %}
-    <link rel="stylesheet" href=".../.../static/style.css"/>
+    <link rel="stylesheet" href="../../static/styles.css"/>
 {% endblock %}
 {% block content %}
 
@@ -15,7 +15,7 @@
       <div class="card-body">
         <h4 class="card-title">{{ ad.product_name }}: {{ ad.price }} kr</h4>
         <h6 class="card-subtitle">
-          Sold by: <a href="">{{ ad.seller_name }}</a>
+          Sold by: {{ ad.seller.username }}
         </h6>
         <p class="card-text">
           {{ ad.product_description }}

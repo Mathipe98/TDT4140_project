@@ -49,7 +49,7 @@ def edit_ad(request, pk):
         if not user == ad.seller:
             return redirect('specific_ad', ad.pk)
     if request.method == "POST":
-        form = AdvertisementForm(request.POST, instance=ad)
+        form = AdvertisementForm(request.POST, request.FILES, instance=ad)
         if form.is_valid():
             ad = form.save(commit=False)
             ad.author = request.user

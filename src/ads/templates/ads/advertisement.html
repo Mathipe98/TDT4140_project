@@ -1,7 +1,7 @@
 {% extends 'sellyoshit/base.html' %}
 {% block title %}My Title{% endblock %}
 {% block extra_head %}
-    <link rel="stylesheet" href=".../.../static/style.css"/>
+    <link rel="stylesheet" href="../../static/styles.css"/>
 {% endblock %}
 {% block content %}
   <div class = "top_header" >
@@ -13,7 +13,7 @@
       <div class="card-body">
         <h4 class="card-title">{{ ad.product_name }}: {{ ad.price }} kr</h4>
         <h6 class="card-subtitle">
-          Sold by: {{ ad.seller }} 
+          Sold by: {{ ad.seller.username }}
           <!-- Should be inside a link later on -->
         </h6>
         <p class="card-text">
