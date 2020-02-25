@@ -15,7 +15,7 @@ def create_ad(request):
     if not user.is_authenticated:
         return redirect('ads_view')
     if request.method == "POST":
-        form = AdvertisementForm(request.POST, initial={"header_picture": "default.png"})
+        form = AdvertisementForm(request.POST, request.FILES)
         if form.is_valid():
             ad = form.save(commit=False)
             ad.seller = user
@@ -27,8 +27,7 @@ def create_ad(request):
 
 
 def advertisements_view(request):
-    my_ads = Advertisement.objects.filter()
-    # my_ad.publish()
+    my_ads = Advertisement.objects.all()
     return render(request, 'ads/advertisement_view.html', {'ads': my_ads})
 
 
@@ -56,13 +55,16 @@ def edit_ad(request, pk):
             ad.author = request.user
             ad.published_date = timezone.now()
             ad.save()
-            return redirect('post_detail', pk=ad.pk)
+            return redirect('specific_ad', pk=ad.pk)
     else:
         form = AdvertisementForm(instance=ad)
-    return render(request, 'ads/edit_ad.html', {'form': form})
+    return render(request, 'ads/create_ad.html', {'form': form})
 
 
 def delete_ad(request, pk):
     ad = get_object_or_404(Advertisement, pk=pk)
-    ad.delete()
+    user = request.user
+    if user.is_authenticated:
+        if user == ad.seller:
+            ad.delete()
     return redirect('ads_view')
