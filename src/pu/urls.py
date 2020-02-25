@@ -41,7 +41,7 @@ urlpatterns = [
     path('new/', av.create_ad, name='create_ad'),
     path('<int:pk>/edit/', av.edit_ad, name='edit_ad'),
     path('<int:pk>/delete/', av.delete_ad, name='delete_ad')
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]
 
 # For displaying imagefields
 urlpatterns += staticfiles_urlpatterns()
