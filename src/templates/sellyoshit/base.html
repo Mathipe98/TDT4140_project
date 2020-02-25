@@ -32,45 +32,43 @@
 
 <body>
     <!-- Navigation bar -->
-    <nav class="navbar sticky-top navbar-dark bg-dark mb-3">
-        <div class="container">
+    <nav class="navbar navbar-expand-lg sticky-top navbar-dark bg-dark ">
+        <div class="container-fluid">
             <a class="navbar-brand" href="{% url 'home' %}">
                 <img src="../static/navbarlogo.png" width="35" height="35" class="d-inline-block align-top" alt="">
                 SellYo'Shit
             </a>
             {% if request.user.is_authenticated %}
-                <div>
-                    <button class="btn btn-outline-warning my-12 my-sm-0">
-                        Meldinger
-                    </button>
-                    <a href="{% url 'create_ad' %}">
-                        <button class="btn btn-outline-warning my-12 my-sm-0">
-                            Ny annonse
-                        </button>
-                    </a>
-                    <a href="{% url 'mypage' %}">
-                        <button class="btn btn-outline-warning my-12 my-sm-0">
-                            Min side
-                        </button>
-                    </a>
-                    <a href="{% url 'logout' %}">
-                        <button class="btn btn-outline-warning my-12 my-sm-0">
-                            Logg ut
-                        </button>
-                    </a>
+                <div class="collapse navbar-collapse mb-1">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="{% url 'home' %}">Hjem<span class="sr-only">(current)</span></a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'mypage' %}">Min side</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'create_ad' %}">Ny annonse</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'logout' %}">Logg ut</a>
+                        </li>
+                    </ul>
                 </div>
             {% else %}
-                <div>
-                    <a href="{% url 'login' %}">
-                        <button class="btn btn-outline-warning my-12 my-sm-0">
-                            Logg inn
-                        </button>
-                    </a>
-                    <a href="{% url 'signup' %}">
-                        <button class="btn btn-outline-warning my-12 my-sm-0">
-                            Register
-                        </button>
-                    </a>
+                <div class="collapse navbar-collapse mb-1">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="{% url 'signup' %}">Registrer<span class="sr-only">(current)</span></a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'login' %}">Logg inn</a>
+                        </li>
+                    </ul>
                 </div>
             {% endif %}
         </div>
@@ -79,23 +77,22 @@
     <!-- Content div -->
     <div class="container-fluid">
         <!-- Left pane: functionality according to page -->
-        <div class="row">
-            <div class="col-1 order-1" visibility="hidden">
-                <div style="min-height: 800px;">
+        <div class="row no-gutters">
+            <div class="col-1 order-1">
+                 <div class="alert alert-light" style="min-height: 800px;">
                     {% block sidebar %}
                     {% endblock %}
                 </div>
             </div>
 
             <!-- Right pane: ads -->
-            <div class="col-10 order-2">
-                <div class="alert alert-primary" style="min-height: 800px;">
+            <div class="col-11 order-2">
+                <div class="alert alert-secondary" style="min-height: 800px;">
                     {% block content %}
                     {% endblock %}
                 </div>
             </div>
         </div>
-
     </div>
 
 </body>
