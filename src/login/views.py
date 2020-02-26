@@ -1,5 +1,8 @@
+from django.core.paginator import Paginator
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate, logout
+
+from ads.models import Advertisement
 from .forms import SignupForm, LoginForm
 
 
@@ -63,4 +66,13 @@ def my_page(request):
     user = request.user
     if not user.is_authenticated:
         return redirect('home')
-    return render(request,'sellyoshit/mypage.html',{})
+    products = Advertisement.objects.all().filter(seller=user.userid)
+    paginator = Paginator(products, 6)  # Show X products per page
+
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    context = {'products': page_obj.object_list,
+               'page_obj': page_obj}
+
+    return render(request,'sellyoshit/mypage.html',context)

@@ -65,6 +65,6 @@ def delete_ad(request, pk):
     ad = get_object_or_404(Advertisement, pk=pk)
     user = request.user
     if user.is_authenticated:
-        if user == ad.seller:
+        if user == ad.seller or user.admin:
             ad.delete()
     return redirect('ads_view')
