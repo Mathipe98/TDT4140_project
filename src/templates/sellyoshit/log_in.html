@@ -34,7 +34,7 @@
         <button type="submit" class="btn btn-primary">Logg inn</button>
     </form>
     {% elif request.path == '/signup/'%}
-    <h2>Registrering</h2>
+    <h2>Register</h2>
     <form method="POST">{% csrf_token %}
         {% for field in signup_form %}
             <div class="form-group">

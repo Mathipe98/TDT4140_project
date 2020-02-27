@@ -6,11 +6,11 @@
     <link href="{% static 'style.css' %}" rel="stylesheet"/>
 {% endblock %}
 {% block content %}
-    <h2><strong>Lag annonse</strong>
+    <h2><strong>Create new ad</strong>
             <br>
     </h2>
     <form method="post" enctype="multipart/form-data">{% csrf_token %}
         {{ form|crispy }}
-    <button class="btn btn-primary" type="submit"> Opprett annonse</button>
+    <button class="btn btn-primary" type="submit"> Publish ad</button>
     </form>
 {% endblock %}

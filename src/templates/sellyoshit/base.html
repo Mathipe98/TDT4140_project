@@ -41,36 +41,29 @@
             {% if request.user.is_authenticated %}
                 <div class="collapse navbar-collapse mb-1">
                     <ul class="navbar-nav mr-auto">
-                        <li class="nav-item active">
-                            <a class="nav-link" href="{% url 'home' %}">Hjem<span class="sr-only">(current)</span></a>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'mypage' %}">My page</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'mypage' %}">Min side</a>
+                            <a class="nav-link" href="{% url 'create_ad' %}">New ad</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'create_ad' %}">Ny annonse</a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'logout' %}">Logg ut</a>
+                            <a class="nav-link" href="{% url 'logout' %}">Log out</a>
                         </li>
                     </ul>
                 </div>
             {% else %}
                 <div class="collapse navbar-collapse mb-1">
                     <ul class="navbar-nav mr-auto">
-                        <li class="nav-item active">
-                            <a class="nav-link" href="{% url 'home' %}">Hjem<span class="sr-only">(current)</span></a>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'signup' %}">Register</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'signup' %}">Registrer</a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'login' %}">Logg inn</a>
+                            <a class="nav-link" href="{% url 'login' %}">Login</a>
                         </li>
                     </ul>
                 </div>
