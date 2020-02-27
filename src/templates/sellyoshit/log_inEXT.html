@@ -1,5 +1,6 @@
 {% extends 'sellyoshit/base.html' %}
 {% load crispy_forms_tags %}
+{% load static %}
 {% block content %}
     {% if request.path == '/login/' %}
     <h2>Logg inn</h2>
@@ -35,7 +36,7 @@
                 {% endfor %}
             </div>
         {% endfor %}
-        <button type="submit" class="btn btn-primary">Sign up</button>
+        <button class="btn btn-primary" type="submit">Registrer</button>
     </form>
     {% endif %}
     </div>

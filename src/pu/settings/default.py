@@ -141,18 +141,20 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
+# All media related to ads is stored in this path
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, '../media')
 
+# All static files is stored in this path
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, '../static')
 
-# All folders where django search for static files, e.g. css, media, fonts, js...
+# All folders where django search for static files, e.g. css, fonts, js, images...
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, '../static/media'),
     os.path.join(BASE_DIR, '../static/css'),
     os.path.join(BASE_DIR, '../static/js'),
-    os.path.join(BASE_DIR, '../static/fonts')
+    os.path.join(BASE_DIR, '../static/fonts'),
+    os.path.join(BASE_DIR, '../static/images')      # images not related to ads
 ]
 
 # Bootstrap for forms

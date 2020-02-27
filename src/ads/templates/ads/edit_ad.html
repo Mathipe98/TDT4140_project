@@ -1,8 +1,9 @@
 {% extends 'sellyoshit/base.html' %}
 {% load crispy_forms_tags %}
 {% block title %}My Title{% endblock %}
+{% load static %}
 {% block extra_head %}
-    <link rel="stylesheet" href=".../.../static/style.css"/>
+    <link href="{% static 'style.css' %}" rel="stylesheet"/>
 {% endblock %}
 {% block content %}
     <p>Hallo og velkommen til redigeringen</p>

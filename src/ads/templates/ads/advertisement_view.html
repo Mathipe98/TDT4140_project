@@ -1,7 +1,8 @@
 {% extends 'sellyoshit/base.html' %}
 {% block title %}My Title{% endblock %}
+{% load static %}
 {% block extra_head %}
-    <link rel="stylesheet" href=".../.../static/style.css"/>
+    <link href="{% static 'style.css' %}" rel="stylesheet"/>
 {% endblock %}
 {% block content %} <!-- Name of the current block -->
   {% for ad in ads %}

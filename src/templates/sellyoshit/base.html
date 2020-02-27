@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-{% load static %}
 <html lang="en">
 <head>
+    {% load static %}
     <!-- Required meta tags -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -11,7 +11,7 @@
 
     <!-- Icons -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="../../static/styles.css">
+    <link href="{% static 'style.css' %}" rel="stylesheet">
     {% block extra_head %}{% endblock %}
     <title>SellYo'Shit</title>
     <style>
@@ -35,7 +35,7 @@
     <nav class="navbar navbar-expand-lg sticky-top navbar-dark bg-dark ">
         <div class="container-fluid">
             <a class="navbar-brand" href="{% url 'home' %}">
-                <img src="../static/navbarlogo.png" width="35" height="35" class="d-inline-block align-top" alt="">
+                <img alt="" class="d-inline-block align-top" height="35" src="{% static 'navbarlogo.png' %}" width="35">
                 SellYo'Shit
             </a>
             {% if request.user.is_authenticated %}
@@ -64,7 +64,7 @@
                         <li class="nav-item active">
                             <a class="nav-link" href="{% url 'home' %}">Hjem<span class="sr-only">(current)</span></a>
                         </li>
-                        
+
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'signup' %}">Registrer</a>
                         </li>

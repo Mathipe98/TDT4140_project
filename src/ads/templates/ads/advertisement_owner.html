@@ -1,8 +1,9 @@
 {% extends 'sellyoshit/base.html' %}
 {% load crispy_forms_tags %}
 {% block title %}My Title{% endblock %}
+{% load static %}
 {% block extra_head %}
-    <link rel="stylesheet" href="../../static/styles.css"/>
+    <link href="{% static 'style.css' %}" rel="stylesheet"/>
 {% endblock %}
 {% block content %}
 
@@ -20,8 +21,8 @@
         <p class="card-text">
           {{ ad.product_description }}
         </p>
-        <a class="btn btn-primary" href="{% url 'edit_ad' pk=ad.pk %}" role="button">Edit ad</a>
-        <a class="btn btn-primary" href="{% url 'delete_ad' pk=ad.pk %}" role="button">Delete ad</a>
+        <a class="btn btn-primary" href="{% url 'edit_ad' pk=ad.pk %}" role="button">Rediger annonse</a>
+        <a class="btn btn-primary" href="{% url 'delete_ad' pk=ad.pk %}" role="button">Slett annonse</a>
       </div>
     </div>
   </div>

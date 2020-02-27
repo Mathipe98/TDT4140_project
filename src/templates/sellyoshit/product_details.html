@@ -1,14 +1,15 @@
 {% extends 'sellyoshit/base.html' %}
+{% load static %}
 {% block title %}My Title{% endblock %}
 {% block extra_head %}
-    <link rel="stylesheet" href=".../.../static/style.css"/>
+    <link href="{% static 'style.css' %}" rel="stylesheet">
 {% endblock %}
 
 {% block content %}
          <h2><b> {{ ad.name }} </b></h2>
         <img src="{{ ad.image.url }}" type="ad"
                          alt="Product ad" style="width:400px;height:100%;border:0;"/>
-        <p> Price: kr {{ad.price }}
-        <br> Description
+        <p> Pris: kr {{ad.price }}
+        <br> Beskrivelse
         <p/>
 {% endblock %}
