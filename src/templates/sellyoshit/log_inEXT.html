@@ -1,6 +1,10 @@
 {% extends 'sellyoshit/base.html' %}
 {% load crispy_forms_tags %}
+{% block title %}Log in - {% endblock %}
 {% load static %}
+{% block extra_head %}
+    <link href="{% static 'style.css' %}" rel="stylesheet"/>
+{% endblock %}
 {% block content %}
     {% if request.path == '/login/' %}
     <h2>Logg inn</h2>

@@ -8,7 +8,7 @@ from django.shortcuts import render, redirect
 
 
 def products(request):
-    products = Advertisement.objects.all()
+    products = Advertisement.objects.all().order_by('-created_date')
     paginator = Paginator(products, 6)  # Show X products per page
 
     page_number = request.GET.get('page')

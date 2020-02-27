@@ -1,5 +1,5 @@
 {% extends 'sellyoshit/base.html' %}
-{% block title %}My Title{% endblock %}
+{% block title %}{{ad.product_name}} - {% endblock %}
 {% load static %}
 {% block extra_head %}
     <link href="{% static 'style.css' %}" rel="stylesheet"/>
@@ -10,7 +10,7 @@
 
   <div class = "ad_wrapper">
     <div id="advertisement_card" style="width: 30rem; height: 40rem;">
-      <img src="{{ ad.header_picture.url }}" class="card-img-top" alt="Header picture" id="ad_picture" style="width:400px;">
+      <img src="{{ ad.header_picture.url }}" class="card-img-top" alt="Header picture" id="ad_picture" style="width:400px;" onerror="this.onerror=null;this.src='../media/ads/default.png';">
       <div class="card-body">
         <h4 class="card-title">{{ ad.product_name }}: {{ ad.price }} kr</h4>
         <h6 class="card-subtitle">

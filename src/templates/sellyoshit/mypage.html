@@ -1,6 +1,10 @@
 {% extends 'sellyoshit/base.html' %}
 {% load crispy_forms_tags %}
+{% block title %}My page{% endblock %}
 {% load static %}
+{% block extra_head %}
+    <link href="{% static 'style.css' %}" rel="stylesheet"/>
+{% endblock %}
 {% block sidebar %}
     <ul class="navbar-nav" style="visibility: hidden">
         <li class="nav-item"><a class="nav-link" href="{% url 'mypage' %}">My ads</a></li>
