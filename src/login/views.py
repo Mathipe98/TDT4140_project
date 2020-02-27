@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate, logout
 
 from ads.models import Advertisement
+from users.models import Thread
 from .forms import SignupForm, LoginForm
 
 
@@ -76,3 +77,4 @@ def my_page(request):
                'page_obj': page_obj}
 
     return render(request,'sellyoshit/mypage.html',context)
+

@@ -72,6 +72,10 @@ class Thread(models.Model):
     class Meta:
         managed = False
         db_table = 'thread'
+        app_label = "users"
+
+    def __str__(self):
+        return self.user1,self.user2;
 
 
 class AuthGroup(models.Model):
@@ -215,6 +219,9 @@ class Messages(models.Model):
     class Meta:
         managed = False
         db_table = 'messages'
+
+    def __str__(self):
+        return self.message
 
 
 class Ratings(models.Model):

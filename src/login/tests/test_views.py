@@ -23,13 +23,13 @@ class TestViews(TestCase):
         response = self.client.get(self.signup_url)
 
         self.assertEquals(response.status_code, 200)
-        self.assertTemplateUsed(response, 'sellyoshit/log_in.html')
+        self.assertTemplateUsed(response, 'sellyoshit/log_inEXT.html')
 
     def test_log_in_GET(self):
         response = self.client.get(self.log_in_url)
 
         self.assertEquals(response.status_code, 200)
-        self.assertTemplateUsed(response, 'sellyoshit/log_in.html')
+        self.assertTemplateUsed(response, 'sellyoshit/log_inEXT.html')
 
     def test_log_out_GET(self):
         response = self.client.get(self.log_out_url)
