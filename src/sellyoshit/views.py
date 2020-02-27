@@ -24,10 +24,3 @@ def ad(request, pk):
     context = {'ad': ad}
     return render(request, 'sellyoshit/product_details.html', context)
 
-def home(request):
-    return render(request, 'sellyoshit/home_pageEXT.html')
-
-def image_test(request):
-    #index_file_path = PROJECT_PATH + '/templates/sellyoshit/Clickable_image_test.html'
-    return render(request, "sellyoshit/Clickable_image_test.html")
-
