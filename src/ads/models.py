@@ -1,4 +1,5 @@
 from django.contrib.auth.models import User
+from django.core.validators import MinValueValidator
 from django.db import models
 from django.conf import settings
 from django.db import models
@@ -14,9 +15,9 @@ def user_directory_path(instance, filename):
 
 
 class Advertisement(models.Model):
-    product_name = models.TextField(default="Product")
-    product_description = models.TextField(default="There is no description available for this product.")
-    price = models.IntegerField(default=0)
+    product_name = models.TextField()
+    product_description = models.TextField()
+    price = models.PositiveIntegerField(default=0)
     seller = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     created_date = models.DateTimeField(default=timezone.now)
     published_date = models.DateTimeField(blank=True, null=True)
