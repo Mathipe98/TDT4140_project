@@ -39,7 +39,6 @@ INSTALLED_APPS = [
     'users.apps.UserConfig',
     'ads.apps.AdsConfig',
     'crispy_forms',
-
 ]
 
 MIDDLEWARE = [
@@ -96,7 +95,6 @@ DATABASES = {
         'TEST': {
             'CHARSET': 'utf8'       # ensures that test db is using utf8
         }
-
     }
 }
 """

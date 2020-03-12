@@ -24,6 +24,8 @@ before_script:
   - python -V  # Print out python version
   - pip install -r requirements.txt
 
+# In script, add the terminal command to test the directory you want; - python src/manage.py test <directory>
+# It will then be tested as a part of CI Pipeline.
 test:
   variables:
     DATABASE_URL: "postgresql://postgres:postgres@postgres:5432/$POSTGRES_DB"

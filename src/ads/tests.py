@@ -3,7 +3,7 @@ from ads.forms import AdvertisementForm
 
 
 class TestForms(SimpleTestCase):
-    """This is a test for the input fields in the form that is used when creating or editing a new ad."""
+    """This class tests the input fields in the form that is used when creating or editing a new ad."""
 
     def test_ads_form_valid_data(self):
         form = AdvertisementForm(data={
