@@ -19,6 +19,7 @@ def products(request):
 
     return render(request, 'sellyoshit/product_listEXT.html', context)
 
+
 def ad(request, pk):
     ad = Product.objects.get(pk=pk)
     context = {'ad': ad}
