@@ -33,3 +33,4 @@ test:
   script:
     - python src/manage.py test ads --keepdb
     - python src/manage.py test sellyoshit --keepdb
+    - python src/manage.py test login --keepdb

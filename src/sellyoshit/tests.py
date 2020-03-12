@@ -29,6 +29,7 @@ class TestUrls(SimpleTestCase):
 class TestViews(TestCase):
     """
     This class is testing the HTTP-response from the views. 200 OK if new HTML, or 302 if redirect. 400 is no response.
+    It also assures that the templates are correct.
     """
 
     def setUp(self):
