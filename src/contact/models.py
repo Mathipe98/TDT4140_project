@@ -1,11 +1,12 @@
 from django.db import models
 #from login import models
+from pu.settings import AUTH_USER_MODEL
 
 
 class Thread(models.Model):
     threadid = models.AutoField(db_column='threadID', primary_key=True)  # Field name made lowercase.
-    user1 = models.ForeignKey('Users', models.DO_NOTHING, db_column='user1', related_name="user1")
-    user2 = models.ForeignKey('Users', models.DO_NOTHING, db_column='user2', related_name="user2")
+    user1 = models.ForeignKey(AUTH_USER_MODEL, models.DO_NOTHING, db_column='user1', related_name="user_1")
+    user2 = models.ForeignKey(AUTH_USER_MODEL, models.DO_NOTHING, db_column='user2', related_name="user_2")
 
     class Meta:
         managed = False
@@ -21,9 +22,9 @@ class Messages(models.Model):
     message = models.TextField()
     sent = models.DateTimeField(blank=True, null=True)
     thread = models.ForeignKey('Thread', models.DO_NOTHING, db_column='thread')
-    sentto = models.ForeignKey('Users', models.DO_NOTHING, db_column='sentTo',
+    sentto = models.ForeignKey(AUTH_USER_MODEL, models.DO_NOTHING, db_column='sentTo',
                                related_name="message_sent_to")  # Field name made lowercase.
-    sentfrom = models.ForeignKey('Users', models.DO_NOTHING, db_column='sentFrom',
+    sentfrom = models.ForeignKey(AUTH_USER_MODEL, models.DO_NOTHING, db_column='sentFrom',
                                  related_name="message_sent_from")  # Field name made lowercase.
 
     class Meta:

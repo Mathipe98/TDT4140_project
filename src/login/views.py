@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate, logout
 
 from ads.models import Advertisement
-from users.models import Thread
+#from users.models import Thread
 from .forms import SignupForm, LoginForm
 
 
