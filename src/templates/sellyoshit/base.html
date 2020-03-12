@@ -40,8 +40,8 @@
                 SellYo'Shit
             </a>
             {% if request.user.is_authenticated %}
-                <div class="collapse navbar-collapse mb-1">
-                    <ul class="navbar-nav mr-auto">
+                <li class="collapse navbar-collapse mb-1">
+                    <li class="navbar-nav mr-auto">
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'mypage' %}">My page</a>
                         </li>
@@ -53,6 +53,22 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'logout' %}">Log out</a>
                         </li>
+
+                        <li class="nav-item">
+                            <form class="add_your_class" method="GET" action="" >
+                                <input class="add_your_class" type="search" name="search">
+                                <button class="add_your_class" type="submit"> Search </button>
+                            </form>
+                        </li>
+
+                        {% for result in all_search_results %}
+                            {{ result.product_name }} - {{ result.price }}
+                        {% empty %}
+                            <p>
+                            No results match that search
+                            </p>
+                        {% endfor %}
+
                     </ul>
                 </div>
             {% else %}

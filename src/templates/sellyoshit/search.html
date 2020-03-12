@@ -1,0 +1,18 @@
+{% extends base.html %}
+
+{% block content %}
+
+    <form class="add_your_class" method="GET" action="" >
+        <input class="add_your_class" type="search" name="search">
+        <button class="add_your_class" type="submit"> Search </button>
+    </form>
+
+    {% for result in all_search_results %}
+        {{ result.product_name }} - {{ result.price }}
+    {% empty %}
+        <p>
+        No results match that search
+        </p>
+    {% endfor %}
+
+{% endblock %}
