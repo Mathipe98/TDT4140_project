@@ -11,6 +11,7 @@ from .models import Thread
 from .models import Messages
 from django.db.models import Q
 
+
 def create_conversation(request, pk):
     userFrom = request.user
     if not userFrom.is_authenticated:
@@ -59,28 +60,31 @@ def view_conversation(request, pk):
     return render(request, "sellyoshit/contact.html", {'test': test, 'form': form})
 
 
-def message_view(request):
+def thread_view(request, thread_id=-1):
     user = request.user
+    if not user.is_authenticated:
+        return redirect("home")
     messages = Messages.objects.filter(Q(sentto=user) | Q(sentfrom=user))
     #  This is a filter which checks if sentto OR sentfrom is the user
     messages = messages.order_by('sent')
-    threads = {}  # Dictionary for storing each thread with corresponding messages
-    parent_threads_list = []
+    threads = []  # List for storing all threads, used for sidebar in html
+    current_messages = []  # List for storing messages for current thread
+    if thread_id == -1:  # If no specific thread is requested
+        current_thread = messages.latest('sent').thread  # Gets the first thread by newest messages
+    else:
+        current_thread = messages.filter(thread=thread_id).latest('thread_id').thread
     for message in messages:
         parent_thread = message.thread
-        parent_threads_list.append(parent_thread)
         #  Finds the thread that the message belongs to by using the foreign key in message
-        if parent_thread in threads.keys():
-            threads[parent_thread].append(message)
-        else:
-            threads[parent_thread] = [message]
-        # Adds the message to a list corresponding to the thread. Creates if it doesn't exist
-    print(threads.values())
+        if parent_thread not in threads:
+            threads.append(parent_thread)
+        if parent_thread == current_thread:
+            current_messages.append(message)
+    print(current_messages)
+    print(current_thread)
     return render(request,
                   'message_view.html',
-                  {'threads': threads, 'parent_threads': parent_threads_list, 'user': user})
-
-
-
-
-
+                  {'threads': threads,
+                   'user': user,
+                   'current_thread': current_thread,
+                   'current_messages': current_messages})

@@ -73,25 +73,25 @@
      </nav>
 
     <!-- Content div -->
-    <div class="container-fluid">
-        <!-- Left pane: functionality according to page -->
-        <div class="row no-gutters">
-            <div class="col-1 order-1">
-                 <div class="alert alert-light" style="min-height: 800px;">
-                    {% block sidebar %}
-                    {% endblock %}
-                </div>
-            </div>
 
-            <!-- Right pane: ads -->
-            <div class="col-11 order-2">
-                <div class="alert alert-secondary" style="min-height: 800px;">
-                    {% block content %}
-                    {% endblock %}
-                </div>
+    <!-- Left pane: functionality according to page -->
+    <div class="row no-gutters">
+        <div class="col-1 order-1">
+             <div class="alert alert-light" style="min-height: 800px;">
+                {% block sidebar %}
+                {% endblock %}
+            </div>
+        </div>
+
+        <!-- Right pane: ads -->
+        <div class="col-11 order-2">
+            <div class="alert alert-secondary p-0" style="min-height: 800px;">
+                {% block content %}
+                {% endblock %}
             </div>
         </div>
     </div>
+
 
 </body>
 </html>
