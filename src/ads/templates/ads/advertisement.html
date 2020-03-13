@@ -21,7 +21,7 @@
           {{ ad.product_description }}
         </p>
         {% if request.user.is_authenticated %}
-        <a class="btn btn-primary" href="#" role="button">Contact Seller {{ ad.get_seller_name }}</a>
+        <a class="btn btn-primary" href="{% url 'contact' pk=ad.seller.pk %}" role="button">Contact Seller {{ ad.get_seller_name }}</a>
         {% endif %}
       </div>
     </div>
