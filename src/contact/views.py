@@ -9,7 +9,7 @@ from django.utils import timezone
 from django.contrib.auth.models import User
 from .models import Thread
 from .models import Messages
-
+from django.db.models import Q
 
 def create_conversation(request, pk):
     userFrom = request.user
@@ -40,12 +40,6 @@ def view_conversation(request, pk):
         userTo = thread.user1
     else:
         return redirect("home")
-    # if(userFrom.userid < pk):
-    #    user1 = userFrom
-    #    user2 = userTo
-    # else:
-    #    user1 = userTo
-    #    user2 = userFrom
     test = "User 1: " + str(userFrom.userid) + " User 2: " + str(userTo.userid)
     # Thread.objects.get_or_create(user1=user1,user2=user2)
     # threadUser = Thread.objects.get(user1=user1,user2=user2)
@@ -63,3 +57,30 @@ def view_conversation(request, pk):
     else:
         form = MessageForm
     return render(request, "sellyoshit/contact.html", {'test': test, 'form': form})
+
+
+def message_view(request):
+    user = request.user
+    messages = Messages.objects.filter(Q(sentto=user) | Q(sentfrom=user))
+    #  This is a filter which checks if sentto OR sentfrom is the user
+    messages = messages.order_by('sent')
+    threads = {}  # Dictionary for storing each thread with corresponding messages
+    parent_threads_list = []
+    for message in messages:
+        parent_thread = message.thread
+        parent_threads_list.append(parent_thread)
+        #  Finds the thread that the message belongs to by using the foreign key in message
+        if parent_thread in threads.keys():
+            threads[parent_thread].append(message)
+        else:
+            threads[parent_thread] = [message]
+        # Adds the message to a list corresponding to the thread. Creates if it doesn't exist
+    print(threads.values())
+    return render(request,
+                  'message_view.html',
+                  {'threads': threads, 'parent_threads': parent_threads_list, 'user': user})
+
+
+
+
+

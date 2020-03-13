@@ -1,0 +1,14 @@
+{% extends 'sellyoshit/base.html' %}
+
+{% block content %}
+{% for thread, messages in threads.items %}
+  <p>{{thread}}</p>
+  {% for message in messages %}
+    {% if message.sentfrom == user %}
+      <h1>You: {{message.message}}</h1>
+    {% else %}
+      <h2>Other guy: {{message.message}}</h2>
+    {% endif %}
+  {% endfor %}
+{% endfor %}
+{% endblock %}
