@@ -10,7 +10,7 @@ class Thread(models.Model):
     user2 = models.ForeignKey(AUTH_USER_MODEL, models.DO_NOTHING, db_column='user2', related_name="user_2")
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'thread'
         app_label = "contact"
 
@@ -32,7 +32,7 @@ class Messages(models.Model):
                                  related_name="message_sent_from")  # Field name made lowercase.
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'messages'
         app_label = "contact"
 
