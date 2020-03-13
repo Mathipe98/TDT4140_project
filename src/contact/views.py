@@ -10,32 +10,57 @@ from django.contrib.auth.models import User
 from .models import Thread
 from .models import Messages
 
-def create_conversation(request,pk):
+
+def create_conversation(request, pk):
     userFrom = request.user
     if not userFrom.is_authenticated:
         return redirect("home")
     userTo = get_object_or_404(Users, pk=pk)
-    if(userFrom.userid < pk):
+    if (userFrom.userid < pk):
         user1 = userFrom
         user2 = userTo
     else:
         user1 = userTo
         user2 = userFrom
-    #user1 = min(userFrom.userid,pk)
-    #user2 = max(userFrom.userid,pk)
-    test = "User 1: " + str(user1.userid) + " User 2: " + str(user2.userid)
-    threadUser = Thread.objects.get_or_create(user1=user1,user2=user2)
-    test = "User 1: " + str(user1.userid) + " User 2: " + str(user2.userid) + " " + str(threadUser)
+    Thread.objects.get_or_create(user1=user1, user2=user2)
+    thread = Thread.objects.get(user1=user1, user2=user2)
+    return redirect("messages", pk=thread.pk)
+
+
+def view_conversation(request, pk):
+    thread = Thread.objects.get(pk=pk)
+    user = request.user
+    if not user.is_authenticated:
+        return redirect("home")
+
+    if (user == thread.user1):
+        userFrom = user
+        userTo = thread.user2
+    elif (user == thread.user2):
+        userFrom = thread.user2
+        userTo = user
+    else:
+        return redirect("home")
+    # if(userFrom.userid < pk):
+    #    user1 = userFrom
+    #    user2 = userTo
+    # else:
+    #    user1 = userTo
+    #    user2 = userFrom
+    test = "User 1: " + str(userFrom.userid) + " User 2: " + str(userTo.userid)
+    # Thread.objects.get_or_create(user1=user1,user2=user2)
+    # threadUser = Thread.objects.get(user1=user1,user2=user2)
+    # test = "User 1: " + str(user1.userid) + " User 2: " + str(user2.userid) + " " + str(threadUser)
     if request.method == "POST":
         form = MessageForm(request.POST)
         if form.is_valid():
             messageS = form.save(commit=False)
-            messageS.thread = Thread.objects.get(user1=user1,user2=user2);
+            messageS.thread = thread
             messageS.sentto = userTo
             messageS.sentfrom = userFrom
             messageS.publish()
             messageS.save()
-            return redirect("contact",userTo.userid)
+            return redirect("contact", userTo.userid)
     else:
         form = MessageForm
-    return render(request, "sellyoshit/contact.html", {'test':test,'form': form})
+    return render(request, "sellyoshit/contact.html", {'test': test, 'form': form})

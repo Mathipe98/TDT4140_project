@@ -39,6 +39,7 @@ urlpatterns = [
     path('ads/', include('ads.urls'), name='Advertisements'),
     path('user/', include('users.urls'), name='user'),
     path('contact/<int:pk>', cv.create_conversation, name='contact'),
+    path('messages/<int:pk>', cv.view_conversation, name='messages'),
 ]
 
 # For displaying imagefields
