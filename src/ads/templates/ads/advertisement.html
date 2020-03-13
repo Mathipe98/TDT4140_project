@@ -14,7 +14,7 @@
       <div class="card-body">
         <h4 class="card-title">{{ ad.product_name }}: {{ ad.price }} kr</h4>
         <h6 class="card-subtitle">
-          Selger: {{ ad.seller.username }}
+          <a href="{{% url './users/user_profile' pk=ad.seller.pk %}}" class="badge badge-primary">Selger: {{ ad.seller.username }}</a>
           <!-- Should be inside a link later on -->
         </h6>
         <p class="card-text">
