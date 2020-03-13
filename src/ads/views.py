@@ -36,9 +36,9 @@ def show_specific_ad(request, pk):
     # pk is passed from urls to this view. Must be identically named
     ad = get_object_or_404(Advertisement, pk=pk)
     # get_object_or_404 either gives object with pk or a 404 not found
-    if user.is_authenticated:
-        if user == ad.seller or user.admin:
-            return render(request, 'ads/advertisement_owner.html', {'ad': ad})
+    #if user.is_authenticated:
+    #    if user == ad.seller or user.admin:
+    #        return render(request, 'ads/advertisement_owner.html', {'ad': ad})
     return render(request, 'ads/advertisement.html', {'ad': ad, "request": request})
 
 
