@@ -2,13 +2,21 @@
 
 {% block content %}
 {% for thread, messages in threads.items %}
-  <p>{{thread}}</p>
-  {% for message in messages %}
-    {% if message.sentfrom == user %}
-      <h1>You: {{message.message}}</h1>
+  <p>Your conversation with:
+    {% if thread.user1 == user %}
+      {{thread.user2.username}}
     {% else %}
-      <h2>Other guy: {{message.message}}</h2>
+      {{thread.user1.username}}
     {% endif %}
+  </p>
+  {% for message in messages %}
+    <p style="font-size: x-small;" id="message_sent_date">{{message.sent}}:
+    {% if message.sentfrom == user %}
+      <br><strong style="color: #519fff; font-size: small">You: </strong>{{message.message}}
+    {% else %}
+      <br><strong style="font-size: 15px;">{{message.sentfrom.username}}: </strong>{{message.message}}
+    {% endif %}
+    </p>
   {% endfor %}
 {% endfor %}
 {% endblock %}
