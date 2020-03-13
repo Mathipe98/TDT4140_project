@@ -21,7 +21,13 @@
           {{ ad.product_description }}
         </p>
         {% if request.user.is_authenticated %}
-        <a class="btn btn-primary" href="{% url 'contact_user' pk=ad.seller.pk %}" role="button">Contact Seller {{ ad.get_seller_name }}</a>
+            {% if user.admin == 1 or user == ad.serller %}
+                <a class="btn btn-primary" href="{% url 'edit_ad' pk=ad.pk %}" role="button">Edit ad</a>
+                <a class="btn btn-primary" href="{% url 'delete_ad' pk=ad.pk %}" role="button">Delete ad</a>
+            {% endif %}
+            {% if user != ad.seller %}
+                <a class="btn btn-primary" href="{% url 'contact_user' pk=ad.seller.pk %}" role="button">Contact Seller {{ ad.get_seller_name }}</a>
+            {% endif %}
         {% endif %}
       </div>
     </div>
