@@ -1,6 +1,7 @@
 from django.db import models
 #from login import models
 from pu.settings import AUTH_USER_MODEL
+from django.utils import timezone
 
 
 class Thread(models.Model):
@@ -14,7 +15,10 @@ class Thread(models.Model):
         app_label = "contact"
 
     def __str__(self):
-        return self.user1, self.user2;
+        return self.user1.username + " " + self.user2.username
+
+    def get_threadid(self):
+        return self.threadid
 
 
 class Messages(models.Model):
@@ -34,3 +38,7 @@ class Messages(models.Model):
 
     def __str__(self):
         return self.message
+
+    def publish(self):
+        self.sent = timezone.now()
+        self.save()

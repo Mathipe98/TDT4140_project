@@ -18,6 +18,7 @@ from django.urls import path, include
 from sellyoshit import views
 from login import views as lv
 from ads import views as av
+from contact import views as cv
 from django.conf.urls.static import static
 from django.conf import settings
 
@@ -41,6 +42,7 @@ urlpatterns = [
     path('new/', av.create_ad, name='create_ad'),
     path('<int:pk>/edit/', av.edit_ad, name='edit_ad'),
     path('<int:pk>/delete/', av.delete_ad, name='delete_ad'),
+    path('contact/<int:pk>', cv.create_conversation, name='contact'),
 ]
 
 # For displaying imagefields
