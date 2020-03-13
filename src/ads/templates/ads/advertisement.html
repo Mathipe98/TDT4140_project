@@ -14,15 +14,13 @@
       <div class="card-body">
         <h4 class="card-title">{{ ad.product_name }}: {{ ad.price }} kr</h4>
         <h6 class="card-subtitle">
-          <a href="{{% url './users/user_profile' pk=ad.seller.pk %}}" class="badge badge-primary">Selger: {{ ad.seller.username }}</a>
-          <!-- Should be inside a link later on -->
+          Selger:
+          <a href="{% url 'user_profile' pk=ad.seller.pk %}">{{ ad.seller.username }}</a>
         </h6>
         <p class="card-text">
           {{ ad.product_description }}
         </p>
-        <!-- Not functional at the moment
         <a class="btn btn-primary" href="#" role="button">Contact Seller {{ ad.get_seller_name }}</a>
-        -->
       </div>
     </div>
   </div>
