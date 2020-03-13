@@ -8,6 +8,7 @@
 from django.contrib.auth.base_user import BaseUserManager, AbstractBaseUser
 from django.db import models
 
+
 class UserManager(BaseUserManager):
     def create_user(self,email,username,firstname,lastname,password=None):
         if not email:
@@ -26,6 +27,7 @@ class UserManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
+
 class Users(AbstractBaseUser):
     userid = models.AutoField(db_column='userID', primary_key=True)  # Field name made lowercase.
     last_login = None
@@ -42,9 +44,9 @@ class Users(AbstractBaseUser):
     objects = UserManager()
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'users'
-        app_label ="users"
+        app_label = "users"
 
     def __str__(self):
         return self.username

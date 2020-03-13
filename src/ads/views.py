@@ -39,7 +39,7 @@ def show_specific_ad(request, pk):
     if user.is_authenticated:
         if user == ad.seller or user.admin:
             return render(request, 'ads/advertisement_owner.html', {'ad': ad})
-    return render(request, 'ads/advertisement.html', {'ad': ad})
+    return render(request, 'ads/advertisement.html', {'ad': ad, "request": request})
 
 
 def edit_ad(request, pk):

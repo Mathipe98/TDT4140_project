@@ -14,15 +14,15 @@
       <div class="card-body">
         <h4 class="card-title">{{ ad.product_name }}: {{ ad.price }} kr</h4>
         <h6 class="card-subtitle">
-          Selger: {{ ad.seller.username }}
-          <!-- Should be inside a link later on -->
+          Sold by:
+          <a href="{% url 'user_profile' pk=ad.seller.pk %}">{{ ad.seller.username }}</a>
         </h6>
         <p class="card-text">
           {{ ad.product_description }}
         </p>
-        <!-- Not functional at the moment
+        {% if request.user.is_authenticated %}
         <a class="btn btn-primary" href="#" role="button">Contact Seller {{ ad.get_seller_name }}</a>
-        -->
+        {% endif %}
       </div>
     </div>
   </div>

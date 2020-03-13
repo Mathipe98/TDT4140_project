@@ -16,7 +16,8 @@
       <div class="card-body">
         <h4 class="card-title">{{ ad.product_name }}: {{ ad.price }} kr</h4>
         <h6 class="card-subtitle">
-          Sold by: {{ ad.seller.username }}
+          Sold by:
+          <a href="{% url 'user_profile' pk=ad.seller.pk %}">{{ ad.seller.username }}</a>
         </h6>
         <p class="card-text">
           {{ ad.product_description }}

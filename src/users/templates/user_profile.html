@@ -1,0 +1,19 @@
+{% extends 'sellyoshit/base.html' %}
+{% block content %}
+<div class="user_prof">
+  <div class="card w-75">
+    <div class="card-body">
+      <h5 class="card-title">{{user.username}}</h5>
+      <p class="card-text">Welcome to {{user.firstname}} {{user.lastname}}'s profile</p>
+      <p class="card-text">Email: {{user.email}}</p>
+      {% if request.user.is_authenticated %}
+      <a href="#" class="btn btn-primary" style="height: 40px;">Contact {{user.username}}</a>
+      <div class="btn-group" role="group" aria-label="Basic example">
+        <a href="#" class="btn btn-secondary" style="height: 40px;"><img src="../../media/thumbs-up.png" id="thumbs up" style="width: 30px; height: 30px;"></a>
+        <a href="#" class="btn btn-secondary" style="height: 40px;"><img src="../../media/thumbs-down.png" id="thumbs down" style="width: 30px; height: 30px;"></a>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock %}
