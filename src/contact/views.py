@@ -33,12 +33,11 @@ def view_conversation(request, pk):
     if not user.is_authenticated:
         return redirect("home")
 
+    userFrom = user
     if (user == thread.user1):
-        userFrom = user
         userTo = thread.user2
     elif (user == thread.user2):
-        userFrom = thread.user2
-        userTo = user
+        userTo = thread.user1
     else:
         return redirect("home")
     # if(userFrom.userid < pk):
