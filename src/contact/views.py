@@ -41,6 +41,8 @@ def view_conversation(request, pk):
         userTo = thread.user1
     else:
         return redirect("home")
+    if userFrom == userTo:  # Stops you from sending messages to yourself
+        return redirect("home")
     test = "User 1: " + str(userFrom.userid) + " User 2: " + str(userTo.userid)
     # Thread.objects.get_or_create(user1=user1,user2=user2)
     # threadUser = Thread.objects.get(user1=user1,user2=user2)
@@ -73,15 +75,14 @@ def thread_view(request, thread_id=-1):
         current_thread = messages.latest('sent').thread  # Gets the first thread by newest messages
     else:
         current_thread = messages.filter(thread=thread_id).latest('thread_id').thread
+        # Gets latest message form requested thread
     for message in messages:
         parent_thread = message.thread
         #  Finds the thread that the message belongs to by using the foreign key in message
-        if parent_thread not in threads:
+        if parent_thread not in threads:  # If thread has not been recorded yet
             threads.append(parent_thread)
         if parent_thread == current_thread:
-            current_messages.append(message)
-    print(current_messages)
-    print(current_thread)
+            current_messages.append(message)  # The message is part of the thread we are looking for
     return render(request,
                   'message_view.html',
                   {'threads': threads,
