@@ -11,8 +11,6 @@ def searchView(request):
     # search the database title and body
     results = Advertisement.objects.filter(Q(product_name__icontains=query) | Q(product_description__icontains=query))
 
-    print(len(results))
-    print("searching for: " + query)
     paginator = Paginator(results, 6)
 
     page_number = request.GET.get('page')
