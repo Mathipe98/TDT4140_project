@@ -12,6 +12,8 @@
 
                 <p> {{ item.product_name|upper }} - kr {{ item.price }} </p>
             </div>
+        {% empty %}
+        <p>No results match that search</p>
         {% endfor %}
     </div>
 
