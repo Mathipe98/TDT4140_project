@@ -1,20 +1,22 @@
 {% extends 'sellyoshit/base.html' %}
 
 {% block content %}
+{% load crispy_forms_tags %}
 
 <div class="row no-gutters w-100">
   <!-- Left pane: Conversations -->
   <div class="col-2 order-1">
     <div class="alert alert-light p-1" style="min-height: 800px; overflow-y: auto;">
       <ul class="list-group">
+        <!-- Iterates through each thread and creates a box with a link to that thread -->
         {% for thread in threads %}
         <li class="list-group-item">
             {% if thread.user1 == user %}
-            <a href="{% url 'view-threads' thread_id=thread.user2.pk %}" id="message-card-link-user2">
+            <a href="{% url 'view-threads' thread_id=thread.pk %}" id="message-card-link-user2">
               {{thread.user2.username}}
             </a>
             {% else %}
-            <a href="{% url 'view-threads' thread_id=thread.user1.pk %}" id="message-card-link-user1">
+            <a href="{% url 'view-threads' thread_id=thread.pk %}" id="message-card-link-user1">
               {{thread.user1.username}}
             </a>
             {% endif %}
@@ -38,12 +40,19 @@
         {% for message in current_messages %}
         <p style="font-size: x-small;" id="message_sent_date">{{message.sent}}:
           {% if message.sentfrom == user %}
-          <br><strong style="color: #519fff; font-size: 15px;">You: </strong>{{message.message}}
+          <br>
+          <strong style="color: #519fff; font-size: 15px;">You: </strong>{{message.message}}
           {% else %}
-          <br><strong style="font-size: 15px;">{{message.sentfrom.username}}: </strong>{{message.message}}
+          <br>
+          <strong style="font-size: 15px;">{{message.sentfrom.username}}: </strong>{{message.message}}
           {% endif %}
         </p>
         {% endfor %}
+        <!-- Form for sending a message in this thread -->
+        <form method="post">{% csrf_token %}
+           {{ form|crispy }}
+          <button class="btn btn-primary" type="submit">Send message</button>
+        </form>
       </div>
     </div>
   </div>
