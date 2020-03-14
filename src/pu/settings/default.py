@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'users.apps.UserConfig',
     'ads.apps.AdsConfig',
     'crispy_forms',
-
+    'search.apps.SearchConfig',
 ]
 
 MIDDLEWARE = [

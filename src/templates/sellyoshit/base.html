@@ -73,18 +73,12 @@
             {% endif %}
 
             <!-- Search bar -->
-            <form class="form-inline my-2 my-lg-0">
-                <input aria-label="Search" class="form-control mr-sm-2" name="search" placeholder="Search" type="search">
-                <button class="btn btn-outline-warning my-2 my-sm-0" type="submit">Search</button>
+            <form action="{% url 'search_results' %}" class="form-inline my-2 my-lg-0" method="GET">
+                <input aria-label="Search" class="form-control mr-sm-2" name="q" placeholder="Search" type="search" value="{{request.GET.q}}">
+                <button class="btn btn-outline-warning my-2 my-sm-0" type="submit">
+                    Search
+                </button>
             </form>
-
-            {% for result in all_search_results %}
-                {{ result.product_name }} - {{ result.price }}
-            {% empty %}
-            <p>
-            No results match that search
-            </p>
-            {% endfor %}
         </div>
      </nav>
 
