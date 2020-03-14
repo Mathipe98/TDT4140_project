@@ -1,7 +1,8 @@
 {% extends 'sellyoshit/base.html' %}
-
-{% block content %}
 {% load crispy_forms_tags %}
+{% load static %}
+{% block content %}
+
 
 <div class="row no-gutters w-100">
   <!-- Left pane: Conversations -->
@@ -29,7 +30,6 @@
   <!-- Right pane: messages -->
   <div class="col-10 order-2">
     <div class="alert alert-secondary" style="min-height: 800px;">
-      <div id="scrollbar_messages" style="overflow-y: auto; min-height: 800px">
         <p>Your conversation with:
           {% if current_thread.user1 == user %}
           {{current_thread.user2.username}}
@@ -37,6 +37,7 @@
           {{current_thread.user1.username}}
           {% endif %}
         </p>
+      <div id="scrollbar_messages" style="border-top:1px solid gray;border-bottom:1px solid gray;overflow-y: auto;height: 640px;">
         {% for message in current_messages %}
         <p style="font-size: x-small;" id="message_sent_date">{{message.sent}}:
           {% if message.sentfrom == user %}
@@ -48,12 +49,13 @@
           {% endif %}
         </p>
         {% endfor %}
+
+      </div>
         <!-- Form for sending a message in this thread -->
         <form method="post">{% csrf_token %}
-           {{ form|crispy }}
+           {{ form.message|as_crispy_field }}
           <button class="btn btn-primary" type="submit">Send message</button>
         </form>
-      </div>
     </div>
   </div>
 </div>
