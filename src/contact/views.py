@@ -12,10 +12,15 @@ from .models import Messages
 from django.db.models import Q
 
 
+def authenticate_user(request):
+    user = request.user
+    if not user.is_authenticated:
+        return redirect('home')
+    return user
+
+
 def create_conversation(request, pk):
-    userFrom = request.user
-    if not userFrom.is_authenticated:
-        return redirect("home")
+    userFrom = authenticate_user(request)
     userTo = get_object_or_404(Users, pk=pk)
     if (userFrom.userid < pk):
         user1 = userFrom
@@ -30,10 +35,7 @@ def create_conversation(request, pk):
 
 def view_conversation(request, pk):
     thread = Thread.objects.get(pk=pk)
-    user = request.user
-    if not user.is_authenticated:
-        return redirect("home")
-
+    user = authenticate_user(request)
     userFrom = user
     if (user == thread.user1):
         userTo = thread.user2
@@ -63,9 +65,7 @@ def view_conversation(request, pk):
 
 
 def thread_view(request, thread_id=-1):
-    user = request.user
-    if not user.is_authenticated:
-        return redirect("home")
+    user = authenticate_user(request)
     messages = Messages.objects.filter(Q(sentto=user) | Q(sentfrom=user))
     #  This is a filter which checks if sentto OR sentfrom is the user
     messages = messages.order_by('sent')
