@@ -226,16 +226,6 @@ class ImagesInAd(models.Model):
 #        return self.message
 
 
-class Ratings(models.Model):
-    rated = models.ForeignKey('Users', models.DO_NOTHING, db_column='rated',related_name="user_rated")
-    ratedby = models.ForeignKey('Users', models.DO_NOTHING, db_column='ratedBy',related_name="user_rated_by")  # Field name made lowercase.
-    score = models.IntegerField()
-
-    class Meta:
-        managed = False
-        db_table = 'ratings'
-        unique_together = (('rated', 'ratedby'),)
-
 
 class SellyoshitProduct(models.Model):
     name = models.CharField(max_length=100)

@@ -42,3 +42,14 @@ class Messages(models.Model):
     def publish(self):
         self.sent = timezone.now()
         self.save()
+
+class Ratings(models.Model):
+    rated = models.ForeignKey(AUTH_USER_MODEL, models.DO_NOTHING, db_column='rated',related_name="user_rated")
+    ratedby = models.ForeignKey(AUTH_USER_MODEL, models.DO_NOTHING, db_column='ratedBy',related_name="user_rated_by")  # Field name made lowercase.
+    score = models.IntegerField()
+
+    class Meta:
+        managed = False
+        db_table = 'ratings'
+        app_label = "contact"
+        unique_together = (('rated', 'ratedby'),)
