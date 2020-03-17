@@ -1,5 +1,5 @@
 from django.db import models
-#from login import models
+# from login import models
 from pu.settings import AUTH_USER_MODEL
 from django.utils import timezone
 
@@ -43,13 +43,15 @@ class Messages(models.Model):
         self.sent = timezone.now()
         self.save()
 
+
 class Ratings(models.Model):
-    rated = models.ForeignKey(AUTH_USER_MODEL, models.DO_NOTHING, db_column='rated',related_name="user_rated")
-    ratedby = models.ForeignKey(AUTH_USER_MODEL, models.DO_NOTHING, db_column='ratedBy',related_name="user_rated_by")  # Field name made lowercase.
+    ratingid = models.AutoField(db_column='ratingid', primary_key=True)
+    rated = models.ForeignKey(AUTH_USER_MODEL, models.DO_NOTHING, db_column='rated', related_name="user_rated")
+    ratedby = models.ForeignKey(AUTH_USER_MODEL, models.DO_NOTHING, db_column='ratedBy',
+                                related_name="user_rated_by")  # Field name made lowercase.
     score = models.IntegerField()
 
     class Meta:
         managed = True
         db_table = 'ratings'
         app_label = "contact"
-        unique_together = (('rated', 'ratedby'),)

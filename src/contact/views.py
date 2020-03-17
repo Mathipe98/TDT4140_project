@@ -70,7 +70,7 @@ def view_conversation(request, pk):
         form = MessageForm(request.POST)
         if form.is_valid():
             save_msg_form(form, thread, user_to, user_from)
-            return redirect('contact_user', user_to.userid)
+            return redirect('view-threads', thread.threadid)
     else:
         form = MessageForm
     return render(request, "sellyoshit/contact.html", {'test': test, 'form': form})

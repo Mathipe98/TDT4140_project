@@ -30,12 +30,31 @@
   <!-- Right pane: messages -->
   <div class="col-10 order-2">
     <div class="alert alert-secondary" style="min-height: 800px;">
-        <p>Your conversation with:
+        <p><div style="display: inline;">Your conversation with:
           {% if current_thread.user1 == user %}
           {{current_thread.user2.username}}
           {% else %}
           {{current_thread.user1.username}}
           {% endif %}
+        </div>
+        <div style="display: inline;float: right">
+            <form class="stars">{% csrf_token %}
+                <input style="display: none;" id="five" value=5 type="radio" name="rating">
+                <label for="five">&#x2606;</label><span>5</span>
+
+                <input style="display: none;" id="four" value=4 type="radio" name="rating">
+                <label for="four">&#x2606;</label><span>4</span>
+
+                <input style="display: none;" id="three" value=3 type="radio" name="rating">
+                <label for="three">&#x2606;</label><span>3</span>
+
+                <input style="display: none;" id="two" value=2 type="radio" name="rating">
+                <label for="two">&#x2606;</label><span>2</span>
+
+                <input style="display: none;" id="one" value=1 type="radio" name="rating">
+                <label for="one">&#x2606;</label><span>1</span>
+            </form>
+        </div>
         </p>
       <div id="scrollbar_messages" style="border-top:1px solid gray;border-bottom:1px solid gray;overflow-y: auto;height: 640px;">
         {% for message in current_messages %}
@@ -59,6 +78,4 @@
     </div>
   </div>
 </div>
-
 {% endblock %}
-
