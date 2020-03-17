@@ -21,7 +21,7 @@
           {{ ad.product_description }}
         </p>
         {% if request.user.is_authenticated %}
-            {% if user.admin == 1 or user == ad.serller %}
+            {% if user.admin == 1 or user == ad.seller %}
                 <a class="btn btn-primary" href="{% url 'edit_ad' pk=ad.pk %}" role="button">Edit ad</a>
                 <a class="btn btn-primary" href="{% url 'delete_ad' pk=ad.pk %}" role="button">Delete ad</a>
             {% endif %}

@@ -8,18 +8,24 @@ from contact.views import create_conversation, thread_view, determine_users_from
 from users.models import Users
 
 
-class SetUp(TestCase):
+def create_user(user_nr):
+    return Users.objects.create(username="Test" + str(user_nr), password="tester1234", email="test@test.com",
+                                firstname="Test", lastname="Test", admin=0, blocked=0)
 
+
+def create_thread(user1, user2):
+    return Thread.objects.create(user1_id=user1, user2_id=user2)
+
+
+class SetUp(TestCase):
     PASSWORD = "tester1234"
 
     def setUp(self):
-        self.user1 = Users.objects.create(username="Test", password="tester1234", email="test@test.com",
-                                          firstname="Test", lastname="Test", admin=0, blocked=0)
+        self.user1 = create_user(1)
         self.user1.set_password(self.PASSWORD)  # Must be set through method, if not it will save it as a generated hash
         self.user1.save()
 
-        self.user2 = Users.objects.create(username="Test2", password="tester1234", email="test2@test.com",
-                                          firstname="Test2", lastname="Test2", admin=0, blocked=0)
+        self.user2 = create_user(2)
         self.user2.set_password(self.PASSWORD)  # Must be set through method, if not it will save it as a generated hash
         self.user2.save()
         self.client = Client()
@@ -61,14 +67,14 @@ class TestMessages(SetUp):
 
     def setUp(self):
         super().setUp()
-        self.thread = Thread.objects.create(user1_id=self.user1.userid, user2_id=self.user2.userid)
+        self.thread = create_thread(self.user1.pk, self.user2.pk)
 
 
 class TestDetermineUsers(SetUp):
 
     def setUp(self):
         super().setUp()
-        self.thread = Thread.objects.create(user1_id=self.user1.userid, user2_id=self.user2.userid)
+        self.thread = create_thread(self.user1.pk, self.user2.pk)
 
     def test_valid(self):
         result_user_from, result_user_to, result_thread = determine_users_from_thread_id(self.user1, 1)
@@ -83,3 +89,29 @@ class TestDetermineUsers(SetUp):
         self.assertEqual(result_user_from, None)
 
 
+class TestViewThread(SetUp):
+
+    def setUp(self):
+        super().setUp()
+        self.user3 = create_user(3)
+        self.thread1 = create_thread(self.user1.pk, self.user2.pk)
+        self.url = reverse('view-threads')
+
+    def test_logged_out(self):
+        self.client.logout()
+        response = self.client.get(self.url, follow=False)
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response.url, '/')
+
+    def test_no_threads(self):
+        self.user100 = create_user(100)
+        self.client.get(self.url, follow=False)
+        response = self.client.get(self.url, follow=False)
+        self.assertEqual(response.status_code, 404)
+
+    def test_nonexistant_thread(self):
+        url = reverse('view-threads', args=[2])
+        response = self.client.get(url, follow=False)
+        self.assertEqual(response.status_code, 404)
+
+    
