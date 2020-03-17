@@ -36,6 +36,7 @@ class Users(AbstractBaseUser):
     lastname = models.CharField(max_length=45)
     admin = models.IntegerField(blank=True, null=True)
     blocked = models.IntegerField(blank=True, null=True)
+    #is_staff = models.BooleanField(('staff status'),default=False)
 
     USERNAME_FIELD = 'username'
     REQUIRED_FIELDS = ['email','firstname','lastname']

@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'users.apps.UserConfig',
     'ads.apps.AdsConfig',
     'crispy_forms',
+    'stats.apps.StatsConfig',
 
 ]
 
@@ -57,8 +58,7 @@ ROOT_URLCONF = 'pu.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, '../templates')]
-        ,
+        'DIRS': [os.path.join(BASE_DIR, '../templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

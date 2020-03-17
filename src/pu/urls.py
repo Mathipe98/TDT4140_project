@@ -18,6 +18,7 @@ from django.urls import path, include
 from sellyoshit import views
 from login import views as lv
 from ads import views as av
+from stats import views as st
 from django.conf.urls.static import static
 from django.conf import settings
 
@@ -41,6 +42,9 @@ urlpatterns = [
     path('new/', av.create_ad, name='create_ad'),
     path('<int:pk>/edit/', av.edit_ad, name='edit_ad'),
     path('<int:pk>/delete/', av.delete_ad, name='delete_ad'),
+    path('dash/', st.dashboard_with_pivot, name='dashboard_with_pivot'),
+    path('data/', st.pivot_data, name='pivot_data'),
+    path('stats/', include('stats.urls')),
 ]
 
 # For displaying imagefields
