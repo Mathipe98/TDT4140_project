@@ -1,6 +1,7 @@
 from django.test import TestCase
 from contact.models import Thread, Messages
 from users.models import Users
+from django.utils import timezone
 
 
 class ThreadTestCase(TestCase):
@@ -23,7 +24,7 @@ class ThreadTestCase(TestCase):
 
     def test_publish(self):
         self.message.publish()
-        self.assertEqual(self.message.sent, timezone.now())
+        self.assertGreater(self.message.sent.microsecond, timezone.now().microsecond - 2000)  # Takes some mS to execute
 
 
 

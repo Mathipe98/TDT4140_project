@@ -15,14 +15,14 @@ from django.db.models import Q, Model
 
 def determine_users_from_thread_id(user, thread_id):
     """ HELPER METHOD """
-    thread = Thread.objects.get(pk=thread_id)
+    thread = get_object_or_404(Thread, pk=thread_id)
     user_from = user
     if user == thread.user1:
         user_to = thread.user2
     elif user == thread.user2:
         user_to = thread.user1
     else:
-        return False
+        return None, None, None
     return user_from, user_to, thread
 
 
@@ -60,7 +60,7 @@ def view_conversation(request, pk):
     if not user.is_authenticated:
         return redirect('home')
     user_from, user_to, thread = determine_users_from_thread_id(user, pk)
-    if not user_from:  # Method returned redirect
+    if user_from is None:  # Method returned redirect
         return redirect('home')
     test = "User 1: " + str(user_from.userid) + " User 2: " + str(user_to.userid)
     # Thread.objects.get_or_create(user1=user1,user2=user2)
@@ -80,9 +80,11 @@ def thread_view(request, thread_id=-1):
     user = request.user
     if not user.is_authenticated:
         return redirect('home')
+
     messages = Messages.objects.filter(Q(sentto=user) | Q(sentfrom=user))
     #  This is a filter which checks if sentto OR sentfrom is the user
     messages = messages.order_by('sent')
+
     if thread_id == -1:  # If no specific thread is requested
         try:
             current_thread = messages.latest('sent').thread  # Gets the first thread by newest messages
@@ -107,8 +109,9 @@ def thread_view(request, thread_id=-1):
             current_messages.append(message)  # The message is part of the thread we are looking for
 
     user_from, user_to, thread = determine_users_from_thread_id(user, current_thread.pk)
-    if not user_from:  # Method returned redirect
+    if user_from is None:  # Method returned redirect
         return redirect('home')
+
     if request.method == "POST":
         form = MessageForm(request.POST)
         if form.is_valid():
