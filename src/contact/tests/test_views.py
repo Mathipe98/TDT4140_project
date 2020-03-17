@@ -14,8 +14,10 @@ class TestConversation(TestCase):
                                           firstname="Test2", lastname="Test2", admin=0, blocked=0)
         self.client = Client()
 
+        self.client.login(username=self.user1.username, password=self.user1.password)
+
     def test_create_conversation(self):
         url = reverse("contact_user", args=[1])
 
-        response = self.client.get(url)
-        self.assertEqual(response.status, 200)
+        response = self.client.get(url, follow=True)
+        self.assertEqual(response.status_code, 200)
