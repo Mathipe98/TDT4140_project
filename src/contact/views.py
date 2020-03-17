@@ -49,7 +49,7 @@ def create_conversation(request, pk):
     userTo = get_object_or_404(Users, pk=pk)
     if userFrom == userTo:  # Stops you from sending messages to yourself
         return redirect("home")
-    if (userFrom.userid < pk):
+    if userFrom.userid < pk:
         user1 = userFrom
         user2 = userTo
     else:
