@@ -8,7 +8,7 @@ from contact.views import create_conversation, thread_view, determine_users_from
 from users.models import Users
 
 
-class TestConversation(TestCase):
+class SetUp(TestCase):
 
     PASSWORD = "tester1234"
 
@@ -24,6 +24,12 @@ class TestConversation(TestCase):
         self.user2.save()
         self.client = Client()
         self.client.login(username=self.user1.username, password=self.PASSWORD)
+
+
+class TestConversation(SetUp):
+
+    def setUp(self):
+        super().setUp()
 
     def test_create_conversation(self):
         url = reverse("contact_user", args=[self.user2.pk])
@@ -51,50 +57,29 @@ class TestConversation(TestCase):
         self.assertEqual(response.url, '/')
 
 
-class TestMessages(TestCase):
+class TestMessages(SetUp):
 
     def setUp(self):
-        self.user1 = Users.objects.create(username="Test", password="tester1234", email="test@test.com",
-                                          firstname="Test", lastname="Test", admin=0, blocked=0)
-        self.user1.set_password("tester1234")  # Must be set through method, if not it will save it as a generated hash
-        self.user1.save()
-
-        self.user2 = Users.objects.create(username="Test2", password="tester1234", email="test2@test.com",
-                                          firstname="Test2", lastname="Test2", admin=0, blocked=0)
-        self.user2.set_password("tester1234")  # Must be set through method, if not it will save it as a generated hash
-        self.user2.save()
-        self.client = Client()
-
-        self.client.login(username=self.user1.username, password="tester1234")
+        super().setUp()
         self.thread = Thread.objects.create(user1_id=self.user1.userid, user2_id=self.user2.userid)
 
-    
-        
-class TestDetermineUsers(TestCase):
-    
+
+class TestDetermineUsers(SetUp):
+
     def setUp(self):
-        self.user1 = Users.objects.create(username="Test", password="tester1234", email="test@test.com",
-                                          firstname="Test", lastname="Test", admin=0, blocked=0)
-        self.user1.set_password("tester1234")  # Must be set through method, if not it will save it as a generated hash
-        self.user1.save()
-
-        self.user2 = Users.objects.create(username="Test2", password="tester1234", email="test2@test.com",
-                                          firstname="Test2", lastname="Test2", admin=0, blocked=0)
-        self.user2.set_password("tester1234")  # Must be set through method, if not it will save it as a generated hash
-        self.user2.save()
-        self.client = Client()
-
-        self.client.login(username=self.user1.username, password="tester1234")
+        super().setUp()
         self.thread = Thread.objects.create(user1_id=self.user1.userid, user2_id=self.user2.userid)
 
     def test_valid(self):
         result_user_from, result_user_to, result_thread = determine_users_from_thread_id(self.user1, 1)
         self.assertEqual(result_user_from, self.user1)
         self.assertEqual(result_user_to, self.user2)
-        self.assertEqual(result_thread, self.thread)
+        self.assertEqual(result_thread.pk, self.thread.pk)
 
     def test_user_not_in_thread(self):
         self.user3 = Users.objects.create(username="Test3", password="tester1234", email="test@test.com",
                                           firstname="Test", lastname="Test", admin=0, blocked=0)
         result_user_from, result_user_to, result_thread = determine_users_from_thread_id(self.user3, 1)
         self.assertEqual(result_user_from, None)
+
+
