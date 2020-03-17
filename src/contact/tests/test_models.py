@@ -1,5 +1,3 @@
-from django.utils import timezone
-
 from django.test import TestCase
 from contact.models import Thread, Messages
 from users.models import Users

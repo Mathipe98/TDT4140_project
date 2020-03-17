@@ -12,14 +12,6 @@ from .models import Messages
 from django.db.models import Q
 
 
-def authenticate_user(request):
-    """ HELPER METHOD """
-    user = request.user
-    if not user.is_authenticated:
-        return redirect('home')
-    return user
-
-
 def determine_users_from_thread_id(user, thread_id):
     """ HELPER METHOD """
     thread = Thread.objects.get(pk=thread_id)
@@ -45,7 +37,9 @@ def save_msg_form(form, current_thread, user_to, user_from):
 
 
 def create_conversation(request, pk):
-    userFrom = authenticate_user(request)
+    userFrom = request.user
+    if not userFrom.is_authenticated:
+        return redirect('home')
     userTo = get_object_or_404(Users, pk=pk)
     if userFrom == userTo:  # Stops you from sending messages to yourself
         return redirect("home")
@@ -61,7 +55,9 @@ def create_conversation(request, pk):
 
 
 def view_conversation(request, pk):
-    user = authenticate_user(request)
+    user = request.user
+    if not user.is_authenticated:
+        return redirect('home')
     user_from, user_to, thread = determine_users_from_thread_id(user, pk)
     test = "User 1: " + str(user_from.userid) + " User 2: " + str(user_to.userid)
     # Thread.objects.get_or_create(user1=user1,user2=user2)
@@ -78,7 +74,9 @@ def view_conversation(request, pk):
 
 
 def thread_view(request, thread_id=-1):
-    user = authenticate_user(request)
+    user = request.user
+    if not user.is_authenticated:
+        return redirect('home')
     messages = Messages.objects.filter(Q(sentto=user) | Q(sentfrom=user))
     #  This is a filter which checks if sentto OR sentfrom is the user
     messages = messages.order_by('sent')
@@ -103,7 +101,7 @@ def thread_view(request, thread_id=-1):
         form = MessageForm(request.POST)
         if form.is_valid():
             save_msg_form(form, thread, user_to, user_from)
-            return redirect('view-threads', thread_id)
+            return redirect('view-threads', thread.threadid)
     else:
         form = MessageForm
     return render(request,
