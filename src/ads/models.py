@@ -43,7 +43,7 @@ class Advertisement(models.Model):
     sold = models.BooleanField(default=False)
     header_picture = models.ImageField(upload_to="ads/users/",  # Should create a folder for each user optimally
                                        default="ads/default.png")
-    category = models.ForeignKey('Category', null=True, blank=True, on_delete=models.CASCADE)
+    category = models.ManyToManyField(Category, blank=True, related_name='category')
     slug = models.SlugField(unique=False)
 
     class Meta:

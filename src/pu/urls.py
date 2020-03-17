@@ -43,6 +43,7 @@ urlpatterns = [
     path('<int:pk>/edit/', av.edit_ad, name='edit_ad'),
     path('<int:pk>/delete/', av.delete_ad, name='delete_ad'),
     path('results/', sv.searchView, name='search_results'),
+    path('search', include(('search.urls', 'search'), namespace='search')),
 ]
 
 # For displaying imagefields
