@@ -14,13 +14,14 @@ class ThreadTestCase(TestCase):
     def test_get_threadid(self):
         self.assertGreater(Thread.get_threadid(self.thread), 0)
 
+
 class MessageTestCase(TestCase):
 
     def setUp(self):
         Messages.objects.create(
             message="Whats up",
             sent="2020-03-16 00:00:00",
-            thread = 1,
-            sentto = 2,
+            thread=1,
+            sentto=2,
             sentfrom=1
         )
