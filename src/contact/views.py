@@ -1,4 +1,5 @@
 from django.contrib.auth import authenticate
+from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect, HttpResponseNotFound
 from django.utils import timezone
@@ -85,13 +86,13 @@ def thread_view(request, thread_id=-1):
     if thread_id == -1:  # If no specific thread is requested
         try:
             current_thread = messages.latest('sent').thread  # Gets the first thread by newest messages
-        except Model.DoesNotExist:
+        except ObjectDoesNotExist:
             return HttpResponseNotFound('You have not created any conversations yet')
     else:
         try:
             current_thread = messages.filter(thread=thread_id).latest('thread_id').thread
         # Gets latest message form requested thread
-        except Model.DoesNotExist:
+        except ObjectDoesNotExist:
             return HttpResponseNotFound("There is no thread with this ID currently existing. Create a convo first")
 
     threads = []  # List for storing all threads, used for sidebar in html
