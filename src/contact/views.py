@@ -1,6 +1,6 @@
 from django.contrib.auth import authenticate
 from django.shortcuts import render, redirect
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponseNotFound
 from django.utils import timezone
 from users.models import Users
 from .forms import MessageForm
@@ -21,7 +21,7 @@ def determine_users_from_thread_id(user, thread_id):
     elif user == thread.user2:
         user_to = thread.user1
     else:
-        return redirect("home")
+        return False
     return user_from, user_to, thread
 
 
@@ -43,7 +43,7 @@ def create_conversation(request, pk):
     userTo = get_object_or_404(Users, pk=pk)
     if userFrom == userTo:  # Stops you from sending messages to yourself
         return redirect("home")
-    if userFrom.userid < pk:
+    if userFrom.pk < pk:
         user1 = userFrom
         user2 = userTo
     else:
@@ -59,6 +59,8 @@ def view_conversation(request, pk):
     if not user.is_authenticated:
         return redirect('home')
     user_from, user_to, thread = determine_users_from_thread_id(user, pk)
+    if not user_from:  # Method returned redirect
+        return redirect('home')
     test = "User 1: " + str(user_from.userid) + " User 2: " + str(user_to.userid)
     # Thread.objects.get_or_create(user1=user1,user2=user2)
     # threadUser = Thread.objects.get(user1=user1,user2=user2)
@@ -80,13 +82,20 @@ def thread_view(request, thread_id=-1):
     messages = Messages.objects.filter(Q(sentto=user) | Q(sentfrom=user))
     #  This is a filter which checks if sentto OR sentfrom is the user
     messages = messages.order_by('sent')
+    if messages.count() == 0:
+        return redirect('home')
     threads = []  # List for storing all threads, used for sidebar in html
     current_messages = []  # List for storing messages for current thread
     if thread_id == -1:  # If no specific thread is requested
-        current_thread = messages.latest('sent').thread  # Gets the first thread by newest messages
+        current_thread = messages.latest('sent')  # Gets the first thread by newest messages
     else:
-        current_thread = messages.filter(thread=thread_id).latest('thread_id').thread
+        current_thread = messages.filter(thread=thread_id).latest('thread_id')
         # Gets latest message form requested thread
+
+    if current_thread.count() == 0:
+        return HttpResponseNotFound("There is no thread with this ID currently existing. Create a convo first")
+    else:
+        current_thread = current_thread.thread
 
     for message in messages:
         parent_thread = message.thread
@@ -97,6 +106,8 @@ def thread_view(request, thread_id=-1):
             current_messages.append(message)  # The message is part of the thread we are looking for
 
     user_from, user_to, thread = determine_users_from_thread_id(user, current_thread.pk)
+    if not user_from:  # Method returned redirect
+        return redirect('home')
     if request.method == "POST":
         form = MessageForm(request.POST)
         if form.is_valid():
