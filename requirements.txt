@@ -3,3 +3,4 @@ psycopg2-binary==2.8.4
 mysqlclient==1.4.6
 django-crispy-forms==1.8.1
 pillow==7.0.0
+coverage==5.0.3

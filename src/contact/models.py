@@ -49,7 +49,7 @@ class Ratings(models.Model):
     score = models.IntegerField()
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'ratings'
         app_label = "contact"
         unique_together = (('rated', 'ratedby'),)
