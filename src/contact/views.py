@@ -9,7 +9,7 @@ from django.utils import timezone
 from django.contrib.auth.models import User
 from .models import Thread
 from .models import Messages
-from django.db.models import Q
+from django.db.models import Q, Model
 
 
 def determine_users_from_thread_id(user, thread_id):
@@ -82,20 +82,20 @@ def thread_view(request, thread_id=-1):
     messages = Messages.objects.filter(Q(sentto=user) | Q(sentfrom=user))
     #  This is a filter which checks if sentto OR sentfrom is the user
     messages = messages.order_by('sent')
-    if messages.count() == 0:
-        return redirect('home')
+    if thread_id == -1:  # If no specific thread is requested
+        try:
+            current_thread = messages.latest('sent').thread  # Gets the first thread by newest messages
+        except Model.DoesNotExist:
+            return HttpResponseNotFound('You have not created any conversations yet')
+    else:
+        try:
+            current_thread = messages.filter(thread=thread_id).latest('thread_id').thread
+        # Gets latest message form requested thread
+        except Model.DoesNotExist:
+            return HttpResponseNotFound("There is no thread with this ID currently existing. Create a convo first")
+
     threads = []  # List for storing all threads, used for sidebar in html
     current_messages = []  # List for storing messages for current thread
-    if thread_id == -1:  # If no specific thread is requested
-        current_thread = messages.latest('sent')  # Gets the first thread by newest messages
-    else:
-        current_thread = messages.filter(thread=thread_id).latest('thread_id')
-        # Gets latest message form requested thread
-
-    if current_thread.count() == 0:
-        return HttpResponseNotFound("There is no thread with this ID currently existing. Create a convo first")
-    else:
-        current_thread = current_thread.thread
 
     for message in messages:
         parent_thread = message.thread
