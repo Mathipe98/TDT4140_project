@@ -7,7 +7,7 @@ from .forms import AdvertisementForm
 from django.shortcuts import render, get_object_or_404
 from django.utils import timezone
 from django.contrib.auth.models import User
-
+from .models import Advertisement
 
 
 def create_ad(request):
@@ -68,4 +68,3 @@ def delete_ad(request, pk):
         if user == ad.seller or user.admin:
             ad.delete()
     return redirect('ads_view')
-
