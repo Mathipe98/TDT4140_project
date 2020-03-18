@@ -7,7 +7,7 @@ from .forms import AdvertisementForm
 from django.shortcuts import render, get_object_or_404
 from django.utils import timezone
 from django.contrib.auth.models import User
-from .models import Advertisement
+from .models import Advertisement, Category
 
 
 def create_ad(request):
@@ -38,7 +38,7 @@ def show_specific_ad(request, pk):
     # get_object_or_404 either gives object with pk or a 404 not found
     if user.is_authenticated:
         if user == ad.seller or user.admin:
-            return render(request, 'ads/advertisement_owner.html', {'ad': ad})
+            return render(request, 'ads/advertisement_owner.html', {'ad': ad, 'categories': Category.objects.all()})
     return render(request, 'ads/advertisement.html', {'ad': ad})
 
 

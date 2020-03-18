@@ -14,12 +14,16 @@
       <div class="card-body">
         <h4 class="card-title">{{ ad.product_name }}: {{ ad.price }} kr</h4>
         <h6 class="card-subtitle">
-          Selger: {{ ad.seller.username }}
-          <!-- Should be inside a link later on -->
+          Selger: {{ ad.seller.username }} <br>
+          Category: {{ ad.category }}
         </h6>
         <p class="card-text">
           {{ ad.product_description }}
         </p>
+        <p class="card-text">
+
+        </p>
+
         <!-- Not functional at the moment
         <a class="btn btn-primary" href="#" role="button">Contact Seller {{ ad.get_seller_name }}</a>
         -->

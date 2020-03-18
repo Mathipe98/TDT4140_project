@@ -16,11 +16,15 @@
       <div class="card-body">
         <h4 class="card-title">{{ ad.product_name }}: {{ ad.price }} kr</h4>
         <h6 class="card-subtitle">
-          Sold by: {{ ad.seller.username }}
+          Sold by: {{ ad.seller.username }}<br>
+          Category: {{ ad.category }}
         </h6>
         <p class="card-text">
+
           {{ ad.product_description }}
+
         </p>
+
         <a class="btn btn-primary" href="{% url 'edit_ad' pk=ad.pk %}" role="button">Edit ad</a>
         <a class="btn btn-primary" href="{% url 'delete_ad' pk=ad.pk %}" role="button">Delete ad</a>
       </div>

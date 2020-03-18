@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from .models import Product
-from ads.models import Advertisement
+from ads.models import Advertisement, Category
 from django.core.paginator import Paginator
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
@@ -13,9 +13,11 @@ def products(request):
 
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
+    categories = Category.objects.all()
 
     context = {'products': page_obj.object_list,
-               'page_obj': page_obj}
+               'page_obj': page_obj,
+               'categories': categories}
 
     return render(request, 'sellyoshit/product_listEXT.html', context)
 

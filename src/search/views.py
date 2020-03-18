@@ -9,7 +9,7 @@ def searchView(request):
     query = request.GET.get('q')    # receiving the query from input field name='q'
 
     # search the database title and body
-    results = Advertisement.objects.filter(Q(product_name__icontains=query) | Q(product_description__icontains=query))
+    results = Advertisement.objects.filter(Q(product_name__icontains=query) | Q(product_description__icontains=query) | Q(category__name__icontains=query))
 
     paginator = Paginator(results, 6)
 

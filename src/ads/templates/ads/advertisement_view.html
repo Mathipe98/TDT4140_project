@@ -4,6 +4,10 @@
 {% block extra_head %}
     <link href="{% static 'style.css' %}" rel="stylesheet"/>
 {% endblock %}
+
+{% block sidebar %}
+{% endblock %}
+
 {% block content %} <!-- Name of the current block -->
   {% for ad in ads %}
       <div class = "advertisement">

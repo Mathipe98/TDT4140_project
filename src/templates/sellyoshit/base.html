@@ -74,7 +74,12 @@
 
             <!-- Search bar -->
             <form action="{% url 'search_results' %}" class="form-inline my-2 my-lg-0" method="GET">
-                <input aria-label="Search" class="form-control mr-sm-2" name="q" placeholder="Search" type="search" value="{{request.GET.q}}">
+                <input aria-label="Search" class="form-control mr-sm-2" list="suggestions" name="q" placeholder="Search" type="search" value="{{request.GET.q}}">
+                <datalist id="suggestions">
+                    {% for field in categories %}
+                    <option value="{{ field.name }}">
+                    {% endfor %}
+                </datalist>
                 <button class="btn btn-outline-warning my-2 my-sm-0" type="submit">
                     Search
                 </button>
@@ -87,7 +92,7 @@
         <!-- Left pane: functionality according to page -->
         <div class="row no-gutters">
             <div class="col-1 order-1">
-                 <div class="alert alert-light" style="min-height: 800px;">
+                 <div class="alert alert-light" style="min-height: 800px; padding: 0px">
                     {% block sidebar %}
                     {% endblock %}
                 </div>

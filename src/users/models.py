@@ -41,6 +41,17 @@ class Users(AbstractBaseUser):
     REQUIRED_FIELDS = ['email','firstname','lastname']
     objects = UserManager()
 
+    @property
+    def is_staff(self):
+        """Only users with field admin = True will have permission to enter django admin page"""
+        return self.admin
+
+    def has_module_perms(self, app_label):
+        return True
+
+    def has_perm(self, perm, obj=None):
+        return True
+
     class Meta:
         managed = False
         db_table = 'users'
