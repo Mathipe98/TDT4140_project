@@ -38,21 +38,22 @@
           {% endif %}
         </div>
         <div style="display: inline;float: right">
-            <form class="stars">{% csrf_token %}
-                <input style="display: none;" id="five" value=5 type="radio" name="rating">
-                <label for="five">&#x2606;</label><span>5</span>
+            <form method="post" class="stars">{% csrf_token %}
+                <button class="btn btn-primary" type="submit">Rate user</button>
+                <input style="display: none;" id="_5" value=5 type="radio" name="rating">
+                <label for="_5">&#x2606;</label><span>5</span>
 
-                <input style="display: none;" id="four" value=4 type="radio" name="rating">
-                <label for="four">&#x2606;</label><span>4</span>
+                <input style="display: none;" id="_4" value=4 type="radio" name="rating">
+                <label for="_4">&#x2606;</label><span>4</span>
 
-                <input style="display: none;" id="three" value=3 type="radio" name="rating">
-                <label for="three">&#x2606;</label><span>3</span>
+                <input style="display: none;" id="_3" value=3 type="radio" name="rating">
+                <label for="_3">&#x2606;</label><span>3</span>
 
-                <input style="display: none;" id="two" value=2 type="radio" name="rating">
-                <label for="two">&#x2606;</label><span>2</span>
+                <input style="display: none;" id="_2" value=2 type="radio" name="rating">
+                <label for="_2">&#x2606;</label><span>2</span>
 
-                <input style="display: none;" id="one" value=1 type="radio" name="rating">
-                <label for="one">&#x2606;</label><span>1</span>
+                <input style="display: none;" id="_1" value=1 type="radio" name="rating">
+                <label for="_1">&#x2606;</label><span>1</span>
             </form>
         </div>
         </p>
@@ -78,4 +79,12 @@
     </div>
   </div>
 </div>
+    <script>
+    window.onload = function () {
+        if ({{ rating.score }} != 0)
+        {
+             document.getElementById("_"+ {{ rating.score }} ).checked = true;
+        }
+    }
+    </script>
 {% endblock %}

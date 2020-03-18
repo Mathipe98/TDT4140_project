@@ -8,7 +8,7 @@ from .forms import MessageForm
 from django.shortcuts import render, get_object_or_404
 from django.utils import timezone
 from django.contrib.auth.models import User
-from .models import Thread
+from .models import Thread, Ratings
 from .models import Messages
 from django.db.models import Q, Model
 
@@ -83,7 +83,7 @@ def thread_view(request, thread_id=-1):
 
     messages = Messages.objects.filter(Q(sentto=user) | Q(sentfrom=user))
     #  This is a filter which checks if sentto OR sentfrom is the user
-    messages = messages.order_by('sent')
+    messages = messages.order_by('sent').reverse()
 
     if thread_id == -1:  # If no specific thread is requested
         try:
@@ -99,7 +99,7 @@ def thread_view(request, thread_id=-1):
 
     threads = []  # List for storing all threads, used for sidebar in html
     current_messages = []  # List for storing messages for current thread
-
+    print(messages)
     for message in messages:
         parent_thread = message.thread
         #  Finds the thread that the message belongs to by using the foreign key in message
@@ -107,15 +107,28 @@ def thread_view(request, thread_id=-1):
             threads.append(parent_thread)
         if parent_thread == current_thread:
             current_messages.append(message)  # The message is part of the thread we are looking for
-
+    current_messages.reverse()
     user_from, user_to, thread = determine_users_from_thread_id(user, current_thread.pk)
+    try:
+        rating = Ratings.objects.get(rated=user_to, ratedby=user_from)
+    except:
+        rating = 0
     if user_from is None:  # Method returned redirect
         return redirect('home')
-
     if request.method == "POST":
         form = MessageForm(request.POST)
-        if form.is_valid():
-            save_msg_form(form, thread, user_to, user_from)
+        if 'message' in request.POST:
+            if form.is_valid():
+                save_msg_form(form, thread, user_to, user_from)
+                return redirect('view-threads', thread.threadid)
+        elif 'rating' in request.POST:
+            if rating == 0:
+                rating = Ratings.objects.create(rated=user_to, ratedby=user_from, score=request.POST.get('rating'))
+                rating.save()
+            else:
+                new_rating = Ratings.objects.get(ratingid=rating.ratingid)
+                new_rating.score = request.POST.get('rating')
+                new_rating.save()
             return redirect('view-threads', thread.threadid)
     else:
         form = MessageForm
@@ -125,4 +138,5 @@ def thread_view(request, thread_id=-1):
                    'user': user,
                    'current_thread': current_thread,
                    'current_messages': current_messages,
+                   'rating': rating,
                    'form': form})
