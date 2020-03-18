@@ -21,12 +21,6 @@
         <p class="card-text">
           {{ ad.product_description }}
         </p>
-
-
-        Categories: <br/>{% for area in ad.category.all %}{{ area }}<br/>{% endfor %}
-
-
-
         <a class="btn btn-primary" href="{% url 'edit_ad' pk=ad.pk %}" role="button">Edit ad</a>
         <a class="btn btn-primary" href="{% url 'delete_ad' pk=ad.pk %}" role="button">Delete ad</a>
       </div>
