@@ -35,6 +35,14 @@
 </style>
 </head>
 <body>
+    <div id="user-count">
+        <h2> <strong> Total number of site users: {{users_count}} </strong> </h2>
+        <h2> <strong> Total number of sold items: {{sold_items_count}} </strong> </h2>
+        <h2> <strong> Total number of site advertisements: {{advertisements_count}} </strong> </h2>
+        <h2> <strong> Average sell time of advertisements: {{average_sell_time}} </strong> </h2>
+        <hr>
+    </div>
+
     <div id="pivot-table-container" data-url="{% url 'pivot_data' %}"></div>
     <div id="pivot-chart-container"></div>
 <script>
