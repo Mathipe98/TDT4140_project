@@ -20,6 +20,7 @@ from login import views as lv
 from ads import views as av
 from search import views as sv
 from contact import views as cv
+from stats import views as st
 from django.conf.urls.static import static
 from django.conf import settings
 
@@ -46,6 +47,8 @@ urlpatterns = [
     path('results/', sv.searchView, name='search_results'),
     path('user/', include('users.urls'), name='user'),
     path('messages/', include('contact.urls'), name='contact'),
+    path('stats/', st.statistics_page, name='statistics_page'),
+    path('data/', st.pivot_data, name='pivot_data'),
 ]
 
 # For displaying imagefields

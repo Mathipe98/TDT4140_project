@@ -1,5 +1,4 @@
 from django.contrib.auth.models import User
-from django.db import models
 from django.conf import settings
 from django.db import models
 from django.utils import timezone
@@ -26,6 +25,7 @@ class Advertisement(models.Model):
     created_date = models.DateTimeField(default=timezone.now)
     published_date = models.DateTimeField(blank=True, null=True)
     sold = models.BooleanField(default=False)
+    sold_date = models.DateTimeField(blank=True, null=True)
     header_picture = models.ImageField(upload_to="ads/users/",  # Should create a folder for each user optimally
                                        default="ads/default.png")
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True)

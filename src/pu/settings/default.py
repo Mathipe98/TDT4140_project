@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'contact.apps.ContactConfig',
     'crispy_forms',
     'search.apps.SearchConfig',
+    'stats.apps.StatsConfig',
+
 ]
 
 MIDDLEWARE = [
@@ -58,8 +60,7 @@ ROOT_URLCONF = 'pu.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, '../templates')]
-        ,
+        'DIRS': [os.path.join(BASE_DIR, '../templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
