@@ -27,7 +27,6 @@ class Migration(migrations.Migration):
                 ('sold', models.BooleanField(default=False)),
                 ('header_picture', models.ImageField(default='ads/default.png', upload_to='ads/users/')),
                 ('seller', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
-                ('slug', models.TextField(default='slug')),
             ],
             options={
                 'managed': True,

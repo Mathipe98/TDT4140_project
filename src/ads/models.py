@@ -23,7 +23,6 @@ class Advertisement(models.Model):
     sold = models.BooleanField(default=False)
     header_picture = models.ImageField(upload_to="ads/users/",  # Should create a folder for each user optimally
                                        default="ads/default.png")
-    slug = models.TextField(default='slug')
 
     class Meta:
         managed = True
