@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.views.generic.list import ListView
 from django.db.models import Q
-from ads.models import Advertisement
+from ads.models import Advertisement, Category
 from django.core.paginator import Paginator
 
 
@@ -17,6 +17,8 @@ def searchView(request):
     page_obj = paginator.get_page(page_number)
 
     context = {'products': page_obj.object_list,
-               'page_obj': page_obj}
+               'page_obj': page_obj,
+               'categories': Category.objects.all()
+    }
 
     return render(request, 'sellyoshit/search.html', context)
