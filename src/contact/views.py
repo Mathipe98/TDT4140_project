@@ -83,7 +83,7 @@ def thread_view(request, thread_id=-1):
 
     messages = Messages.objects.filter(Q(sentto=user) | Q(sentfrom=user))
     #  This is a filter which checks if sentto OR sentfrom is the user
-    messages = messages.order_by('sent').reverse()
+    messages = messages.order_by('sent')
 
     if thread_id == -1:  # If no specific thread is requested
         try:
@@ -99,8 +99,7 @@ def thread_view(request, thread_id=-1):
 
     threads = []  # List for storing all threads, used for sidebar in html
     current_messages = []  # List for storing messages for current thread
-    print(messages)
-    for message in messages:
+    for message in messages.reverse():
         parent_thread = message.thread
         #  Finds the thread that the message belongs to by using the foreign key in message
         if parent_thread not in threads:  # If thread has not been recorded yet

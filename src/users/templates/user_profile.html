@@ -9,9 +9,14 @@
       {% if request.user.is_authenticated %}
       {% if request.user != user %}
       <a href="{% url 'contact_user' pk=user.pk %}" class="btn btn-primary" style="height: 40px;">Contact {{user.username}}</a>
-      <div class="btn-group" role="group" aria-label="Basic example">
-        <a href="#" class="btn btn-secondary" style="height: 40px;"><img src="../../media/thumbs-up.png" id="thumbs up" style="width: 30px; height: 30px;"></a>
-        <a href="#" class="btn btn-secondary" style="height: 40px;"><img src="../../media/thumbs-down.png" id="thumbs down" style="width: 30px; height: 30px;"></a>
+      <div style="display: inline">
+          {{ rating_avg.score__avg }}/5 <span style="color:yellow">&#x2605;</span>
+          ({{ rating_count }}
+          {% if rating_count == 1 %}
+              rating
+          {% else %}
+              ratings
+          {% endif %})
       </div>
       {% endif %}
       {% endif %}
