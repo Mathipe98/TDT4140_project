@@ -38,6 +38,7 @@
           {% endif %}
         </div>
         <div style="display: inline;float: right">
+            <!-- Form for rating the other user in the thread -->
             <form method="post" class="stars">{% csrf_token %}
                 <button class="btn btn-primary" type="submit">Rate user</button>
                 <input style="display: none;" id="_5" value=5 type="radio" name="rating">

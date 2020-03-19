@@ -9,17 +9,20 @@
       {% if request.user.is_authenticated %}
       {% if request.user != user %}
       <a href="{% url 'contact_user' pk=user.pk %}" class="btn btn-primary" style="height: 40px;">Contact {{user.username}}</a>
-      <div style="display: inline">
-          {{ rating_avg.score__avg }}/5 <span style="color:yellow">&#x2605;</span>
-          ({{ rating_count }}
-          {% if rating_count == 1 %}
-              rating
-          {% else %}
-              ratings
-          {% endif %})
+      {% endif %}
+      {% endif %}
+        <!-- Displays the users average rating and how many ratings they have -->
+        <div style="display: inline">
+            {% if rating_avg.score__avg != Null %}  <!-- Displays if the user has any ratings -->
+                {{ rating_avg.score__avg }}/5 <span style="color:yellow">&#x2605;</span>
+            {% endif %}
+            ({{ rating_count }}
+            {% if rating_count == 1 %}
+                rating
+            {% else %}
+                ratings
+            {% endif %})
       </div>
-      {% endif %}
-      {% endif %}
     </div>
   </div>
 </div>

@@ -111,22 +111,23 @@ def thread_view(request, thread_id=-1):
     current_messages.reverse()
     user_from, user_to, thread = determine_users_from_thread_id(user, current_thread.pk)
     try:
-        rating = Ratings.objects.get(rated=user_to, ratedby=user_from)
+        rating = Ratings.objects.get(rated=user_to, ratedby=user_from)  # Gets previous rating if they've already been
+        # rated
     except:
         rating = 0
     if user_from is None:  # Method returned redirect
         return redirect('home')
     if request.method == "POST":
         form = MessageForm(request.POST)
-        if 'message' in request.POST:
+        if 'message' in request.POST:  # Function to execute if user sends message
             if form.is_valid():
                 save_msg_form(form, thread, user_to, user_from)
                 return redirect('view-threads', thread.threadid)
-        elif 'rating' in request.POST:
-            if rating == 0:
+        elif 'rating' in request.POST:  # Function to execute if user rates the other user
+            if rating == 0:  # If the logged in user has not rated the other user
                 rating = Ratings.objects.create(rated=user_to, ratedby=user_from, score=request.POST.get('rating'))
                 rating.save()
-            else:
+            else:  # Updates if the logged in user has already rated the other user
                 new_rating = Ratings.objects.get(ratingid=rating.ratingid)
                 new_rating.score = request.POST.get('rating')
                 new_rating.save()
