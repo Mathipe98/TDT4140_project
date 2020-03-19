@@ -26,6 +26,9 @@
         </p>
         <a class="btn btn-primary" href="{% url 'edit_ad' pk=ad.pk %}" role="button">Edit ad</a>
         <a class="btn btn-primary" href="{% url 'delete_ad' pk=ad.pk %}" role="button">Delete ad</a>
+        {% if ad.sold == 0 %}
+        <a class="btn btn-primary" href="{% url 'sold_ad' pk=ad.pk %}" role="button">Sold</a>
+        {% endif %}
       </div>
     </div>
   </div>

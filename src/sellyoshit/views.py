@@ -9,7 +9,7 @@ from stats.signals import object_viewed_signal
 
 
 def products(request):
-    products = Advertisement.objects.all().order_by('-created_date')
+    products = Advertisement.objects.all().filter(sold=False).order_by('-created_date')
     paginator = Paginator(products, 6)  # Show X products per page
 
     page_number = request.GET.get('page')

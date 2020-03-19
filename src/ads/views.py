@@ -2,12 +2,28 @@ from django.contrib.auth import authenticate
 from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
 from django.utils import timezone
+
 from .models import Advertisement
 from .forms import AdvertisementForm
 from django.shortcuts import render, get_object_or_404
 from django.utils import timezone
 from django.contrib.auth.models import User
 from .models import Advertisement, Category
+
+
+def sold_ad(request, pk):
+    user = request.user
+    ad = get_object_or_404(Advertisement, pk=pk)
+    print(user.is_authenticated)
+    if user.is_authenticated:
+        print("hello world")
+        if user == ad.seller:
+            print("we got here")
+            ad.sold_date = timezone.now()
+            ad.sold = True
+            ad.save()
+    return redirect("home")
+
 
 
 def create_ad(request):
@@ -24,6 +40,7 @@ def create_ad(request):
             return redirect('specific_ad', ad.pk)
     form = AdvertisementForm
     return render(request, "ads/create_ad.html", {'form': form, 'categories': Category.objects.all()})
+
 
 
 def advertisements_view(request):
