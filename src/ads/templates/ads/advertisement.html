@@ -14,19 +14,23 @@
       <div class="card-body">
         <h4 class="card-title">{{ ad.product_name }}: {{ ad.price }} kr</h4>
         <h6 class="card-subtitle">
+          Sold by:
+          <a href="{% url 'user_profile' pk=ad.seller.pk %}">{{ ad.seller.username }}</a>
           Selger: {{ ad.seller.username }} <br>
           Category: {{ ad.category }}
         </h6>
         <p class="card-text">
           {{ ad.product_description }}
         </p>
-        <p class="card-text">
-
-        </p>
-
-        <!-- Not functional at the moment
-        <a class="btn btn-primary" href="#" role="button">Contact Seller {{ ad.get_seller_name }}</a>
-        -->
+        {% if request.user.is_authenticated %}
+            {% if user.admin == 1 or user == ad.seller %}
+                <a class="btn btn-primary" href="{% url 'edit_ad' pk=ad.pk %}" role="button">Edit ad</a>
+                <a class="btn btn-primary" href="{% url 'delete_ad' pk=ad.pk %}" role="button">Delete ad</a>
+            {% endif %}
+            {% if user != ad.seller %}
+                <a class="btn btn-primary" href="{% url 'contact_user' pk=ad.seller.pk %}" role="button">Contact Seller {{ ad.get_seller_name }}</a>
+            {% endif %}
+        {% endif %}
       </div>
     </div>
   </div>

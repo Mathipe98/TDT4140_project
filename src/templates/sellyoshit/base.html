@@ -39,7 +39,6 @@
                 <img alt="" class="d-inline-block align-top" height="35" src="{% static 'navbarlogo.png' %}" width="35">
                 SellYo'Shit
             </a>
-
             {% if request.user.is_authenticated %}
                 <div class="collapse navbar-collapse mb-1">
                     <ul class="navbar-nav mr-auto">
@@ -52,11 +51,14 @@
                         </li>
 
                         <li class="nav-item">
+                            <a class="nav-link" href="{% url 'view-threads' %}">Messages</a>
+                        </li>
+
+                        <li class="nav-item">
                             <a class="nav-link" href="{% url 'logout' %}">Log out</a>
                         </li>
                     </ul>
                 </div>
-
             {% else %}
                 <div class="collapse navbar-collapse mb-1">
                     <ul class="navbar-nav mr-auto">
@@ -98,12 +100,11 @@
                 </div>
             </div>
 
-            <!-- Right pane: ads -->
-            <div class="col-11 order-2">
-                <div class="alert alert-secondary" style="min-height: 800px;">
-                    {% block content %}
-                    {% endblock %}
-                </div>
+        <!-- Right pane: ads -->
+        <div class="col-11 order-2">
+            <div class="alert alert-secondary p-0" style="min-height: 800px;">
+                {% block content %}
+                {% endblock %}
             </div>
         </div>
     </div>

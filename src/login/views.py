@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate, logout
 
 from ads.models import Advertisement, Category
-from users.models import Thread
+#from users.models import Thread
 from .forms import SignupForm, LoginForm
 
 
@@ -53,7 +53,6 @@ def log_out(request):
     logout(request)
     return redirect('home')
 
-
 def ademin(request):
     user = request.user
     if user.is_authenticated:
@@ -63,7 +62,6 @@ def ademin(request):
             return redirect('home')
     else:
         return redirect('home')
-
 
 def my_page(request):
     user = request.user

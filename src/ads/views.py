@@ -67,4 +67,4 @@ def delete_ad(request, pk):
     if user.is_authenticated:
         if user == ad.seller or user.admin:
             ad.delete()
-    return redirect('ads_view')
+    return redirect('home')

@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'sellyoshit.apps.SellyoshitConfig',
     'users.apps.UserConfig',
     'ads.apps.AdsConfig',
+    'contact.apps.ContactConfig',
     'crispy_forms',
     'search.apps.SearchConfig',
 ]

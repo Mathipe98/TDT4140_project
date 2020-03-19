@@ -1,3 +1,7 @@
+html,body {
+    height: 100%;
+    width: 100%;
+}
 img[type="ad"] {
 
     object-fit: cover;
@@ -138,5 +142,29 @@ h1 {
   .topnav input[type=text] {
     border: 1px solid #ccc;
   }
+}
+
+
+.messageClass {
+    width: 50%;
+    resize: none;
+}
+.foot {
+    display : table-row;
+    vertical-align : bottom;
+    height : 1px;
+}
+.stars {
+  unicode-bidi: bidi-override;
+  direction: rtl;
+}
+.stars > label:hover:before,
+.stars > label:hover ~ label:before,
+.stars > :checked + label:before,
+.stars > :checked + label ~ label:before
+{
+    content: '\2605';
+    position: absolute;
+    color: yellow;
 }
 

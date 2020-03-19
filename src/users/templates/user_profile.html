@@ -1,0 +1,26 @@
+{% extends 'sellyoshit/base.html' %}
+{% block content %}
+<div class="user_prof">
+  <div class="card w-75">
+    <div class="card-body">
+      <h5 class="card-title">{{user.username}}</h5>
+      <p class="card-text">Welcome to {{user.firstname}} {{user.lastname}}'s profile</p>
+      <p class="card-text">Email: {{user.email}}</p>
+      {% if request.user.is_authenticated %}
+      {% if request.user != user %}
+      <a href="{% url 'contact_user' pk=user.pk %}" class="btn btn-primary" style="height: 40px;">Contact {{user.username}}</a>
+      <div style="display: inline">
+          {{ rating_avg.score__avg }}/5 <span style="color:yellow">&#x2605;</span>
+          ({{ rating_count }}
+          {% if rating_count == 1 %}
+              rating
+          {% else %}
+              ratings
+          {% endif %})
+      </div>
+      {% endif %}
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock %}
