@@ -1,11 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Dashboard with Flexmonster</title>
+{% extends 'sellyoshit/base.html' %}
+{% block title %}Dashboard with Flexmonster{% endblock %}
+{% load static %}
+
+{% block extra_head %}
     <script src="https://cdn.flexmonster.com/flexmonster.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-    <link rel="stylesheet" href="https://cdn.flexmonster.com/demo.css">
+    <!--<link rel="stylesheet" href="https://cdn.flexmonster.com/demo.css">-->
     <style>
     /* Charts Style  */
 
@@ -33,7 +33,8 @@
       fill: #ffa600 !important;
     }
 </style>
-</head>
+{% endblock %}
+{% block content %}
 <body>
     <div id="user-count">
         <h2> <strong> Total number of site users: {{users_count}} </strong> </h2>
@@ -136,4 +137,4 @@ $.ajax({
 });
 </script>
 </body>
-</html>
+{% endblock %}
