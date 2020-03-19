@@ -220,7 +220,7 @@ class ImagesInAd(models.Model):
         db_table = 'images_in_ad'
         unique_together = (('imageid', 'adid'),)
 
-
+"""
 class Messages(models.Model):
     messageid = models.AutoField(db_column='messageID', primary_key=True)  # Field name made lowercase.
     message = models.TextField()
@@ -246,7 +246,7 @@ class Ratings(models.Model):
         managed = False
         db_table = 'ratings'
         unique_together = (('rated', 'ratedby'),)
-
+"""
 
 class SellyoshitProduct(models.Model):
     name = models.CharField(max_length=100)
