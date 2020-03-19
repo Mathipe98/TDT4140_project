@@ -38,7 +38,6 @@ class Users(AbstractBaseUser):
     admin = models.IntegerField(blank=True, null=True)
     blocked = models.IntegerField(blank=True, null=True)
 
-
     USERNAME_FIELD = 'username'
     REQUIRED_FIELDS = ['email','firstname','lastname']
     objects = UserManager()
@@ -55,7 +54,7 @@ class Users(AbstractBaseUser):
         return True
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'users'
         app_label ="users"
 

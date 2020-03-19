@@ -38,18 +38,18 @@ def save_msg_form(form, current_thread, user_to, user_from):
 
 
 def create_conversation(request, pk):
-    userFrom = request.user
-    if not userFrom.is_authenticated:
+    user_from = request.user
+    if not user_from.is_authenticated:
         return redirect('home')
-    userTo = get_object_or_404(Users, pk=pk)
-    if userFrom == userTo:  # Stops you from sending messages to yourself
+    user_to = get_object_or_404(Users, pk=pk)
+    if user_from == user_to:  # Stops you from sending messages to yourself
         return redirect("home")
-    if userFrom.pk < pk:
-        user1 = userFrom
-        user2 = userTo
+    if user_from.pk < pk:
+        user1 = user_from
+        user2 = user_to
     else:
-        user1 = userTo
-        user2 = userFrom
+        user1 = user_to
+        user2 = user_from
     Thread.objects.get_or_create(user1=user1, user2=user2)
     thread = Thread.objects.get(user1=user1, user2=user2)
     return redirect("messages", pk=thread.pk)
@@ -89,13 +89,15 @@ def thread_view(request, thread_id=-1):
         try:
             current_thread = messages.latest('sent').thread  # Gets the first thread by newest messages
         except ObjectDoesNotExist:
-            return HttpResponseNotFound('You have not created any conversations yet')
+            return render(request, 'message_view_failure.html',
+                          {'message': 'You have not created any conversations yet'})
     else:
         try:
             current_thread = messages.filter(thread=thread_id).latest('thread_id').thread
         # Gets latest message form requested thread
         except ObjectDoesNotExist:
-            return HttpResponseNotFound("There is no thread with this ID currently existing. Create a convo first")
+            return render(request, 'message_view_failure.html',
+                          {'message': "There is no thread with this ID currently existing. Create a convo first"})
 
     threads = []  # List for storing all threads, used for sidebar in html
     current_messages = []  # List for storing messages for current thread

@@ -3,24 +3,33 @@ from django.contrib.auth.models import User
 from django.test import TestCase, Client
 from django.urls import reverse
 
-from contact.models import Thread
+from contact.forms import MessageForm
+from contact.models import Thread, Messages, Ratings
 from contact.views import create_conversation, thread_view, determine_users_from_thread_id, save_msg_form
 from users.models import Users
 
 
 def create_user(user_nr):
+    """Helper method"""
     return Users.objects.create(username="Test" + str(user_nr), password="tester1234", email="test@test.com",
                                 firstname="Test", lastname="Test", admin=0, blocked=0)
 
 
 def create_thread(user1, user2):
+    """Helper method"""
     return Thread.objects.create(user1_id=user1, user2_id=user2)
+
+
+def create_message(thread, sentto, sentfrom):
+    """Helper method"""
+    return Messages.objects.create(thread_id=thread.pk, sentto=sentto, sentfrom=sentfrom)
 
 
 class SetUp(TestCase):
     PASSWORD = "tester1234"
 
     def setUp(self):
+        """Set up for each test. Super class for all the remaining test classes."""
         self.user1 = create_user(1)
         self.user1.set_password(self.PASSWORD)  # Must be set through method, if not it will save it as a generated hash
         self.user1.save()
@@ -102,16 +111,27 @@ class TestViewThread(SetUp):
         response = self.client.get(self.url, follow=False)
         self.assertEqual(response.status_code, 302)
         self.assertEqual(response.url, '/')
+        # Redirect to home page
 
-    def test_no_threads(self):
+    def test_no_threads_latest(self):
         self.user100 = create_user(100)
         self.client.get(self.url, follow=False)
-        response = self.client.get(self.url, follow=False)
-        self.assertEqual(response.status_code, 404)
+        response = self.client.get(self.url)
+        self.assertEqual(response.status_code, 200)
+        # Should return 200 OK but with different content than a valid thread
+        self.assertIn('You have not created any conversations yet', str(response.content))
 
-    def test_nonexistant_thread(self):
+    def test_nonexistant_thread_request(self):
         url = reverse('view-threads', args=[2])
-        response = self.client.get(url, follow=False)
-        self.assertEqual(response.status_code, 404)
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+        # Should return 200 OK but with different content than a valid thread
+        self.assertIn('There is no thread with this ID currently existing. Create a convo first', str(response.content))
 
-    
+    def test_valid_thread(self):
+        self.msg = create_message(self.thread1, self.user1, self.user2)
+        response = self.client.get(self.url)  # Should not redirect anywhere else
+        self.assertEqual(response.status_code, 200)
+        self.assertIn('Your conversation with', str(response.content))
+
+
