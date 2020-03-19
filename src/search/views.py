@@ -6,6 +6,9 @@ from django.core.paginator import Paginator
 
 
 def searchView(request):
+    """This view is initiated by the search-button. When this button is pressed the input in the serach field with name
+    'q' is sent to this view. This input field is used to filter the advertisement objects. """
+    
     query = request.GET.get('q')    # receiving the query from input field name='q'
 
     # search the database title and body
