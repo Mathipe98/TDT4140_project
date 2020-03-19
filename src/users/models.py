@@ -77,19 +77,6 @@ class Ads(models.Model):
         managed = False
         db_table = 'ads'
 
-class Thread(models.Model):
-    threadid = models.AutoField(db_column='threadID', primary_key=True)  # Field name made lowercase.
-    user1 = models.ForeignKey('Users', models.DO_NOTHING, db_column='user1',related_name="user1")
-    user2 = models.ForeignKey('Users', models.DO_NOTHING, db_column='user2',related_name="user2")
-
-    class Meta:
-        managed = False
-        db_table = 'thread'
-        app_label = "users"
-
-    def __str__(self):
-        return self.user1,self.user2;
-
 
 class AuthGroup(models.Model):
     name = models.CharField(unique=True, max_length=150)
@@ -219,33 +206,6 @@ class ImagesInAd(models.Model):
         managed = False
         db_table = 'images_in_ad'
         unique_together = (('imageid', 'adid'),)
-
-
-class Messages(models.Model):
-    messageid = models.AutoField(db_column='messageID', primary_key=True)  # Field name made lowercase.
-    message = models.TextField()
-    sent = models.DateTimeField(blank=True, null=True)
-    thread = models.ForeignKey('Thread', models.DO_NOTHING, db_column='thread')
-    sentto = models.ForeignKey('Users', models.DO_NOTHING, db_column='sentTo',related_name="message_sent_to")  # Field name made lowercase.
-    sentfrom = models.ForeignKey('Users', models.DO_NOTHING, db_column='sentFrom',related_name="message_sent_from")  # Field name made lowercase.
-
-    class Meta:
-        managed = False
-        db_table = 'messages'
-
-    def __str__(self):
-        return self.message
-
-
-class Ratings(models.Model):
-    rated = models.ForeignKey('Users', models.DO_NOTHING, db_column='rated',related_name="user_rated")
-    ratedby = models.ForeignKey('Users', models.DO_NOTHING, db_column='ratedBy',related_name="user_rated_by")  # Field name made lowercase.
-    score = models.IntegerField()
-
-    class Meta:
-        managed = False
-        db_table = 'ratings'
-        unique_together = (('rated', 'ratedby'),)
 
 
 class SellyoshitProduct(models.Model):
