@@ -4,7 +4,6 @@ from django.db import migrations
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ('stats', '0001_initial'),
     ]
@@ -12,6 +11,7 @@ class Migration(migrations.Migration):
     operations = [
         migrations.AlterModelOptions(
             name='objectviewed',
-            options={'ordering': ['-timestamp'], 'verbose_name': 'Object viewed', 'verbose_name_plural': 'Objects viewed'},
+            options={'ordering': ['-timestamp'], 'verbose_name': 'Object viewed',
+                     'verbose_name_plural': 'Objects viewed'},
         ),
     ]

@@ -1,5 +1,3 @@
-
-
 def get_client_ip(request):
     """Method for getting ip-address"""
     x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')

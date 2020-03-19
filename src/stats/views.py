@@ -1,10 +1,12 @@
-from django.shortcuts import render, redirect
-from django.http import JsonResponse
-from django.core import serializers
-from ads.models import Advertisement
-from users.models import Users
 from datetime import timedelta
 from statistics import mean
+
+from django.core import serializers
+from django.http import JsonResponse
+from django.shortcuts import render, redirect
+
+from ads.models import Advertisement
+from users.models import Users
 
 
 def statistics_page(request):
