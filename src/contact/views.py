@@ -62,7 +62,7 @@ def view_conversation(request, pk):
     user_from, user_to, thread = determine_users_from_thread_id(user, pk)
     if user_from is None:  # Method returned redirect
         return redirect('home')
-    test = "User 1: " + str(user_from.userid) + " User 2: " + str(user_to.userid)
+    text = "Send a message to " + user_to.username
     # Thread.objects.get_or_create(user1=user1,user2=user2)
     # threadUser = Thread.objects.get(user1=user1,user2=user2)
     # test = "User 1: " + str(user1.userid) + " User 2: " + str(user2.userid) + " " + str(threadUser)
@@ -73,7 +73,7 @@ def view_conversation(request, pk):
             return redirect('view-threads', thread.threadid)
     else:
         form = MessageForm
-    return render(request, "sellyoshit/contact.html", {'test': test, 'form': form})
+    return render(request, "sellyoshit/contact.html", {'text': text, 'form': form})
 
 
 def thread_view(request, thread_id=-1):
