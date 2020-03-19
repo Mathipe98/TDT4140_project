@@ -1,60 +1,60 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Dashboard with Flexmonster</title>
+{% extends 'sellyoshit/base.html' %}
+{% block title %}Dashboard with Flexmonster{% endblock %}
+{% load static %}
+
+{% block extra_head %}
     <script src="https://cdn.flexmonster.com/flexmonster.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-    <link rel="stylesheet" href="https://cdn.flexmonster.com/demo.css">
+    <!--<link rel="stylesheet" href="https://cdn.flexmonster.com/demo.css">-->
     <style>
-        /* Charts Style  */
+    /* Charts Style  */
 
-        .fm-charts-color-1 {
-            fill: #ffa600 !important;
-        }
-
-        .fm-charts-color-2 {
-            fill: #7eae26 !important;
-        }
-
-        .fm-charts-color-3 {
-            fill: #00a45a !important;
-        }
-
-        .fm-charts-color-4 {
-            fill: #df3800 !important;
-        }
-
-        .fm-charts-color-5 {
-            fill: #e95800 !important;
-        }
-
-        .fm-charts-color-6 {
-            fill: #ffa600 !important;
-        }
-    </style>
-</head>
-<body>
-<div id="user-count">
-    <h2><strong> Total number of site users: {{users_count}} </strong></h2>
-    <h2><strong> Total number of sold items: {{sold_items_count}} </strong></h2>
-    <h2><strong> Total number of site advertisements: {{advertisements_count}} </strong></h2>
-    <h2><strong> Average sell time of advertisements: {{average_sell_time}} </strong></h2>
-    <hr>
-</div>
-
-<div data-url="{% url 'pivot_data' %}" id="pivot-table-container"></div>
-<div id="pivot-chart-container"></div>
-<script>
-
-    function processData(dataset) {
-        const result = [];
-        dataset = JSON.parse(dataset);
-        dataset.forEach(item => result.push(item.fields));
-        return result;
+    .fm-charts-color-1 {
+      fill: #ffa600 !important;
     }
 
-    $.ajax({
+    .fm-charts-color-2 {
+      fill: #7eae26 !important;
+    }
+
+    .fm-charts-color-3 {
+      fill: #00a45a !important;
+    }
+
+    .fm-charts-color-4 {
+      fill: #df3800 !important;
+    }
+
+    .fm-charts-color-5 {
+      fill: #e95800 !important;
+    }
+
+    .fm-charts-color-6 {
+      fill: #ffa600 !important;
+    }
+</style>
+{% endblock %}
+{% block content %}
+<body>
+    <div id="user-count">
+        <h2> <strong> Total number of site users: {{users_count}} </strong> </h2>
+        <h2> <strong> Total number of sold items: {{sold_items_count}} </strong> </h2>
+        <h2> <strong> Total number of site advertisements: {{advertisements_count}} </strong> </h2>
+        <h2> <strong> Average sell time of advertisements: {{average_sell_time}} </strong> </h2>
+        <hr>
+    </div>
+
+    <div id="pivot-table-container" data-url="{% url 'pivot_data' %}"></div>
+    <div id="pivot-chart-container"></div>
+<script>
+
+function processData(dataset) {
+    var result = []
+    dataset = JSON.parse(dataset);
+    dataset.forEach(item => result.push(item.fields));
+    return result;
+}
+$.ajax({
         url: $("#pivot-table-container").attr("data-url"),
         dataType: 'json',
         success: function (data) {
@@ -77,29 +77,29 @@
                                 "type": "number"
                             },
                             "seller": {
-                                "caption": "Seller"
-                            }
+                            "caption": "Seller"
+                             }
                         }
                     },
                     slice: {
                         "rows": [{
-                            "uniqueName": "product_name"
-                        }],
-                        "columns": [{
+                        "uniqueName": "product_name"
+                    }],
+                    "columns": [{
                             "uniqueName": "price"
                         },
-                            {
-                                "uniqueName": "[Measures]"
-                            }
-                        ],
-                        "measures": [{
+                        {
+                            "uniqueName": "[Measures]"
+                        }
+                    ],
+                    "measures": [{
                             "uniqueName": "sold",
                             "aggregation": "sum"
                         },
-                            {
-                                "uniqueName": "seller",
-                                "aggregation": "sum"
-                            }]
+                        {
+                            "uniqueName": "seller",
+                            "aggregation": "sum"
+                        }]
                     }
                 }
             });
@@ -108,12 +108,12 @@
                 componentFolder: "https://cdn.flexmonster.com/",
                 width: "100%",
                 height: 430,
-                toolbar: true,
+                //toolbar: true,
                 report: {
                     dataSource: {
                         type: "json",
                         data: processData(data),
-                        mapping: {
+                         mapping: {
                             "created_date": {
                                 "caption": "Date created"
                             },
@@ -124,17 +124,17 @@
                         }
                     },
                 },
-                slice: {},
-                "options": {
-                    "viewType": "charts",
-                    "chart": {
-                        "type": "pie"
+                    slice: {},
+                    "optons": {
+                        "viewType": "charts",
+                        "chart": {
+                            "type": "pie"
+                        }
                     }
-                }
 
             });
         }
-    });
+});
 </script>
 </body>
-</html>
+{% endblock %}
