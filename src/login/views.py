@@ -2,14 +2,14 @@ from django.core.paginator import Paginator
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate, logout
 
-from ads.models import Advertisement
+from ads.models import Advertisement, Category
 from users.models import Thread
 from .forms import SignupForm, LoginForm
 
 
 # Create your views here.
 def signup(request):
-    context = {}
+    context = {'categories': Category.objects.all()}
     if request.POST:
         form = SignupForm(request.POST)
         if form.is_valid():
@@ -28,7 +28,7 @@ def signup(request):
 
 
 def log_in(request):
-    context = {}
+    context = {'categories': Category.objects.all()}
 
     user = request.user
     if user.is_authenticated:
@@ -53,6 +53,7 @@ def log_out(request):
     logout(request)
     return redirect('home')
 
+
 def ademin(request):
     user = request.user
     if user.is_authenticated:
@@ -62,6 +63,7 @@ def ademin(request):
             return redirect('home')
     else:
         return redirect('home')
+
 
 def my_page(request):
     user = request.user
@@ -74,7 +76,9 @@ def my_page(request):
     page_obj = paginator.get_page(page_number)
 
     context = {'products': page_obj.object_list,
-               'page_obj': page_obj}
+               'page_obj': page_obj,
+               'categories': Category.objects.all()
+    }
 
     return render(request,'sellyoshit/mypage.html',context)
 

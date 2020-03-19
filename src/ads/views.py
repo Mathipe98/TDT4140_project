@@ -23,12 +23,12 @@ def create_ad(request):
             ad.save()
             return redirect('specific_ad', ad.pk)
     form = AdvertisementForm
-    return render(request, "ads/create_ad.html", {'form': form})
+    return render(request, "ads/create_ad.html", {'form': form, 'categories': Category.objects.all()})
 
 
 def advertisements_view(request):
     my_ads = Advertisement.objects.all()
-    return render(request, 'ads/advertisement_view.html', {'ads': my_ads})
+    return render(request, 'ads/advertisement_view.html', {'ads': my_ads, 'categories': Category.objects.all()})
 
 
 def show_specific_ad(request, pk):
@@ -39,7 +39,7 @@ def show_specific_ad(request, pk):
     if user.is_authenticated:
         if user == ad.seller or user.admin:
             return render(request, 'ads/advertisement_owner.html', {'ad': ad, 'categories': Category.objects.all()})
-    return render(request, 'ads/advertisement.html', {'ad': ad})
+    return render(request, 'ads/advertisement.html', {'ad': ad,'categories': Category.objects.all()})
 
 
 def edit_ad(request, pk):
@@ -58,7 +58,7 @@ def edit_ad(request, pk):
             return redirect('specific_ad', pk=ad.pk)
     else:
         form = AdvertisementForm(instance=ad)
-    return render(request, 'ads/create_ad.html', {'form': form})
+    return render(request, 'ads/create_ad.html', {'form': form, 'categories': Category.objects.all()})
 
 
 def delete_ad(request, pk):
