@@ -1,3 +1,16 @@
+"""
+Display different sites all relating to the usage of advertisements
+
+Functions:
+
+    sell_ad(request, pk) -> redirect
+    create_ad(request) -> redirect/render
+    show_specific_ad(request, pk) -> render
+    edit_ad(request, pk) -> redirect/render
+    delete_ad(request, pk) -> redirect
+
+"""
+
 from django.contrib.auth import authenticate
 from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
@@ -11,77 +24,109 @@ from django.contrib.auth.models import User
 from .models import Advertisement, Category
 
 
-def sold_ad(request, pk):
+def sell_ad(request, pk):
+    """
+    Marks an ad as sold and records the time, after validating the user. Returns a redirect to the homepage.
+
+    :param request: A django HttpRequest object. The session of the user.
+    :param pk: Primary key of the requested ad. Passed into the view via the url.
+    :return:
+        redirect: A redirect with the homepage as destination
+    """
     user = request.user
-    ad = get_object_or_404(Advertisement, pk=pk)
-    print(user.is_authenticated)
-    if user.is_authenticated:
-        print("hello world")
-        if user == ad.seller:
-            print("we got here")
+    ad = get_object_or_404(Advertisement, pk=pk)  # Either gives the request ad, or a 404 page if the ad is not found
+    if user.is_authenticated:  # Checks whether the user is logged in
+        if user == ad.seller or user.admin:  # Checks if the user is the owner of the ad or an admin user
             ad.sold_date = timezone.now()
             ad.sold = True
-            ad.save()
-    return redirect("home")
-
+            ad.save()  # Saves the updates to the advertisement model
+    return redirect("home")  # Redirects the user to the homepage using the 'home' view
 
 
 def create_ad(request):
+    """
+    Displays a page for creating a new ad. Redirects the user to it after creating it.
+
+    :param request: A django HttpRequest object. The session of the user.
+    :return:
+        redirect (POST): A path to the created ad.
+        render (GET): A render of the creation-page with a form for input
+    """
     user = request.user
-    if not user.is_authenticated:
-        return redirect('ads_view')
-    if request.method == "POST":
-        form = AdvertisementForm(request.POST, request.FILES)  # initial={"header_picture": "default.png"})
-        if form.is_valid():
-            ad = form.save(commit=False)
+    if not user.is_authenticated:  # Checks whether the user is logged in
+        return redirect('home')  # If not, redirect to the homepage
+    if request.method == "POST":  # If the user is accessing the page via POST
+        form = AdvertisementForm(request.POST, request.FILES)  # TODO: Explain request.FILES
+        if form.is_valid():  # Checks the validity of the input of the form's fields
+            ad = form.save(commit=False)  # TODO: Explain this line
             ad.seller = user
-            ad.publish()
-            ad.save()
-            return redirect('specific_ad', ad.pk)
-    form = AdvertisementForm
+            ad.publish()  # Calls on the advertisement model's publish method, recording time of creation
+            ad.save()  # Saves the model to the database
+            return redirect('specific_ad', ad.pk)  # Redirects the user to the newly created ad
+    form = AdvertisementForm  # Creates a new form for the advertisement model
     return render(request, "ads/create_ad.html", {'form': form, 'categories': Category.objects.all()})
-
-
-
-def advertisements_view(request):
-    my_ads = Advertisement.objects.all()
-    return render(request, 'ads/advertisement_view.html', {'ads': my_ads, 'categories': Category.objects.all()})
+    # Renders the create_ad HTML page with the newly created form, as well as sending in all the available categories
+    # (all categories that currently exist in the database)
 
 
 def show_specific_ad(request, pk):
-    user = request.user
-    # pk is passed from urls to this view. Must be identically named
+    """
+    Returns a render of a page displaying the currently requested ad.
+
+    :param request: A django HttpRequest object. The session of the user.
+    :param pk: Primary key of the requested ad. Passed into the view via the url.
+    :return:
+        render: A render with the advertisement.html file and the requested ad object
+    """
     ad = get_object_or_404(Advertisement, pk=pk)
-    # get_object_or_404 either gives object with pk or a 404 not found
-    if user.is_authenticated:
-        if user == ad.seller or user.admin:
-            return render(request, 'ads/advertisement_owner.html', {'ad': ad, 'categories': Category.objects.all()})
-    return render(request, 'ads/advertisement.html', {'ad': ad,'categories': Category.objects.all()})
+    # get_object_or_404 either returns the requested object or a 404 not found
+    return render(request, 'ads/advertisement.html', {'ad': ad, 'categories': Category.objects.all()})
+    # Renders advertisement.html with the requested ad, as well as all available categories
 
 
 def edit_ad(request, pk):
-    ad = get_object_or_404(Advertisement, pk=pk)
+    """
+    View for letting the user change information on an already created ad.
+
+    :param request: A django HttpRequest object. The session of the user.
+    :param pk: Primary key of the requested ad. Passed into the view via the url.
+    :return:
+        redirect (POST) : Redirect to the edited ad's page.
+        render (GET) :  Render of the creation page with the information of the requested ad filled in.
+    """
+    ad = get_object_or_404(Advertisement, pk=pk)  # Either gives the request ad, or a 404 page if the ad is not found
     user = request.user
-    if not user.is_authenticated:
-        if not user == ad.seller:
-            return redirect('specific_ad', ad.pk)
-    if request.method == "POST":
+    if not user.is_authenticated:  # Checks whether the user is logged in
+        if not user == ad.seller:  # Checks whether the user is the owner of the ad
+            return redirect('specific_ad', ad.pk)  # Redirects to the ad's default page
+    if request.method == "POST":  # If the view is being called with POST
         form = AdvertisementForm(request.POST, request.FILES, instance=ad)
-        if form.is_valid():
-            ad = form.save(commit=False)
+        # TODO: Explain this line
+        if form.is_valid():  # Checks the validity of the input of the form's fields
+            ad = form.save(commit=False)  # TODO: Explain this line
             ad.author = request.user
-            ad.published_date = timezone.now()
-            ad.save()
-            return redirect('specific_ad', pk=ad.pk)
+            ad.published_date = timezone.now()  # TODO: Remove this line?
+            ad.save()  # Saves the ad to the database
+            return redirect('specific_ad', pk=ad.pk)  # Redirects to the ad's default page
     else:
-        form = AdvertisementForm(instance=ad)
+        form = AdvertisementForm(instance=ad)  # Creates a form with the requested ad's current information filled in
     return render(request, 'ads/create_ad.html', {'form': form, 'categories': Category.objects.all()})
+    # Renders create_ad with the form already containing the requested ad's current info,
+    # as well as all available categories
 
 
 def delete_ad(request, pk):
-    ad = get_object_or_404(Advertisement, pk=pk)
+    """
+    View for deleting a requested ad. Returns redirect to homepage.
+
+    :param request: A django HttpRequest object. The session of the user.
+    :param pk: Primary key for the requested advertisement
+    :return:
+        redirect: A redirect to the homepage
+    """
+    ad = get_object_or_404(Advertisement, pk=pk)  # Either gives the request ad, or a 404 page if the ad is not found
     user = request.user
-    if user.is_authenticated:
-        if user == ad.seller or user.admin:
-            ad.delete()
-    return redirect('home')
+    if user.is_authenticated:  # Checks whether the user is logged in
+        if user == ad.seller or user.admin:  # Checks whether the user is the owner of the ad or an admin
+            ad.delete()  # Deletes the ad from the database
+    return redirect('home')  # Redirects the user to the homepage of the site
