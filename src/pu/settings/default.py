@@ -151,7 +151,8 @@ MEDIA_ROOT = os.path.join(BASE_DIR, '../media')
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, '../static')
 
-# All folders where django search for static files, e.g. css, fonts, js, images...
+# All folders where django search for static files, e.g. css, fonts, js,
+# images...
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, '../static/css'),
     os.path.join(BASE_DIR, '../static/js'),
