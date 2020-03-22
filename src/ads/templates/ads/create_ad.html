@@ -1,16 +1,30 @@
 {% extends 'sellyoshit/base.html' %}
+<!-- This means the HTML file inherits everything from base.html. Code added to blocks from base.html will
+show up where they are declared in the super class-->
+
 {% load crispy_forms_tags %}
-{% block title %}My Title{% endblock %}
+{% block title %}
+    <!-- Start of the title part from base.html -->
+    Create/Update an Ad
+{% endblock %}
+<!-- End of title -->
+
 {% load static %}
+<!-- Loads files from static folders. Necessary for CSS -->
 {% block extra_head %}
+    <!-- Start of the extra_head part from base.html -->
     <link href="{% static 'style.css' %}" rel="stylesheet"/>
 {% endblock %}
+<!-- End of extra_head -->
+
 {% block content %}
+    <!-- Start of the content part from base.html -->
     <h2><strong>Create new ad</strong>
-            <br>
+        <br>
     </h2>
     <form method="post" enctype="multipart/form-data">{% csrf_token %}
-        {{ form|crispy }}
-    <button class="btn btn-primary" type="submit"> Publish ad</button>
+        {{ form|crispy }}  <!-- Uses the crispy package to nicely display the form for an ad in the browser -->
+    <button class="btn btn-primary" type="submit"> Publish ad</button>  <!-- The button which sends the form via POST -->
     </form>
 {% endblock %}
+<!-- end of content -->
