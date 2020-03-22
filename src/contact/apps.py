@@ -1,3 +1,5 @@
+# TODO: Add docstring
+
 from django.apps import AppConfig
 
 

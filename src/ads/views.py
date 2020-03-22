@@ -1,13 +1,18 @@
 """
-Display different sites all relating to the usage of advertisements
+Display different web pages all relating to the usage of advertisements
 
 Functions:
 
-    sell_ad(request, pk) -> redirect
-    create_ad(request) -> redirect/render
-    show_specific_ad(request, pk) -> render
-    edit_ad(request, pk) -> redirect/render
-    delete_ad(request, pk) -> redirect
+    sell_ad(request, pk) : redirect
+        Marks an ad as sold and records the time, after validating the user. Returns a redirect to the homepage.
+    create_ad(request) : redirect (POST) / render (GET)
+        Displays a page for creating a new ad. Redirects the user to it after creating it.
+    show_specific_ad(request, pk) : render
+        Returns a render of a page displaying the currently requested ad.
+    edit_ad(request, pk) : redirect (POST) / render (GET)
+         Lets the user change information on an already created ad.
+    delete_ad(request, pk) : redirect
+        View for deleting a requested ad. Returns redirect to homepage.
 
 """
 

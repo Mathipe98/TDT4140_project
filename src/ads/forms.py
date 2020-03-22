@@ -2,8 +2,9 @@
     Form for creating/changing the Advertisement model
 
     classes:
-        AdvertisementForm : Form which allows you to create/change the product_name, product_description, price,
-        header_picture and category of an Advertisement.
+        AdvertisementForm : ModelForm
+            Form which allows you to create/change the product_name, product_description, price,
+            header_picture and category of an Advertisement.
 """
 
 from django import forms

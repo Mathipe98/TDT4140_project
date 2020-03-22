@@ -43,6 +43,9 @@
                 <!-- The href references the edit_ad view, and sends the advertisement's primary key as an argument -->
                 <a class="btn btn-primary" href="{% url 'delete_ad' pk=ad.pk %}" role="button">Delete ad</a>
                 <!-- The href references the delete_ad view, and sends the advertisement's primary key as an argument -->
+                {% if ad.sold == 0 %} <!-- If the ad has not been marked as sold yet -->
+                    <a class="btn btn-primary" href="{% url 'sold_ad' pk=ad.pk %}" role="button">Sold</a>
+                {% endif %}
             {% endif %}
             {% if user != ad.seller %}
                 <!-- Code below will run if the user is not the owner -->
