@@ -6,16 +6,15 @@
         TestStatisticsPageInput
 """
 
-from datetime import datetime
-
-from django.test import SimpleTestCase
+from django.db.models import BooleanField, DateTimeField
+from django.test import TestCase
 
 from ads.models import Advertisement
 from stats.views import statistics_context
 from users.models import Users
 
 
-class TestUsersAttributes(SimpleTestCase):
+class TestUsersAttributes(TestCase):
     """ This class tests if the Users class has the correct attributes """
 
     def test_if_class_has_objects_attribute(self):
@@ -31,7 +30,7 @@ class TestUsersAttributes(SimpleTestCase):
         self.assertIsInstance(Users.objects.all().count(), int)
 
 
-class TestAdvertisementAttributes(SimpleTestCase):
+class TestAdvertisementAttributes(TestCase):
     """ This class tests if the Advertisement class has the correct attributes """
 
     def test_if_class_has_objects_attribute(self):
@@ -50,22 +49,22 @@ class TestAdvertisementAttributes(SimpleTestCase):
         self.assertTrue(hasattr(Advertisement, 'sold'))
 
     def test_if_sold_attribute_is_bool(self):
-        self.assertIsInstance(Advertisement.sold, bool)
+        self.assertIsInstance(Advertisement._meta.get_field('sold'), BooleanField)
 
     def test_if_class_has_sold_date_attribute(self):
         self.assertTrue(hasattr(Advertisement, 'sold_date'))
 
     def test_if_sold_date_attribute_is_datetime(self):
-        self.assertIsInstance(Advertisement.sold_date, datetime)
+        self.assertIsInstance(Advertisement._meta.get_field('sold_date'), DateTimeField)
 
     def test_if_class_has_published_date_attribute(self):
         self.assertTrue(hasattr(Advertisement, 'published_date'))
 
     def test_if_published_date_attribute_is_datetime(self):
-        self.assertIsInstance(Advertisement.published_date, datetime)
+        self.assertIsInstance(Advertisement._meta.get_field('published_date'), DateTimeField)
 
 
-class TestStatisticsPageInput(SimpleTestCase):
+class TestStatisticsPageInput(TestCase):
     """ This class tests the validity of the context input fields shown in the statistics page """
 
     def test_users_count_validity(self):
