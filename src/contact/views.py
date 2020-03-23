@@ -164,13 +164,14 @@ def thread_view(request, thread_id=-1):
 
     threads = []  # List for storing all threads, used for sidebar in html
     current_messages = []  # List for storing messages for current thread
-    for message in messages:  # Reverses order of the messages so that most recent is displayed furthest down
+    for message in messages.reverse():  # Reverses order of the messages so that most recent is displayed furthest down
         parent_thread = message.thread
         #  Finds the thread that the message belongs to by using the foreign key in message
         if parent_thread not in threads:  # If thread has not been recorded yet
             threads.append(parent_thread)
         if parent_thread == current_thread:
             current_messages.append(message)  # The message is part of the thread we are looking for
+    current_messages.reverse()
     user_from, user_to, thread = determine_users_from_thread_id(user, current_thread.pk)
     if user_from is None:  # Method returned redirect
         return redirect('home')
