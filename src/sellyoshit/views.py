@@ -7,8 +7,9 @@ from django.contrib.auth import login
 from django.shortcuts import render, redirect
 from stats.signals import object_viewed_signal
 
-"""View for showing all ads and paginating them over multiple pages"""
+
 def products(request):
+    """View for showing all ads and paginating them over multiple pages"""
     products = Advertisement.objects.all().filter(sold=False).order_by('-created_date')
     paginator = Paginator(products, 6)  # Show X products per page
 
@@ -22,9 +23,9 @@ def products(request):
 
     return render(request, 'sellyoshit/product_listEXT.html', context)
 
-"""View for showing a specific ad"""
+
 def ad(request, pk):
+    """View for showing a specific ad"""
     ad = Advertisement.objects.get(pk=pk)
     context = {'ad': ad}
     return render(request, 'sellyoshit/product_details.html', context)
-
