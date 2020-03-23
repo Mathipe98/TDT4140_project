@@ -1,3 +1,9 @@
+""" Django set up of valid site URLs for Django views
+
+    Variables:
+        urlpatterns (list): Valid urls and the views function called upon use
+"""
+
 from django.urls import path
 
 from . import views

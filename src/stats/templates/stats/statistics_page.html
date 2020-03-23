@@ -1,60 +1,71 @@
 {% extends 'sellyoshit/base.html' %}
+<!-- Inherit all formatting from base.html -->
+
 {% block title %}Dashboard with Flexmonster{% endblock %}
+<!-- Set the title for the page -->
+
 {% load static %}
+<!-- Load CSS formatting and style -->
 
 {% block extra_head %}
-    <script src="https://cdn.flexmonster.com/flexmonster.js"></script>
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-    <!--<link rel="stylesheet" href="https://cdn.flexmonster.com/demo.css">-->
-    <style>
+<script src="https://cdn.flexmonster.com/flexmonster.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<!--<link rel="stylesheet" href="https://cdn.flexmonster.com/demo.css">-->
+<style>
     /* Charts Style  */
 
     .fm-charts-color-1 {
-      fill: #ffa600 !important;
+        fill: #ffa600 !important;
     }
 
     .fm-charts-color-2 {
-      fill: #7eae26 !important;
+        fill: #7eae26 !important;
     }
 
     .fm-charts-color-3 {
-      fill: #00a45a !important;
+        fill: #00a45a !important;
     }
 
     .fm-charts-color-4 {
-      fill: #df3800 !important;
+        fill: #df3800 !important;
     }
 
     .fm-charts-color-5 {
-      fill: #e95800 !important;
+        fill: #e95800 !important;
     }
 
     .fm-charts-color-6 {
-      fill: #ffa600 !important;
+        fill: #ffa600 !important;
     }
 </style>
 {% endblock %}
+<!-- Set the colors for use on Flexmonster tables and charts -->
+
 {% block content %}
 <body>
-    <div id="user-count">
-        <h2> <strong> Total number of site users: {{users_count}} </strong> </h2>
-        <h2> <strong> Total number of sold items: {{sold_items_count}} </strong> </h2>
-        <h2> <strong> Total number of site advertisements: {{advertisements_count}} </strong> </h2>
-        <h2> <strong> Average sell time of advertisements: {{average_sell_time}} </strong> </h2>
-        <hr>
-    </div>
+<div id="user-count">
+    <h2><strong> Total number of site users: {{users_count}} </strong></h2>
+    <h2><strong> Total number of sold items: {{sold_items_count}} </strong></h2>
+    <h2><strong> Total number of site advertisements: {{advertisements_count}} </strong></h2>
+    <h2><strong> Average sell time of advertisements: {{average_sell_time}} </strong></h2>
+    <hr>
+</div>
+<!-- Display relevant statistics on site users and advertisements -->
 
-    <div id="pivot-table-container" data-url="{% url 'pivot_data' %}"></div>
-    <div id="pivot-chart-container"></div>
+<div data-url="{% url 'pivot_data' %}" id="pivot-table-container"></div>
+<div id="pivot-chart-container"></div>
+<!-- Set up container for site data -->
+
 <script>
 
-function processData(dataset) {
-    var result = []
-    dataset = JSON.parse(dataset);
-    dataset.forEach(item => result.push(item.fields));
-    return result;
-}
-$.ajax({
+    function processData(dataset) {
+        var result = [];
+        dataset = JSON.parse(dataset);
+        dataset.forEach(item => result.push(item.fields));
+        return result;
+    } <!-- Parse JSON data into a list of data fields -->
+
+    $.ajax({
         url: $("#pivot-table-container").attr("data-url"),
         dataType: 'json',
         success: function (data) {
@@ -77,32 +88,33 @@ $.ajax({
                                 "type": "number"
                             },
                             "seller": {
-                            "caption": "Seller"
-                             }
+                                "caption": "Seller"
+                            }
                         }
                     },
                     slice: {
                         "rows": [{
-                        "uniqueName": "product_name"
-                    }],
-                    "columns": [{
+                            "uniqueName": "product_name"
+                        }],
+                        "columns": [{
                             "uniqueName": "price"
                         },
-                        {
-                            "uniqueName": "[Measures]"
-                        }
-                    ],
-                    "measures": [{
+                            {
+                                "uniqueName": "[Measures]"
+                            }
+                        ],
+                        "measures": [{
                             "uniqueName": "sold",
                             "aggregation": "sum"
                         },
-                        {
-                            "uniqueName": "seller",
-                            "aggregation": "sum"
-                        }]
+                            {
+                                "uniqueName": "seller",
+                                "aggregation": "sum"
+                            }]
                     }
                 }
-            });
+            }); <!-- Create a new Flexmonster table with the site statistics as data source -->
+
             new Flexmonster({
                 container: "#pivot-chart-container",
                 componentFolder: "https://cdn.flexmonster.com/",
@@ -113,7 +125,7 @@ $.ajax({
                     dataSource: {
                         type: "json",
                         data: processData(data),
-                         mapping: {
+                        mapping: {
                             "created_date": {
                                 "caption": "Date created"
                             },
@@ -124,17 +136,17 @@ $.ajax({
                         }
                     },
                 },
-                    slice: {},
-                    "optons": {
-                        "viewType": "charts",
-                        "chart": {
-                            "type": "pie"
-                        }
+                slice: {},
+                "options": {
+                    "viewType": "charts",
+                    "chart": {
+                        "type": "pie"
                     }
+                }
 
-            });
+            }); <!-- Create another Flexmonster table with the site statistics as data source -->
         }
-});
+    });
 </script>
 </body>
 {% endblock %}

@@ -1,3 +1,11 @@
+""" Django views functions used for displaying stats site data
+
+    Functions:
+        statistics_pages
+        statistics_context
+        pivot_data
+"""
+
 from datetime import timedelta
 from statistics import mean
 
@@ -10,6 +18,14 @@ from users.models import Users
 
 
 def statistics_page(request):
+    """ Checks if the user is authorized, and redirects to home page or renders the statistics page appropriately
+
+        Parameters:
+            request (class): A Django request object
+
+        Returns:
+            HttpResponse (class) or HttpResponseRedirect (class): Django HTTP response objects
+    """
     user = request.user
     if not user.is_authenticated:
         return redirect('home')
@@ -20,6 +36,12 @@ def statistics_page(request):
 
 
 def statistics_context():
+    """ Returns relevant statistics based on current site users and advertisements
+
+        Returns:
+            context (dict): Contains counts of site users, advertisements and
+                            number of sold items, as well as average sell time of items
+    """
     users, ads = Users.objects.all(), Advertisement.objects.all()
     sold_items_count = len([ad for ad in ads if ad.sold])
     average_sell_seconds = mean([(ad.sold_date - ad.published_date).total_seconds() for ad in ads if ad.sold_date])
@@ -32,6 +54,14 @@ def statistics_context():
 
 
 def pivot_data(request):
+    """ Serializes and returns the data of all Advertisement objects as a JSON response
+
+            Parameters:
+                request (class): A Django request object
+
+            Returns:
+                JsonResponse (class): A Django JSON HTTP response object containing all Advertisement data
+        """
     dataset = Advertisement.objects.all()
     data = serializers.serialize('json', dataset)
     return JsonResponse(data, safe=False)
