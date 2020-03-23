@@ -1,11 +1,7 @@
+from django.core.paginator import Paginator
 from django.shortcuts import render
 
 from ads.models import Advertisement, Category
-from django.core.paginator import Paginator
-from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth import login
-from django.shortcuts import render, redirect
-from stats.signals import object_viewed_signal
 
 """View for showing all ads and paginating them over multiple pages"""
 def products(request):
