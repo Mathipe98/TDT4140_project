@@ -44,8 +44,12 @@ def statistics_context():
     """
     users, ads = Users.objects.all(), Advertisement.objects.all()
     sold_items_count = len([ad for ad in ads if ad.sold])
-    average_sell_seconds = mean([(ad.sold_date - ad.published_date).total_seconds() for ad in ads if ad.sold_date])
-    average_sell_time = str(timedelta(seconds=average_sell_seconds)).split('.')[0]
+    sold_ads = [ad for ad in ads if ad.sold_date]
+    if sold_ads:
+        average_sell_seconds = mean([(ad.sold_date - ad.published_date).total_seconds() for ad in sold_ads])
+        average_sell_time = str(timedelta(seconds=average_sell_seconds)).split('.')[0]
+    else:
+        average_sell_time = 'N/A'
     context = {'users_count': users.count(),
                'advertisements_count': ads.count(),
                'sold_items_count': sold_items_count,
