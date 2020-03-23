@@ -9,7 +9,8 @@ from stats.signals import object_viewed_signal
 
 
 def products(request):
-    """View for showing all ads and paginating them over multiple pages"""
+    """View for showing all ads that are not sold, ordering them by date created
+    and paginating them over multiple pages"""
     products = Advertisement.objects.all().filter(sold=False).order_by('-created_date')
     paginator = Paginator(products, 6)  # Show X products per page
 
