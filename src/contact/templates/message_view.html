@@ -81,11 +81,14 @@
   </div>
 </div>
     <script>
+
+    //Checks a star if the user has already been rated
     window.onload = function () {
         if ({{ rating.score }} != 0)
         {
              document.getElementById("_"+ {{ rating.score }} ).checked = true;
         }
     }
+
     </script>
 {% endblock %}

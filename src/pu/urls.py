@@ -36,7 +36,6 @@ urlpatterns = [
     path('signup/', lv.signup, name='signup'),
     path('login/', lv.log_in, name='login'),
     path('logout/', lv.log_out, name='logout'),
-    path('ademin/', lv.ademin, name='ademin'),
     path('mypage/', lv.my_page, name='mypage'),
     path('ads/', include('ads.urls'), name='Advertisements'),
     path('results/', sv.searchView, name='search_results'),

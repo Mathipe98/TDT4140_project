@@ -53,16 +53,6 @@ def log_out(request):
     logout(request)
     return redirect('home')
 
-def ademin(request):
-    user = request.user
-    if user.is_authenticated:
-        if user.admin:
-            return render(request,'sellyoshit/admin.html',{})
-        else:
-            return redirect('home')
-    else:
-        return redirect('home')
-
 def my_page(request):
     user = request.user
     if not user.is_authenticated:
