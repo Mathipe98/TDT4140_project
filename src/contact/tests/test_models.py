@@ -48,6 +48,3 @@ class ThreadTestCase(TestCase):
         """Tests the publish method found in Messages. Returns None"""
         self.message.publish()
         self.assertGreater(self.message.sent.microsecond, timezone.now().microsecond - 2000)  # Takes some mS to execute
-
-
-

@@ -16,4 +16,3 @@ urlpatterns = [
     path('<int:pk>/delete/', av.delete_ad, name='delete_ad'),
     path('<int:pk>/update/', av.sell_ad, name='sold_ad')
 ]
-

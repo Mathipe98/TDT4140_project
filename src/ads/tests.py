@@ -63,4 +63,4 @@ class TestForms(TestCase):
         })
 
         self.assertFalse(form.is_valid())
-        self.assertEquals(len(form.errors), 4)      # checks that all 4 errors occurred for missing fields
+        self.assertEquals(len(form.errors), 4)  # checks that all 4 errors occurred for missing fields

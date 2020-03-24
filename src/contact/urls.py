@@ -8,6 +8,7 @@
 
 from django.urls import path
 from . import views as cv
+
 urlpatterns = [
     path('contact/<int:pk>/', cv.create_conversation, name='contact_user'),
     # <int:pk> means that any integer passed into the url will be passed into the view's pk parameter
