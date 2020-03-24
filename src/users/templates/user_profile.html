@@ -1,14 +1,19 @@
 {% extends 'sellyoshit/base.html' %}
+<!-- This means the HTML file inherits everything from base.html. Code added to blocks from base.html will
+ show up where they are declared in the super class-->
 {% block content %}
+<!-- Start of the content block found in base.html -->
+
 <div class="user_prof">
-  <div class="card w-75">
+  <div class="card w-75"> <!-- Bootstrap card that holds the user information -->
     <div class="card-body">
       <h5 class="card-title">{{user.username}}</h5>
       <p class="card-text">Welcome to {{user.firstname}} {{user.lastname}}'s profile</p>
       <p class="card-text">Email: {{user.email}}</p>
-      {% if request.user.is_authenticated %}
-      {% if request.user != user %}
+      {% if request.user.is_authenticated %} <!-- If the user is logged in -->
+      {% if request.user != user %} <!-- If the user requesting the site is not the owner of the profile. Display a contact button -->
       <a href="{% url 'contact_user' pk=user.pk %}" class="btn btn-primary" style="height: 40px;">Contact {{user.username}}</a>
+      <!-- href references contact_user view found i views.py -->
       {% endif %}
       {% endif %}
         <!-- Displays the users average rating and how many ratings they have -->
@@ -27,3 +32,4 @@
   </div>
 </div>
 {% endblock %}
+<!-- End of content block -->
