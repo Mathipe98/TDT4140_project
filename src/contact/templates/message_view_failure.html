@@ -1,7 +1,12 @@
 {% extends 'sellyoshit/base.html' %}
+<!-- This means the HTML file inherits everything from base.html. Code added to blocks from base.html will
+ show up where they are declared in the super class-->
+
 {% block content %}
-  <h2>{{message}}</h2>
+<!-- Start of the content block found in base.html -->
+  <h2>{{message}}</h2> <!-- The error code that was sent to when the user requested the page -->
   <h2>
-  <a href="{% url 'home' %}">Go back</a>
+  <a href="{% url 'home' %}">Go back</a> <!-- Calls on the 'home' url in PU/urls, displays homepage -->
   </h2>
 {% endblock %}
+<!-- End of content block -->

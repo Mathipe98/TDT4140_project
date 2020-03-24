@@ -1,7 +1,12 @@
 {% extends 'sellyoshit/base.html' %}
+<!-- This means the HTML file inherits everything from base.html. Code added to blocks from base.html will
+ show up where they are declared in the super class-->
 {% load crispy_forms_tags %}
+
 {% load static %}
+<!-- Loads files from static folders. Necessary for CSS -->
 {% block content %}
+<!-- Start of the content block found in base.html -->
 
 
 <div class="row no-gutters w-100">
@@ -12,7 +17,7 @@
         <!-- Iterates through each thread and creates a box with a link to that thread -->
         {% for thread in threads %}
         <li class="list-group-item">
-            {% if thread.user1 == user %}
+            {% if thread.user1 == user %} <!-- Figures out which user is which, and links to the other user in convo -->
             <a href="{% url 'view-threads' thread_id=thread.pk %}" id="message-card-link-user2">
               {{thread.user2.username}}
             </a>
@@ -23,7 +28,7 @@
             {% endif %}
           </a>
         </li>
-        {% endfor %}
+        {% endfor %} <!-- End of the for block, everything between will be displayed for each iteration -->
       </ul>
     </div>
   </div>
@@ -31,7 +36,7 @@
   <div class="col-10 order-2">
     <div class="alert alert-secondary" style="min-height: 800px;">
         <p><div style="display: inline;">Your conversation with:
-          {% if current_thread.user1 == user %}
+          {% if current_thread.user1 == user %} <!-- Determines which user is which -->
           {{current_thread.user2.username}}
           {% else %}
           {{current_thread.user1.username}}
@@ -61,7 +66,7 @@
       <div id="scrollbar_messages" style="border-top:1px solid gray;border-bottom:1px solid gray;overflow-y: auto;height: 640px;">
         {% for message in current_messages %}
         <p style="font-size: x-small;" id="message_sent_date">{{message.sent}}:
-          {% if message.sentfrom == user %}
+          {% if message.sentfrom == user %} <!-- Determines whether it displays 'You' or the other's users name in front of msg -->
           <br>
           <strong style="color: #519fff; font-size: 15px;">You: </strong>{{message.message}}
           {% else %}
@@ -74,8 +79,8 @@
       </div>
         <!-- Form for sending a message in this thread -->
         <form method="post">{% csrf_token %}
-           {{ form.message|as_crispy_field }}
-          <button class="btn btn-primary" type="submit">Send message</button>
+           {{ form.message|as_crispy_field }} <!-- The message form displayed as a field via crispy library -->
+          <button class="btn btn-primary" type="submit">Send message</button> <!-- Button that submits the form data -->
         </form>
     </div>
   </div>
@@ -92,3 +97,4 @@
 
     </script>
 {% endblock %}
+<!-- End of content block -->
