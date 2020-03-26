@@ -6,7 +6,8 @@ from django.urls import reverse, resolve
 from sellyoshit.views import products, ad
 
 # models imports
-from sellyoshit.models import Product
+from ads.models import Category, Advertisement
+from users.models import Users
 
 
 class TestUrls(SimpleTestCase):
@@ -45,12 +46,20 @@ class TestViews(TestCase):
         self.assertTemplateUsed(response, 'sellyoshit/product_listEXT.html')
 
     def test_ad_GET(self):
-        product_car = Product.objects.create(
-            name='Car',
-            price=10.00,
-            image='default'
+        credentials = {
+            'username': 'Georgyyy',
+            'email': 'georgyboy@gmail.com',
+            'password': 'a2bC90PqL345',
+            'firstname': 'George',
+            'lastname': 'Mc Twist'}
+        seller = Users.objects.create_user(**credentials)
+        category = Category.objects.create(name='TestCategory')
+        product_car = Advertisement.objects.create(
+            product_name="Car",
+            product_description="Car",
+            seller=seller,
+            category=category
         )
-
         # response from the detail page for ad corresponding to product_car object
         response = self.client.get(reverse('shop:details', kwargs={'pk': product_car.pk}))
         self.assertEquals(response.status_code, 200)
