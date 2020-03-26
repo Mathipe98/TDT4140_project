@@ -1,14 +1,35 @@
+"""
+    Displays different webpages related to login and registration
+
+    Functions
+        signup(request) : redirect (POST) / render (GET)
+            Renders a registration form users can sign up with. Log ins after user is registered and redirect to home
+        log_in(request) : redirect (POST) / render (GET)
+            Renders a log in form registered users can log in with and redirect to home
+        log_out(request) : redirect
+            Logs out user and redirect to home
+        my_page(request) : render
+            Renders a page displaying the logged in user's ads
+
+"""
+
 from django.core.paginator import Paginator
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate, logout
 
 from ads.models import Advertisement, Category
-#from users.models import Thread
 from .forms import SignupForm, LoginForm
 
 
-# Create your views here.
 def signup(request):
+    """
+    Renders a registration form users can sign up with. Log ins after user is registered and redirect to home
+
+    :param request: A django HttpRequest object. The session of the user.
+    :return:
+        redirect: Redirects to home after user is registered
+        render: Renders the registration form in the file log_inEXT.html
+    """
     context = {'categories': Category.objects.all()}
     if request.POST:
         form = SignupForm(request.POST)
@@ -28,6 +49,14 @@ def signup(request):
 
 
 def log_in(request):
+    """
+    Renders a log in form registered users can log in with and redirect to home
+
+    :param request: A django HttpRequest object. The session of the user.
+    :return:
+        redirect: Redirects to home after loggin in the user
+        render: Renders the log in form in the file log_inEXT.html
+    """
     context = {'categories': Category.objects.all()}
 
     user = request.user
@@ -50,10 +79,26 @@ def log_in(request):
 
 
 def log_out(request):
+    """
+    Logs out user and redirect to home
+
+    :param request: A django HttpRequest object. The session of the user.
+    :return:
+        redirect: Redirects to home after logging out the user
+    """
     logout(request)
     return redirect('home')
 
+
 def my_page(request):
+    """
+    Renders a page displaying the logged in user's ads
+
+    :param request: A django HttpRequest object. The session of the user.
+    :return:
+        redirect: Redirects to home if the user if not logged in
+        render: Renders the logged in user's ad in the file mypage.html
+    """
     user = request.user
     if not user.is_authenticated:
         return redirect('home')
@@ -66,7 +111,6 @@ def my_page(request):
     context = {'products': page_obj.object_list,
                'page_obj': page_obj,
                'categories': Category.objects.all()
-    }
+               }
 
-    return render(request,'sellyoshit/mypage.html',context)
-
+    return render(request, 'sellyoshit/mypage.html', context)
