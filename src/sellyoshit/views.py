@@ -12,7 +12,6 @@ Functions:
         and paginating them over multiple pages
     ad(request, pk) : render
         View for showing a specific ad
-    
 
 """
 
