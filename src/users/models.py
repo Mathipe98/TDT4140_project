@@ -4,7 +4,7 @@ from django.db import models
 
 class UserManager(BaseUserManager):
     """
-    A model for the model Users
+    A manager for the model Users
 
     functions
         create_user : user
