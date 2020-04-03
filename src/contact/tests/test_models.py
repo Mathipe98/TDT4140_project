@@ -44,7 +44,7 @@ class ThreadTestCase(TestCase):
         """Tests that the thread id cannot be 0 or negative. Returns None"""
         self.assertGreater(self.thread.get_threadid(), 0)
 
-    def test_publish(self):  # TODO: Move to another class?
+    def test_publish(self):
         """Tests the publish method found in Messages. Returns None"""
         self.message.publish()
         self.assertGreater(self.message.sent.microsecond, timezone.now().microsecond - 2000)  # Takes some mS to execute

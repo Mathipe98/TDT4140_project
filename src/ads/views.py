@@ -61,9 +61,9 @@ def create_ad(request):
     if not user.is_authenticated:  # Checks whether the user is logged in
         return redirect('home')  # If not, redirect to the homepage
     if request.method == "POST":  # If the user is accessing the page via POST
-        form = AdvertisementForm(request.POST, request.FILES)  # TODO: Explain request.FILES
-        if form.is_valid():  # Checks the validity of the input of the form's fields
-            ad = form.save(commit=False)  # TODO: Explain this line
+        form = AdvertisementForm(request.POST, request.FILES)  
+        if form.is_valid():
+            ad = form.save(commit=False)  # Returns an object that has not been saved to db yet (commit=false)
             ad.seller = user
             ad.publish()  # Calls on the advertisement model's publish method, recording time of creation
             ad.save()  # Saves the model to the database
@@ -84,7 +84,7 @@ def show_specific_ad(request, pk):
         render: A render with the advertisement.html file and the requested ad object
     """
     ad = get_object_or_404(Advertisement, pk=pk)
-    # get_object_or_404 either returns the requested object or a 404 not found
+    # Either returns the requested object or a 404 not found
     return render(request, 'ads/advertisement.html', {'ad': ad, 'categories': Category.objects.all()})
     # Renders advertisement.html with the requested ad, as well as all available categories
 
@@ -106,11 +106,11 @@ def edit_ad(request, pk):
             return redirect('specific_ad', ad.pk)  # Redirects to the ad's default page
     if request.method == "POST":  # If the view is being called with POST
         form = AdvertisementForm(request.POST, request.FILES, instance=ad)
-        # TODO: Explain this line
+        # Creates a form with ad's info already filled in
         if form.is_valid():  # Checks the validity of the input of the form's fields
-            ad = form.save(commit=False)  # TODO: Explain this line
+            ad = form.save(commit=False)  # Returns an object that has not been saved to db yet (commit=false)
             ad.author = request.user
-            ad.published_date = timezone.now()  # TODO: Remove this line?
+            ad.published_date = timezone.now()
             ad.save()  # Saves the ad to the database
             return redirect('specific_ad', pk=ad.pk)  # Redirects to the ad's default page
     else:

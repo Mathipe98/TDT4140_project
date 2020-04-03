@@ -85,7 +85,7 @@ class Advertisement(models.Model):
     class Meta:
         """ Meta class for Advertisement"""
         managed = True  # Whether or not the model is added to the database
-        app_label = 'ads'  # TODO: Explain this line
+        app_label = 'ads'  # Declares that it belongs to the 'ads' app. 
 
     def __str__(self):
         """Returns toString for Advertisement model"""

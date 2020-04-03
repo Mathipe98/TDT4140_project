@@ -150,13 +150,6 @@ class TestConversation(SetUp):
         self.assertEqual(response.url, '/')
 
 
-class TestMessages(SetUp):  # TODO: Remove?
-
-    def setUp(self):
-        super().setUp()
-        self.thread = create_thread(self.user1.pk, self.user2.pk)
-
-
 class TestDetermineUsers(SetUp):
     """
     Tests that the helper method determine_users_from_thread in views works as intended

@@ -70,7 +70,7 @@ def save_msg_form(form, current_thread, user_to, user_from):
     :return: None
     """
     if form.is_valid():  # Checks that the input in the form is valid
-        messages = form.save(commit=False)  # TODO: Explain line
+        messages = form.save(commit=False)  # Returns an object that has not been saved to db yet (commit=false)
         messages.thread = current_thread
         messages.sentto = user_to
         messages.sentfrom = user_from
@@ -95,7 +95,7 @@ def create_conversation(request, pk):
     # Returns either the requested User object or renders a 404 page if not found
     if user_from == user_to:  # Stops you from sending messages to yourself
         return redirect("home")
-    if user_from.pk < pk:  # TODO: Explain line
+    if user_from.pk < pk:
         user1 = user_from
         user2 = user_to
     else:
@@ -108,7 +108,17 @@ def create_conversation(request, pk):
 
 
 def send_message(request, pk):
-    # TODO: Docstring
+    """
+    View for sending an initial message to a user via contact
+
+    :param request: A django HttpRequest object. The session of the user.
+    :param pk: Primary key of the user receiving the message
+    :return:
+        redirect (POST/failed validation)
+            A redirect, either to home (failed validation) or to the thread_view with an updated thread (successful)
+        render
+            A render of contact.html with a message form to send to another user
+    """
     user = request.user  # The user requesting the page
     if not user.is_authenticated:  # If the user is not logged in
         return redirect('home')  # Redirects to home page
