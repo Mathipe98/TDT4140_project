@@ -1,4 +1,4 @@
-# SellYoShit
+# SellYo'Shit
 
 [![pipeline status](https://gitlab.stud.idi.ntnu.no/tdt4140-2020/52/badges/master/pipeline.svg)](https://gitlab.stud.idi.ntnu.no/tdt4140-2020/52/-/commits/master)
 [![coverage report](https://gitlab.stud.idi.ntnu.no/tdt4140-2020/52/badges/master/coverage.svg)](https://gitlab.stud.idi.ntnu.no/tdt4140-2020/52/-/commits/master)
@@ -9,7 +9,7 @@
 <!-- number of commits --> 
 <!-- license --> 
 
-SellYoShit is an application for selling your things online, written in Python 3.7 using the Django framework.
+SellYo'Shit is an application for selling your things online, written in Python 3.7 using the Django framework.
 
 
 ## Motivation
