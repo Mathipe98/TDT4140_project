@@ -100,4 +100,4 @@ The following students have contributed to this project:
 
 ## License
 
-...
+This project uses the [MIT](https://choosealicense.com/licenses/mit/) license.
