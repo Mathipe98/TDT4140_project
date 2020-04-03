@@ -73,11 +73,33 @@ Replace `<directory>` with the module name (`ads`, `contact`, `login`, `search`,
 
 ## Usage
 
-Authenticate use of GitLab servers by connecting through NTNU's [VPN](https://innsida.ntnu.no/wiki/-/wiki/English/Install+vpn). Input **vpn.ntnu.no** in the Cisco AnyConnect text field, click Connect, input your NTNU user credentials, and click OK and Accept. Next, run the Django server:
+### Connecting to GitLab
+
+Authenticate use of GitLab servers by connecting through NTNU's [VPN](https://innsida.ntnu.no/wiki/-/wiki/English/Install+vpn). Input **vpn.ntnu.no** in the Cisco AnyConnect text field, click Connect, input your NTNU user credentials, and click OK and Accept.
+
+
+### Running the server
+
+Next, run the Django server:
 
 ```
 python manage.py runserver
 ```
+
+### Adding database categories
+
+Run the following commands in order to activate the interactive Python Console and create advertisement categories for the application:
+
+```
+py manage.py shell
+from ads.models import Category
+Category.objects.create(name=<category name>)
+```
+
+Replace `<category name>` with your desired category name. Run the last line for each category to be added.
+
+
+### Accessing the application web page
 
 Finally, open your preferred browser and go to the locally hosted web page by entering the following URL in the address bar:
 ```
