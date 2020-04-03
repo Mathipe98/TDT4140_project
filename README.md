@@ -78,7 +78,16 @@ http://127.0.0.1:8000/
 
 ## Contributors
 
-...
+The following students have contributed to this project:
+
+- Alf Berger Husem ([alfbhu@stud.ntnu.no](mailto:alfbhu@stud.ntnu.no))
+- Giske Naper Freberg ([giskenf@stud.ntnu.no](mailto:giskenf@stud.ntnu.no))
+- Mathias Pettersen ([mathipe@stud.ntnu.no](mailto:mathipe@stud.ntnu.no))
+- Mathias Sørensen ([mathiaws@stud.ntnu.no](mailto:mathiaws@stud.ntnu.no))
+- Simon Blindheim ([simon.blindheim@ntnu.no](mailto:simon.blindheim@ntnu.no))
+- Sivert Hognes ([siverhog@stud.ntnu.no](mailto:siverhog@stud.ntnu.no))
+- Thor-Herman van Eggelen ([theggele@stud.ntnu.no](mailto:theggele@stud.ntnu.no))
+
 
 ## License
 
