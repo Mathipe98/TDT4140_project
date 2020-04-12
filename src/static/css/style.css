@@ -13,29 +13,6 @@ img[type="ad"] {
   grid-template-columns: auto auto auto;
 }
 
-/*
-h1 {
-  text-align: center;
-  font-family: "Roboto", "Lucida Grande", "DejaVu Sans", "Bitstream Vera Sans", Verdana, Arial, sans-serif;
-  font-size: 50px;
-  transform: skewY(-10deg);
-  letter-spacing: 4px;
-  word-spacing: -8px;
-  color: mediumblue;
-  text-shadow:
-    -1px -1px 0 skyblue,
-    -2px -2px 0 skyblue,
-    -3px -3px 0 skyblue,
-    -4px -4px 0 skyblue,
-    -5px -5px 0 skyblue,
-    -6px -6px 0 skyblue,
-    -7px -7px 0 skyblue,
-    -8px -8px 0 skyblue,
-    -30px 20px 40px dimgrey;
-}
- */
-
-
 h1 {
     color: #ff0110;
   text-shadow: 0 1px 0 #ccc,

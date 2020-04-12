@@ -3,7 +3,7 @@ from django.test import TestCase, Client
 from django.urls import reverse, resolve
 from django.test import SimpleTestCase
 from django import forms
-from .views import searchView
+from .views import search_view
 from ads.forms import AdvertisementForm
 from django.test.client import RequestFactory
 
@@ -25,7 +25,7 @@ class TestSearch(TestCase):
     def test_search_result(self):
         """Try to search for Car advertisement, check for response"""
         request = self.factory.get('/results/?q=Car')
-        response = searchView(request)
+        response = search_view(request)
         self.assertEqual(response.status_code, 200)
 
 

@@ -23,7 +23,7 @@ class TestUrls(SimpleTestCase):
         self.assertEquals(resolve(url).func, products)
 
     def test_ad_url_resolves(self):
-        url = reverse('shop:details', kwargs={'pk': 1})     # details for ad number 1, specified by kwargs argument
+        url = reverse('shop:details', kwargs={'pk': 1})  # details for ad number 1, specified by kwargs argument
         self.assertEquals(resolve(url).func, ad)
 
 

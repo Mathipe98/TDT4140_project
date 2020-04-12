@@ -2,6 +2,7 @@ from django.core.paginator import Paginator
 from django.shortcuts import render
 
 from ads.models import Advertisement, Category
+
 """
 Django views that make up an intuitive browsable site with multiple pages 
 
@@ -14,6 +15,7 @@ Functions:
         View for showing a specific ad
 
 """
+
 
 def products(request):
     """
