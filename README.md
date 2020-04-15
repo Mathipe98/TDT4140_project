@@ -76,6 +76,16 @@ Replace `<directory>` with the module name (`ads`, `contact`, `login`, `search`,
 
 ## Usage
 
+### Creating a system administrator
+
+Generate a Django "superuser" with all administrator permissions:
+
+```
+python manage.py createsuperuser
+```
+
+Input desired admin username and password when prompted, and confirm the password.
+
 ### Adding a default advertisement image
 
 Add an image with the file name `default.png` into the folder `src/media/ads`. This image will be shown for each advertisement if no picture is added by the seller.
