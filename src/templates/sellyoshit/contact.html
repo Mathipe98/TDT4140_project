@@ -2,8 +2,10 @@
 {% load crispy_forms_tags %}
 {% load static %}
 {% block content %}
+    <!-- displaying text input field in the message page -->
     {{ text }}
     <form method="post">{% csrf_token %}
+        <!-- the text input is submitted by the 'send message' button -->
          {{ form|crispy }}
         <button class="btn btn-primary" type="submit">Send message</button>
     </form>
