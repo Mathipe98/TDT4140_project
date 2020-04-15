@@ -19,7 +19,11 @@ This group project is developed for the NTNU course [TDT4140 Software Engineerin
 
 ## Features
 
-...
+- Establish your own account
+- Create and publish your own ads
+- Browse and search for ads of your interest
+- Contact and communicate with sellers
+- Rate other sellers in the application
 
 
 ## Prerequisites
