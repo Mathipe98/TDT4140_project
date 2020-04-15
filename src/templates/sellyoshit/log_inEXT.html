@@ -6,14 +6,17 @@
     <link href="{% static 'style.css' %}" rel="stylesheet"/>
 {% endblock %}
 {% block content %}
+    <!-- the form displayed in this html is determined by whether login or register is requested -->
+    
     {% if request.path == '/login/' %}
+    <!-- Display login form -->
     <h2>Logg inn</h2>
     <form method="post">{% csrf_token %}
         {% for field in login_form %}
           <div class="form-group">
             {{ field|as_crispy_field }}
 
-
+            <!-- this loop displays errors if they occur because of wrong inputs -->
             {% for error in field.error %}
                 <small style="color:red;">{{ error }}</small>
             {% endfor %}
@@ -27,14 +30,16 @@
         {% endfor %}
         <button class="btn btn-primary" type="submit">Login</button>
     </form>
+    
     {% elif request.path == '/signup/'%}
+    <!-- Display register form -->
     <h2>Register</h2>
     <form method="POST">{% csrf_token %}
         {% for field in signup_form %}
             <div class="form-group">
             {{ field|as_crispy_field }}
 
-
+            <!-- this loop displays errors if they occur because of wrong inputs -->
             {% for error in field.error %}
                 <p>{{ error }}</p>
                 {% endfor %}
