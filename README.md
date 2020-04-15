@@ -77,6 +77,10 @@ Replace `<directory>` with the module name (`ads`, `contact`, `login`, `search`,
 
 ## Usage
 
+### Adding a default advertisement image
+
+Add an image with the file name `default.png` into the folder `src/media/ads`. This image will be shown for each advertisement if no picture is added by the seller.
+
 ### Connecting to GitLab
 
 Authenticate use of GitLab servers by connecting through NTNU's [VPN](https://innsida.ntnu.no/wiki/-/wiki/English/Install+vpn). Input **vpn.ntnu.no** in the Cisco AnyConnect text field, click Connect, input your NTNU user credentials, and click OK and Accept.
