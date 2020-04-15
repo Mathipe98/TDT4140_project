@@ -84,7 +84,7 @@ Generate a Django "superuser" with all administrator permissions:
 python manage.py createsuperuser
 ```
 
-Input desired admin username and password when prompted, and confirm the password.
+Input desired admin username and password when prompted, and confirm the password. This superuser is also initiated as an administrator account for the application website.
 
 ### Adding a default advertisement image
 
