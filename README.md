@@ -92,14 +92,23 @@ To use this configuration you must have access to a [NTNU user account](https://
 python manage.py migrate
 ```
 
-### 3. Running the server
-Next, make sure that you're still connected to the VPN and then run the Django server:
+### 3. Creating a system administrator
+Generate a Django "superuser" with all administrator permissions:
+
+```
+python manage.py createsuperuser
+```
+
+Input desired admin username and password when prompted, and confirm the password. This superuser is also initiated as an administrator account for the application website.
+
+### 4. Running the server
+Next, run the Django server:
 
 ```
 python manage.py runserver
 ```
 
-### 4. Accessing the application web page
+### 5. Accessing the application web page
 Finally, open your preferred browser and go to the locally hosted web page by entering the following URL in the address bar:
 ```
 http://127.0.0.1:8000/
@@ -116,6 +125,7 @@ python manage.py test <directory>
 Replace `<directory>` with the module name (`ads`, `contact`, `login`, `search`, `sellyoshit`, `stats`, or `users`).
 
 Be aware that running the tests without being connected to a database will cause errors. If you are using the preconfigured database you must also be connected to NTNU's [VPN](https://innsida.ntnu.no/wiki/-/wiki/English/Install+vpn) in order to run the tests.
+
 
 ## Usage
 
