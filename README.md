@@ -24,6 +24,21 @@ This group project is developed for the NTNU course [TDT4140 Software Engineerin
 - Contact and communicate with sellers
 - Rate other sellers in the application
 
+## Code style
+- [PEP8](https://www.python.org/dev/peps/pep-0008/) conventions for Python code
+- [PEP257](https://www.python.org/dev/peps/pep-0257/) conventions for docstrings documentation
+
+Additionally, the [Inspection checklist](https://gitlab.stud.idi.ntnu.no/tdt4140-2020/52/uploads/9ee820e5ca3316d6f3dc375178e39e10/Inspection_checklist.pdf) is used for specific standards related to this product. 
+
+## Screenshots
+![home_page](https://gitlab.stud.idi.ntnu.no/tdt4140-2020/52/uploads/7386ea9bf69e796df9702e2094fea049/home_page.PNG) 
+
+<br><br>
+![message](https://gitlab.stud.idi.ntnu.no/tdt4140-2020/52/uploads/ec7c99a82a1977c668dcb2cfbd1c1fb6/message_rm.png)
+
+Image 1: Home page
+
+Image 2: Message page
 
 ## Prerequisites
 
