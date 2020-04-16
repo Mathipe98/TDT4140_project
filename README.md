@@ -28,7 +28,7 @@ This group project is developed for the NTNU course [TDT4140 Software Engineerin
 - [PEP8](https://www.python.org/dev/peps/pep-0008/) conventions for Python code
 - [PEP257](https://www.python.org/dev/peps/pep-0257/) conventions for docstrings documentation
 
-Additionally, the [Inspection checklist](https://gitlab.stud.idi.ntnu.no/tdt4140-2020/52/uploads/9ee820e5ca3316d6f3dc375178e39e10/Inspection_checklist.pdf) is used for specific standards related to this product. 
+Additionally, the [Inspection checklist](https://gitlab.stud.idi.ntnu.no/tdt4140-2020/52/uploads/9ee820e5ca3316d6f3dc375178e39e10/Inspection_checklist.pdf) is used to control specific standards related to this product before merge. 
 
 ## Screenshots
 ![home_page](https://gitlab.stud.idi.ntnu.no/tdt4140-2020/52/uploads/7386ea9bf69e796df9702e2094fea049/home_page.PNG) 
@@ -142,7 +142,7 @@ python manage.py runserver
 Run the following commands in order to activate the interactive Python Console and create advertisement categories for the application:
 
 ```
-py manage.py shell
+python manage.py shell
 from ads.models import Category
 Category.objects.create(name=<category name>)
 ```
