@@ -95,7 +95,15 @@ class Users(AbstractBaseUser):
     def is_staff(self):
         """Only users with field admin = True will have permission to enter django admin page"""
         return self.admin
+        
+    @staticmethod
+    def has_module_perms(app_label):
+        return True
 
+    @staticmethod
+    def has_perm(perm, obj=None):
+        return True
+        
     class Meta:
         managed = True
         db_table = 'users'
