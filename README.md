@@ -63,6 +63,42 @@ pip install -r requirements.txt
 cd src
 ```
 
+## Database configuration
+
+You can either connect to the preconfigured MySQL database through NTNU's [VPN](https://innsida.ntnu.no/wiki/-/wiki/English/Install+vpn) or configure your own MySQL database with the product.
+
+### Connecting to the preconfigured database
+
+To use this configuration you must have access to a [NTNU user account](https://innsida.ntnu.no/wiki/-/wiki/English/Create+a+user+account). 
+
+1. Authenticate use of GitLab servers by connecting through NTNU's [VPN](https://innsida.ntnu.no/wiki/-/wiki/English/Install+vpn).
+2. Input **vpn.ntnu.no** in the Cisco AnyConnect text field, click Connect. 
+3. Input your NTNU user credentials, and click OK and Accept.
+4. Navigate to `default.py` located in `src/pu/settings`, and make sure that the database is correctly configured according to the code block below:
+```python
+DATABASES = {
+    'default:' {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'siverhog_sellyoshit',
+        'USER': 'siverhog_gruppe52',
+        'PASSWORD': 'ShAhGfMpMsTe',
+        'HOST': 'mysql.stud.ntnu.no',
+        'PORT': '3306',
+        'TEST': {
+            'CHARSET': 'utf8'      
+    }
+}
+```
+
+### Connection to your own MySQL database
+
+1. Navigate to `default.py` located in `src/pu/settings`
+2. Modify `DATABASES = {}` according to your own database settings. More specific instructions can be found [here](https://docs.djangoproject.com/en/3.0/ref/settings/#databases).
+3. Run the following command in your virtual environment to configure your database with the product:
+```
+python manage.py migrate
+```
+
 ## Tests
 
 Run the Django test suite to validate the implementation of each module:
@@ -89,10 +125,6 @@ Input desired admin username and password when prompted, and confirm the passwor
 ### Adding a default advertisement image
 
 Add an image with the file name `default.png` into the folder `src/media/ads`. This image will be shown for each advertisement if no picture is added by the seller.
-
-### Connecting to GitLab
-
-Authenticate use of GitLab servers by connecting through NTNU's [VPN](https://innsida.ntnu.no/wiki/-/wiki/English/Install+vpn). Input **vpn.ntnu.no** in the Cisco AnyConnect text field, click Connect, input your NTNU user credentials, and click OK and Accept.
 
 
 ### Running the server
