@@ -135,8 +135,6 @@ Category.objects.create(name=<category name>)
 
 Replace `<category name>` with your desired category name. Run the last line for each category to be added. 
 
-To be able to create new ads there must exist at least one category.
-
 ## Contributors
 
 The following students have contributed to this project:
