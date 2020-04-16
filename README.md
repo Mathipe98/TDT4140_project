@@ -39,6 +39,8 @@ Download and install the latest version of [Git](https://www.linode.com/docs/dev
 
 ## Installation
 
+### 1. Cloning the repository and creating a virtual environment
+
 The source code of the application is hosted at [GitLab](https://gitlab.stud.iie.ntnu.no/tdt4140-2020/52). Download the project repository and enter it by running the following commands in your preferred shell (CMD/PowerShell in Windows, Bash in Mac/Linux):
 
 ```
@@ -68,11 +70,11 @@ pip install -r requirements.txt
 cd src
 ```
 
-## Database configuration
+### 2. Configuration of the database
 
 You can either connect to the preconfigured database created on the NTNU server or configure your own database with the product.
 
-### Connecting to the preconfigured database
+**Connecting to the preconfigured database**
 
 To use this configuration you must have access to a [NTNU user account](https://innsida.ntnu.no/wiki/-/wiki/English/Create+a+user+account). 
 
@@ -81,13 +83,26 @@ To use this configuration you must have access to a [NTNU user account](https://
 3. Input your NTNU user credentials, and click OK and Accept.
 
 
-### Connection to your own database
+**Connection to your own database**
 
 1. Navigate to `default.py` located in `src/pu/settings`
 2. Modify the dictionary `DATABASES = {}` according to your own database settings. More specific instructions can be found [here](https://docs.djangoproject.com/en/3.0/ref/settings/#databases).
 3. Run the following command in your virtual environment to configure your database with the product:
 ```
 python manage.py migrate
+```
+
+### 3. Running the server
+Next, run the Django server:
+
+```
+python manage.py runserver
+```
+
+### 4. Accessing the application web page
+Finally, open your preferred browser and go to the locally hosted web page by entering the following URL in the address bar:
+```
+http://127.0.0.1:8000/
 ```
 
 ## Tests
@@ -104,28 +119,9 @@ Be aware that running the tests without being connected to a database will cause
 
 ## Usage
 
-### Creating a system administrator
-
-Generate a Django "superuser" with all administrator permissions:
-
-```
-python manage.py createsuperuser
-```
-
-Input desired admin username and password when prompted, and confirm the password. This superuser is also initiated as an administrator account for the application website.
-
 ### Adding a default advertisement image
 
 Add an image with the file name `default.png` into the folder `src/media/ads`. This image will be shown for each advertisement if no picture is added by the seller.
-
-
-### Running the server
-
-Next, run the Django server:
-
-```
-python manage.py runserver
-```
 
 ### Adding database categories
 
@@ -137,16 +133,9 @@ from ads.models import Category
 Category.objects.create(name=<category name>)
 ```
 
-Replace `<category name>` with your desired category name. Run the last line for each category to be added.
+Replace `<category name>` with your desired category name. Run the last line for each category to be added. 
 
-
-### Accessing the application web page
-
-Finally, open your preferred browser and go to the locally hosted web page by entering the following URL in the address bar:
-```
-http://127.0.0.1:8000/
-```
-
+To be able to create new ads there must exist at least one category.
 
 ## Contributors
 
