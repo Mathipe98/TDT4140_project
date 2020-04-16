@@ -72,7 +72,7 @@ cd src
 
 ### 2. Configuration of the database
 
-You can either connect to the preconfigured database created on the NTNU server or connect to your own MySQL database.
+You can either connect to the preconfigured database created on the NTNU server or connect to your own database.
 
 **Connecting to the preconfigured database**
 
@@ -84,6 +84,8 @@ To use this configuration you must have access to a [NTNU user account](https://
 
 
 **Connection to your own database**
+
+Your database must use MySQL og SQLite in order to work with this product. 
 
 1. Navigate to `default.py` located in `src/pu/settings`
 2. Modify the dictionary `DATABASES = {}` according to your own database settings. More specific instructions can be found [here](https://docs.djangoproject.com/en/3.0/ref/settings/#databases).
