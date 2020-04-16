@@ -65,7 +65,7 @@ cd src
 
 ## Database configuration
 
-You can either connect to a preconfigured database created on the NTNU server or configure your own database with the product.
+You can either connect to the preconfigured database created on the NTNU server or configure your own database with the product.
 
 ### Connecting to the preconfigured database
 
