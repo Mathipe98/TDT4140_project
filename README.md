@@ -93,7 +93,7 @@ python manage.py migrate
 ```
 
 ### 3. Running the server
-Next, run the Django server:
+Next, make sure that you're still connected to the VPN and then run the Django server:
 
 ```
 python manage.py runserver
