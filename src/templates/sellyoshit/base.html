@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="no">
 <head>
-    {% load static %}
-    <!-- Required meta tags -->
+    {% load static %} <!-- Loaded static files from src/static -->
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href="{% static 'navbarlogo.png' %}" rel="icon"  type="image/png">
@@ -12,6 +12,7 @@
 
     <!-- Icons -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    
     <link href="{% static 'style.css' %}" rel="stylesheet">
     {% block extra_head %}{% endblock %}
     <title>{% block title %}{% endblock %}SellYo'Shit</title>
@@ -40,6 +41,7 @@
                 SellYo'Shit
             </a>
             {% if request.user.is_authenticated %}
+            <!-- If user is authenticated, then fill the navigation bar with other content -->
                 <div class="collapse navbar-collapse mb-1">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item">
@@ -55,6 +57,7 @@
                         </li>
 
                         {% if request.user.admin %}
+                        <!-- If the user is an admin, then show statistics tab in the navigation bar -->
                             <li class="nav-item">
                                 <a class="nav-link" href="{% url 'statistics_page' %}">Statistics</a>
                             </li>
@@ -67,6 +70,7 @@
                     </ul>
                 </div>
             {% else %}
+            <!-- Navigation bar when user is not authenticated -->
                 <div class="collapse navbar-collapse mb-1">
                     <ul class="navbar-nav mr-auto">
 
@@ -85,6 +89,7 @@
             <form action="{% url 'search_results' %}" class="form-inline my-2 my-lg-0" method="GET">
                 <input aria-label="Search" class="form-control mr-sm-2" list="suggestions" name="q" placeholder="Search" type="search" value="{{request.GET.q}}">
                 <datalist id="suggestions">
+                    <!-- Fill the search bar with different categories according to db --> 
                     {% for field in categories %}
                     <option value="{{ field.name }}">
                     {% endfor %}

@@ -1,13 +1,12 @@
 # SellYo'Shit
 
-[![pipeline status](https://gitlab.stud.idi.ntnu.no/tdt4140-2020/52/badges/master/pipeline.svg)](https://gitlab.stud.idi.ntnu.no/tdt4140-2020/52/-/commits/master)
-[![coverage report](https://gitlab.stud.idi.ntnu.no/tdt4140-2020/52/badges/master/coverage.svg)](https://gitlab.stud.idi.ntnu.no/tdt4140-2020/52/-/commits/master)
-<!-- repo size --> 
-<!-- language distribution --> 
-<!-- code style pep8 --> 
-<!-- contributors --> 
-<!-- number of commits --> 
-<!-- license --> 
+[![platform](https://img.shields.io/badge/platform-windows%20%7C%20macos%20%7C%20linux-lightgrey)](https://gitlab.stud.idi.ntnu.no/tdt4140-2020/52/-/commits/master)
+[![python version](https://img.shields.io/badge/python-3.7-blue)](https://gitlab.stud.idi.ntnu.no/tdt4140-2020/52/-/commits/master)
+[![django version](https://img.shields.io/badge/django-3.0.2-blue)](https://gitlab.stud.idi.ntnu.no/tdt4140-2020/52/-/commits/master)
+[![size](https://img.shields.io/badge/size-128%20kB-blue)](https://gitlab.stud.idi.ntnu.no/tdt4140-2020/52/-/commits/master)
+[![license](https://img.shields.io/badge/license-MIT-green)](https://gitlab.stud.idi.ntnu.no/tdt4140-2020/52/-/commits/master)
+[![coverage](https://img.shields.io/badge/coverage-82%25-yellowgreen)](https://gitlab.stud.idi.ntnu.no/tdt4140-2020/52/-/commits/master)
+[![pipeline](https://gitlab.stud.idi.ntnu.no/tdt4140-2020/52/badges/master/pipeline.svg)](https://gitlab.stud.idi.ntnu.no/tdt4140-2020/52/-/commits/master)
 
 SellYo'Shit is an application for selling your things online, written in Python 3.7 using the Django framework.
 
@@ -19,7 +18,11 @@ This group project is developed for the NTNU course [TDT4140 Software Engineerin
 
 ## Features
 
-...
+- Establish your own account
+- Create and publish your own ads
+- Browse and search for ads of your interest
+- Contact and communicate with sellers
+- Rate other sellers in the application
 
 
 ## Prerequisites
@@ -60,6 +63,28 @@ pip install -r requirements.txt
 cd src
 ```
 
+## Database configuration
+
+You can either connect to the preconfigured database created on the NTNU server or configure your own database with the product.
+
+### Connecting to the preconfigured database
+
+To use this configuration you must have access to a [NTNU user account](https://innsida.ntnu.no/wiki/-/wiki/English/Create+a+user+account). 
+
+1. Authenticate use of GitLab servers by connecting through NTNU's [VPN](https://innsida.ntnu.no/wiki/-/wiki/English/Install+vpn).
+2. Input **vpn.ntnu.no** in the Cisco AnyConnect text field, click Connect. 
+3. Input your NTNU user credentials, and click OK and Accept.
+
+
+### Connection to your own database
+
+1. Navigate to `default.py` located in `src/pu/settings`
+2. Modify the dictionary `DATABASES = {}` according to your own database settings. More specific instructions can be found [here](https://docs.djangoproject.com/en/3.0/ref/settings/#databases).
+3. Run the following command in your virtual environment to configure your database with the product:
+```
+python manage.py migrate
+```
+
 ## Tests
 
 Run the Django test suite to validate the implementation of each module:
@@ -70,12 +95,23 @@ python manage.py test <directory>
 
 Replace `<directory>` with the module name (`ads`, `contact`, `login`, `search`, `sellyoshit`, `stats`, or `users`).
 
+Be aware that running the tests without being connected to a database will cause errors. If you are using the preconfigured database you must also be connected to NTNU's [VPN](https://innsida.ntnu.no/wiki/-/wiki/English/Install+vpn) in order to run the tests.
 
 ## Usage
 
-### Connecting to GitLab
+### Creating a system administrator
 
-Authenticate use of GitLab servers by connecting through NTNU's [VPN](https://innsida.ntnu.no/wiki/-/wiki/English/Install+vpn). Input **vpn.ntnu.no** in the Cisco AnyConnect text field, click Connect, input your NTNU user credentials, and click OK and Accept.
+Generate a Django "superuser" with all administrator permissions:
+
+```
+python manage.py createsuperuser
+```
+
+Input desired admin username and password when prompted, and confirm the password. This superuser is also initiated as an administrator account for the application website.
+
+### Adding a default advertisement image
+
+Add an image with the file name `default.png` into the folder `src/media/ads`. This image will be shown for each advertisement if no picture is added by the seller.
 
 
 ### Running the server

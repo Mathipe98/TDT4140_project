@@ -11,7 +11,10 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 </head>
 <body>
+    <!-- Shared html document for login form and register form dependent of the requested path -->
     <div class="container">
+        
+    <!-- Login form -->
     {% if request.path == '/login/' %}
     <h2>Logg inn</h2>
     <form method="post">{% csrf_token %}
@@ -19,7 +22,7 @@
           <div class="form-group">
             {{ field|as_crispy_field }}
 
-
+            <!-- display of errors if they occur because of wrong input -->
             {% for error in field.error %}
                 <small style="color:red;">{{ error }}</small>
             {% endfor %}
@@ -33,6 +36,8 @@
         {% endfor %}
         <button type="submit" class="btn btn-primary">Logg inn</button>
     </form>
+    
+    <!-- Register form -->
     {% elif request.path == '/signup/'%}
     <h2>Register</h2>
     <form method="POST">{% csrf_token %}
