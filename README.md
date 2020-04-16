@@ -65,7 +65,7 @@ cd src
 
 ## Database configuration
 
-You can either connect to the preconfigured MySQL database through NTNU's [VPN](https://innsida.ntnu.no/wiki/-/wiki/English/Install+vpn) or configure your own MySQL database with the product.
+You can either connect to a preconfigured database created on the NTNU server or configure your own database with the product.
 
 ### Connecting to the preconfigured database
 
@@ -74,26 +74,12 @@ To use this configuration you must have access to a [NTNU user account](https://
 1. Authenticate use of GitLab servers by connecting through NTNU's [VPN](https://innsida.ntnu.no/wiki/-/wiki/English/Install+vpn).
 2. Input **vpn.ntnu.no** in the Cisco AnyConnect text field, click Connect. 
 3. Input your NTNU user credentials, and click OK and Accept.
-4. Navigate to `default.py` located in `src/pu/settings`, and make sure that the database is correctly configured according to the code block below:
-```python
-DATABASES = {
-    'default:' {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'siverhog_sellyoshit',
-        'USER': 'siverhog_gruppe52',
-        'PASSWORD': 'ShAhGfMpMsTe',
-        'HOST': 'mysql.stud.ntnu.no',
-        'PORT': '3306',
-        'TEST': {
-            'CHARSET': 'utf8'      
-    }
-}
-```
 
-### Connection to your own MySQL database
+
+### Connection to your own database
 
 1. Navigate to `default.py` located in `src/pu/settings`
-2. Modify `DATABASES = {}` according to your own database settings. More specific instructions can be found [here](https://docs.djangoproject.com/en/3.0/ref/settings/#databases).
+2. Modify the dictionary `DATABASES = {}` according to your own database settings. More specific instructions can be found [here](https://docs.djangoproject.com/en/3.0/ref/settings/#databases).
 3. Run the following command in your virtual environment to configure your database with the product:
 ```
 python manage.py migrate
@@ -109,6 +95,7 @@ python manage.py test <directory>
 
 Replace `<directory>` with the module name (`ads`, `contact`, `login`, `search`, `sellyoshit`, `stats`, or `users`).
 
+Be aware that running the tests without being connected to a database will cause errors. If you are using the preconfigured database you must also be connected to NTNU's [VPN](https://innsida.ntnu.no/wiki/-/wiki/English/Install+vpn) in order to run the tests.
 
 ## Usage
 
