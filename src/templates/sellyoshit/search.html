@@ -1,18 +1,24 @@
 {% extends 'sellyoshit/base.html' %}
-
+<!-- This means the HTML file inherits everything from base.html. Code added to blocks from base.html will
+ show up where they are declared in the super class-->
 {% block content %}
+<!-- Start of the content block found in base.html -->
     <div class="grid">
        {% for item in products %}
+        <!-- Code below down to endfor will excecute for every item in products -->
             <div>
                 <a href="{% url 'specific_ad' pk=item.pk %}">
+                  <!-- Links to the urlpattern named specific_ad and passess item.pk as the pk -->
 
                     <img alt="Product ad" onerror="this.onerror=null;this.src='media/ads/default.png';"
                          src="{{ item.header_picture.url }}" style="width:400px;height:300px;border:0;" type="ad"/>
+                    <!-- Must use .url from header_picture to get the correct path -->
                 </a>
 
                 <p> {{ item.product_name|upper }} - kr {{ item.price }} </p>
             </div>
         {% empty %}
+        <!-- If there are no items in product -->
         <p>No results match that search</p>
         {% endfor %}
     </div>
@@ -20,6 +26,7 @@
     <div class="pagination" style="position: absolute;bottom:0;">
         <span class="step-links">
             {% if page_obj.has_previous %}
+            <!-- Block below only executes if page_obj.has_previous returns true. Must be first -->
                 <a href="?page=1">&laquo; first</a>
                 <a href="?page={{ page_obj.previous_page_number }}"> previous</a>
             {% endif %}
