@@ -30,16 +30,6 @@ This group project is developed for the NTNU course [TDT4140 Software Engineerin
 
 Additionally, the [Inspection checklist](https://gitlab.stud.idi.ntnu.no/tdt4140-2020/52/uploads/9ee820e5ca3316d6f3dc375178e39e10/Inspection_checklist.pdf) is used to control specific standards related to this product before merge. 
 
-## Screenshots
-![home_page](https://gitlab.stud.idi.ntnu.no/tdt4140-2020/52/uploads/7386ea9bf69e796df9702e2094fea049/home_page.PNG) 
-
-<br><br>
-![message](https://gitlab.stud.idi.ntnu.no/tdt4140-2020/52/uploads/ec7c99a82a1977c668dcb2cfbd1c1fb6/message_rm.png)
-
-Image 1: Home page
-
-Image 2: Message page
-
 ## Prerequisites
 
 Download and install the latest version of [Python](https://www.python.org/downloads/) (version 3.7 or newer).
