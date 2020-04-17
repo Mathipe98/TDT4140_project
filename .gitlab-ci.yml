@@ -25,12 +25,10 @@ before_script:
   - pip install -r requirements.txt
 
 # In script, add the terminal command to test the directory you want; - python src/manage.py test <directory>
-# It will then be tested as a part of CI Pipeline.
-# DO NOT DELETE THE DATABASE called test_siverhog_sellyoshit! Use --keepdb behind tests that need to use the test db.
+# Currently  all tests in the project is running when committing because <directory> is left empty. 
+# It will then be tested as a part of CI Pipeline.b.
 test:
   variables:
     DATABASE_URL: "postgresql://postgres:postgres@postgres:5432/$POSTGRES_DB"
   script:
-    - python src/manage.py test ads --keepdb
-    - python src/manage.py test sellyoshit --keepdb
-    - python src/manage.py test login --keepdb
+    - python src/manage.py test 
