@@ -25,10 +25,16 @@ before_script:
   - pip install -r requirements.txt
 
 # In script, add the terminal command to test the directory you want; - python src/manage.py test <directory>
-# Currently  all tests in the project is running when committing because <directory> is left empty. 
 # It will then be tested as a part of CI Pipeline.b.
 test:
   variables:
     DATABASE_URL: "postgresql://postgres:postgres@postgres:5432/$POSTGRES_DB"
   script:
-    - python src/manage.py test 
+    - python src/manage.py test ads
+    - python src/manage.py test contact
+    - python src/manage.py test login
+    - python src/manage.py test pu
+    - python src/manage.py test search
+    - python src/manage.py test sellyoshit
+    - python src/manage.py test stats
+    - python src/manage.py test users
