@@ -149,7 +149,7 @@ from ads.models import Category
 Category.objects.create(name=<category name>)
 ```
 
-Replace `<category name>` with your desired category name. Run the last line for each category to be added. 
+Replace `<category name>` with your desired category name. Run the last line for each category to be added. Type `exit()` to exit the Python Console. 
 
 You can also add categories by using the Django administrator panel with this URL:
 ```
