@@ -118,6 +118,8 @@ http://127.0.0.1:8000/
 
 ## Tests
 
+If you're still running the server, press CTRL-BREAK inside the shell to quit. 
+
 Run the Django test suite to validate the implementation of each module:
 
 ```
