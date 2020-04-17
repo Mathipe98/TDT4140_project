@@ -87,7 +87,7 @@ To use this configuration you must have access to a [NTNU user account](https://
 
 Your database must use MySQL or SQLite in order to work with this product. 
 
-1. Navigate to `default.py` located in `src/pu/settings`
+1. Navigate to and open `default.py` located in `src/pu/settings`
 2. Modify the dictionary `DATABASES = {}` according to your own database settings. More specific instructions can be found [here](https://docs.djangoproject.com/en/3.0/ref/settings/#databases).
 3. Run the following command in your virtual environment to configure your database with the product:
 ```
