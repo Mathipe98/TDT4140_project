@@ -47,4 +47,4 @@ class ThreadTestCase(TestCase):
     def test_publish(self):
         """Tests the publish method found in Messages. Returns None"""
         self.message.publish()
-        self.assertGreater(self.message.sent.microsecond, timezone.now().microsecond - 2000)  # Takes some mS to execute
+        self.assertGreater(timezone.now().microsecond - 2000, self.message.sent.microsecond)  # Takes some mS to execute

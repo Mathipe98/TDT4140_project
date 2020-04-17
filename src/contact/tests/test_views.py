@@ -122,10 +122,10 @@ class TestConversation(SetUp):
     def test_create_conversation(self):
         """Tests creation of conversations via views. Returns None."""
         url = reverse("contact_user", args=[self.user2.pk])  # Requests the url of contact_user with pk = user2.pk
-        self.assertEqual(url, '/messages/contact/2/')
+        self.assertEqual(url, '/messages/contact/6/')
         response_redirect = self.client.get(url, follow=False)
         # Follow = false means it won't be redirected immediately
-        self.assertEqual(response_redirect.url, '/messages/messages/1')
+        self.assertEqual(response_redirect.url, '/messages/messages/3')
         self.assertEqual(response_redirect.status_code, 302)
         response = self.client.get(response_redirect.url)  # Follows the redirect url now
         self.assertEqual(response.status_code, 200)
@@ -148,43 +148,6 @@ class TestConversation(SetUp):
         url = reverse("contact_user", args=[self.user1.pk])
         response = self.client.get(url)
         self.assertEqual(response.url, '/')
-
-
-class TestDetermineUsers(SetUp):
-    """
-    Tests that the helper method determine_users_from_thread in views works as intended
-
-    Functions
-        setUp: None
-            Runs setup that occurs before each test
-        test_valid: None
-            Tests whether the function works as intended with valid input
-        test_user_not_in_thread: None
-            Tests whether the function acts correctly when given a user who's not in the given thread
-
-    Attributes
-        thread: Thread
-            A thread between user1 and user2
-    """
-
-    def setUp(self):
-        """Runs setup that occurs before each test. Returns None."""
-        super().setUp()
-        self.thread = create_thread(self.user1.pk, self.user2.pk)
-
-    def test_valid(self):
-        """Tests whether the function works as intended with valid input. Returns None."""
-        result_user_from, result_user_to, result_thread = determine_users_from_thread_id(self.user1, 1)
-        self.assertEqual(result_user_from, self.user1)
-        self.assertEqual(result_user_to, self.user2)
-        self.assertEqual(result_thread.pk, self.thread.pk)
-
-    def test_user_not_in_thread(self):
-        """Tests whether the function acts correctly when given a user who's not in the given thread. Returns None."""
-        user3 = Users.objects.create(username="Test3", password="tester1234", email="test@test.com",
-                                     firstname="Test", lastname="Test", admin=0, blocked=0)
-        result_user_from, result_user_to, result_thread = determine_users_from_thread_id(user3, 1)
-        self.assertEqual(result_user_from, None)
 
 
 class TestViewThread(SetUp):
