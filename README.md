@@ -126,7 +126,7 @@ Run the Django test suite to validate the implementation of each module:
 python manage.py test <directory>
 ```
 
-Replace `<directory>` with the module name (`ads`, `contact`, `login`, `search`, `sellyoshit`, `stats`, or `users`).
+Replace `<directory>` with the module name (`ads`, `contact`, `login`, `search`, `sellyoshit`, `stats`, or `users`). If you want to test all modules, simply leave `<directory`> empty.
 
 Be aware that running the tests without being connected to a database will cause errors. If you are using the preconfigured database you must also be connected to NTNU's [VPN](https://innsida.ntnu.no/wiki/-/wiki/English/Install+vpn) in order to run the tests.
 
