@@ -78,7 +78,7 @@ You can either connect to the preconfigured database created on the NTNU server 
 
 To use this configuration you must have access to a [NTNU user account](https://innsida.ntnu.no/wiki/-/wiki/English/Create+a+user+account). 
 
-1. Authenticate use of GitLab servers by connecting through NTNU's [VPN](https://innsida.ntnu.no/wiki/-/wiki/English/Install+vpn).
+1. Authenticate use of NTNU servers by connecting through NTNU's [VPN](https://innsida.ntnu.no/wiki/-/wiki/English/Install+vpn).
 2. Input **vpn.ntnu.no** in the Cisco AnyConnect text field, click Connect. 
 3. Input your NTNU user credentials, and click OK and Accept.
 
