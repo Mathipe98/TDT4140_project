@@ -3,7 +3,7 @@
 [![platform](https://img.shields.io/badge/platform-windows%20%7C%20macos%20%7C%20linux-lightgrey)](https://gitlab.stud.idi.ntnu.no/tdt4140-2020/52/-/commits/master)
 [![python version](https://img.shields.io/badge/python-3.7-blue)](https://gitlab.stud.idi.ntnu.no/tdt4140-2020/52/-/commits/master)
 [![django version](https://img.shields.io/badge/django-3.0.2-blue)](https://gitlab.stud.idi.ntnu.no/tdt4140-2020/52/-/commits/master)
-[![size](https://img.shields.io/badge/size-128%20kB-bluee)](https://gitlab.stud.idi.ntnu.no/tdt4140-2020/52/-/commits/master)
+[![size](https://img.shields.io/badge/size-128%20kB-blue)](https://gitlab.stud.idi.ntnu.no/tdt4140-2020/52/-/commits/master)
 [![license](https://img.shields.io/badge/license-MIT-green)](https://gitlab.stud.idi.ntnu.no/tdt4140-2020/52/-/commits/master)
 [![coverage](https://img.shields.io/badge/coverage-82%25-yellowgreen)](https://gitlab.stud.idi.ntnu.no/tdt4140-2020/52/-/commits/master)
 [![pipeline](https://gitlab.stud.idi.ntnu.no/tdt4140-2020/52/badges/master/pipeline.svg)](https://gitlab.stud.idi.ntnu.no/tdt4140-2020/52/-/commits/master)
